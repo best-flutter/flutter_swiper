@@ -313,10 +313,9 @@ class ExamplePhone extends StatelessWidget {
   }
 }
 
-class ExamplePlugins extends StatelessWidget{
+class ExamplePlugins extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
   }
-
 }
