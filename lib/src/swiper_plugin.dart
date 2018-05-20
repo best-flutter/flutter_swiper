@@ -5,25 +5,25 @@ import 'swiper_controller.dart';
 /**
  * plugin to display swiper components
  */
-abstract class SwiperPlugin<T> {
+abstract class SwiperPlugin {
   const SwiperPlugin();
 
-  T build(SwiperPluginConfig config);
+  Widget build(BuildContext context, SwiperPluginConfig config);
 }
 
 class SwiperPluginConfig {
   final int activeIndex;
   final int itemCount;
-  final Axis axis;
+  final Axis scrollDirection;
 
   final SwiperController controller;
 
   const SwiperPluginConfig({
     this.activeIndex,
     this.itemCount,
-    this.axis,
+    this.scrollDirection,
     this.controller,
-  })  : assert(axis != null),
+  })  : assert(scrollDirection != null),
         assert(controller != null);
 }
 
@@ -35,6 +35,6 @@ class SwiperPluginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return plugin.build(config);
+    return plugin.build(context, config);
   }
 }

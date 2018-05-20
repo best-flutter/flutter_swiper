@@ -4,10 +4,10 @@ V1
 - [x] Pagination
 - [] None loop
 - [] Unit tests
-- [] Examples
-- [] Direction
+- [x] Examples
+- [x] Direction
 - [x] Custom control buttons
 - [x] Custom pagination
-- [] Autoplay
+- [x] Autoplay
 - [] Fix bugs
 - [x] Controler

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:infinity_page_view/infinity_page_view.dart';
-import 'swiper_pagination.dart';
-import 'swiper_control.dart';
 import 'swiper_controller.dart';
 import 'swiper_plugin.dart';
 
+import 'dart:async';
+
 typedef void SwiperOnTap(int index);
+
+typedef Widget SwiperDataBuilder(BuildContext context, dynamic data, int index);
 
 class Swiper extends StatefulWidget {
   final IndexedWidgetBuilder itemBuilder;
@@ -47,7 +48,7 @@ class Swiper extends StatefulWidget {
    * horizontal/vertical
    *
    */
-  final Axis axis;
+  final Axis scrollDirection;
 
   /**
    * transition curve
@@ -72,17 +73,24 @@ class Swiper extends StatefulWidget {
   /**
    *The swiper pagination plugin
    */
-  final SwiperPagination pagination;
+  final SwiperPlugin pagination;
 
   /**
    * the swiper control button plugin
    */
-  final SwiperControl control;
+  final SwiperPlugin control;
+
+  /**
+   * other plugins, you can cutom your own plugin
+   */
+  final List<SwiperPlugin> plugins;
+
+  final SwiperController controller;
 
   Swiper(
       {@required this.itemBuilder,
       @required this.itemCount,
-      this.autoplay: false,
+      this.autoplay: true,
       this.autoplayDely: 3000,
       this.reverse: false,
       this.autoplayDiableOnInteraction: true,
@@ -93,8 +101,88 @@ class Swiper extends StatefulWidget {
       this.control,
       this.loop: true,
       this.curve: Curves.ease,
-      this.axis: Axis.horizontal,
-      this.pagination});
+      this.scrollDirection: Axis.horizontal,
+      this.pagination,
+      SwiperController controller})
+      : controller =
+            controller == null ? new SwiperController(index) : controller;
+
+  factory Swiper.children({
+    List<Widget> children,
+    bool autoplay: true,
+    int autoplayDely: 3000,
+    bool reverse: false,
+    bool autoplayDiableOnInteraction: true,
+    int duration: 300,
+    ValueChanged<int> onIndexChanged,
+    int index: 0,
+    SwiperOnTap onTap,
+    bool loop: true,
+    Curve curve: Curves.ease,
+    Axis scrollDirection: Axis.horizontal,
+    SwiperPlugin pagination,
+    SwiperPlugin control,
+    SwiperController conttoller,
+  }) {
+    return new Swiper(
+        autoplay: autoplay,
+        autoplayDely: autoplayDely,
+        autoplayDiableOnInteraction: autoplayDiableOnInteraction,
+        reverse: reverse,
+        duration: duration,
+        onIndexChanged: onIndexChanged,
+        index: index,
+        onTap: onTap,
+        curve: curve,
+        scrollDirection: scrollDirection,
+        pagination: pagination,
+        control: control,
+        controller: conttoller,
+        loop: loop,
+        itemBuilder: (BuildContext context, int index) {
+          return children[index];
+        },
+        itemCount: children.length);
+  }
+
+  factory Swiper.list({
+    List list,
+    SwiperDataBuilder builder,
+    bool autoplay: true,
+    int autoplayDely: 3000,
+    bool reverse: false,
+    bool autoplayDiableOnInteraction: true,
+    int duration: 300,
+    ValueChanged<int> onIndexChanged,
+    int index: 0,
+    SwiperOnTap onTap,
+    bool loop: true,
+    Curve curve: Curves.ease,
+    Axis scrollDirection: Axis.horizontal,
+    SwiperPlugin pagination,
+    SwiperPlugin control,
+    SwiperController conttoller,
+  }) {
+    return new Swiper(
+        autoplay: autoplay,
+        autoplayDely: autoplayDely,
+        autoplayDiableOnInteraction: autoplayDiableOnInteraction,
+        reverse: reverse,
+        duration: duration,
+        onIndexChanged: onIndexChanged,
+        index: index,
+        onTap: onTap,
+        curve: curve,
+        scrollDirection: scrollDirection,
+        pagination: pagination,
+        control: control,
+        controller: conttoller,
+        loop: loop,
+        itemBuilder: (BuildContext context, int index) {
+          return builder(context, list[index], index);
+        },
+        itemCount: list.length);
+  }
 
   @override
   State<StatefulWidget> createState() {
@@ -103,8 +191,10 @@ class Swiper extends StatefulWidget {
 }
 
 class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
-  InfinityPageController pageController;
-  SwiperController controller;
+  InfinityPageController _pageController;
+  SwiperController _controller;
+  Timer _timer;
+  int _activeIndex;
 
   Widget _wrapInkWell(BuildContext context, int index) {
     return new InkWell(
@@ -117,46 +207,80 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    controller.removeListener(_onController);
-
+    _controller.removeListener(_onController);
+    _stopAutoplay();
     super.dispose();
   }
 
   @override
   void initState() {
-    pageController = new InfinityPageController(initialPage: widget.index);
+    _pageController = new InfinityPageController(initialPage: widget.index);
     _activeIndex = widget.index;
-    controller = new SwiperController(widget.index);
-    controller.addListener(_onController);
+    _controller = widget.controller;
+    _controller.addListener(_onController);
     super.initState();
   }
 
   void _onController() {
-    if (!controller.animation) {
-      pageController.jumpToPage(controller.index);
-    } else {
-      pageController.animateToPage(controller.index,
-          duration: new Duration(milliseconds: widget.duration),
-          curve: widget.curve);
+    switch (_controller.event) {
+      case SwiperControllerEvent.INDEX:
+        {
+          if (!_controller.animation) {
+            _pageController.jumpToPage(_controller.index);
+          } else {
+            _pageController.animateToPage(_controller.index,
+                duration: new Duration(milliseconds: widget.duration),
+                curve: widget.curve);
+          }
+        }
+        break;
+      case SwiperControllerEvent.AUTOPLAY:
+        {
+          _handleAutoplay();
+        }
+        break;
     }
   }
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
+    _controller.autoplay = widget.autoplay;
+    _handleAutoplay();
     super.didChangeDependencies();
   }
 
   @override
   void didUpdateWidget(Swiper oldWidget) {
-    // TODO: implement didUpdateWidget
+    _controller.autoplay = widget.autoplay;
+    _handleAutoplay();
     super.didUpdateWidget(oldWidget);
   }
 
-  int _activeIndex;
+  void _handleAutoplay() {
+    _stopAutoplay();
+    if (_controller.autoplay) {
+      _startAutoplay();
+    }
+  }
+
+  void _startAutoplay() {
+    _timer = new Timer.periodic(
+        new Duration(milliseconds: widget.autoplayDely), _onTimer);
+  }
+
+  void _onTimer(Timer timer) {
+    if (_controller != null) _controller.next(animation: true);
+  }
+
+  void _stopAutoplay() {
+    if (_timer != null) {
+      _timer.cancel();
+      _timer = null;
+    }
+  }
 
   void _onPageChage(int index) {
-    controller.index = index;
+    _controller.index = index;
 
     setState(() {
       _activeIndex = index;
@@ -167,16 +291,24 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
     }
   }
 
+  bool _isHumanDrag;
+
   bool _handleNotification(ScrollNotification notification) {
     if (notification.depth != 0) return false;
-//   implement in next version
-//    if (notification is ScrollUpdateNotification) {
-//      print("update");
-//    } else if (notification is ScrollEndNotification) {
-//      print("end");
-//    } else if (notification is ScrollStartNotification) {
-//      print("start");
-//    }
+    if (notification is ScrollUpdateNotification) {
+      //print("update");
+    } else if (notification is ScrollEndNotification) {
+      //print("end");
+      if (_isHumanDrag && widget.autoplayDiableOnInteraction) {
+        _handleAutoplay();
+      }
+    } else if (notification is ScrollStartNotification) {
+      //print("start");
+      _isHumanDrag = notification.dragDetails != null;
+      if (_isHumanDrag && widget.autoplayDiableOnInteraction) {
+        _stopAutoplay();
+      }
+    }
 
     return false;
   }
@@ -188,9 +320,11 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
 
     InfinityPageView infinityPageView = new InfinityPageView(
       key: const Key("swiper_bg"),
+      reverse: widget.reverse,
       itemBuilder: itemBuilder,
       itemCount: widget.itemCount,
-      controller: pageController,
+      controller: _pageController,
+      scrollDirection: widget.scrollDirection,
       onPageChanged: _onPageChage,
     );
 
@@ -222,8 +356,8 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
       config = new SwiperPluginConfig(
           itemCount: widget.itemCount,
           activeIndex: _activeIndex,
-          axis: widget.axis,
-          controller: controller);
+          scrollDirection: widget.scrollDirection,
+          controller: _controller);
     }
     return config;
   }

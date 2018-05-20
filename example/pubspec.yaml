@@ -1,6 +1,9 @@
 name: example
 description: A new Flutter project.
 
+
+
+
 dependencies:
   flutter:
     sdk: flutter
@@ -27,6 +30,16 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+
+  assets:
+    - images/bg0.jpeg
+    - images/bg1.jpeg
+    - images/bg2.jpeg
+    - images/1.png
+    - images/2.png
+    - images/3.png
+    - images/bg.jpeg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
