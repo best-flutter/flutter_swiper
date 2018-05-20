@@ -1,2 +1,17 @@
 # flutter_swiper
-The most powerful Flutter swiper plugin in the world! .
+
+The best swiper for flutter.
+
+## Getting Started
+
+### Installation
+
+### Basic Usage
+
+### Properties
+
+### Plugins
+
+### Controller
+
+### Examples

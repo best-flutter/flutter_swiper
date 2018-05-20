@@ -1,0 +1,13 @@
+V1
+- [x] Infinite loop
+- [x] Control buttons
+- [x] Pagination
+- [] None loop
+- [] Unit tests
+- [] Examples
+- [] Direction
+- [x] Custom control buttons
+- [x] Custom pagination
+- [] Autoplay
+- [] Fix bugs
+- [x] Controler
