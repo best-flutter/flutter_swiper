@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         '/example03': (BuildContext context) => new ExampleFraction(),
         '/example04': (BuildContext context) => new ExampleCustomPagination(),
         '/example05': (BuildContext context) => new ExamplePhone(),
+        '/example06': (BuildContext context) => new ExamplePlugins(),
       },
     );
   }
@@ -310,4 +311,12 @@ class ExamplePhone extends StatelessWidget {
       ),
     );
   }
+}
+
+class ExamplePlugins extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+  }
+
 }

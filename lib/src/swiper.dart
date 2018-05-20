@@ -103,6 +103,7 @@ class Swiper extends StatefulWidget {
       this.curve: Curves.ease,
       this.scrollDirection: Axis.horizontal,
       this.pagination,
+        this.plugins,
       SwiperController controller})
       : controller =
             controller == null ? new SwiperController(index) : controller;
@@ -122,6 +123,7 @@ class Swiper extends StatefulWidget {
     Axis scrollDirection: Axis.horizontal,
     SwiperPlugin pagination,
     SwiperPlugin control,
+    List<SwiperPlugin> plugins,
     SwiperController conttoller,
   }) {
     return new Swiper(
@@ -139,6 +141,7 @@ class Swiper extends StatefulWidget {
         control: control,
         controller: conttoller,
         loop: loop,
+        plugins:plugins,
         itemBuilder: (BuildContext context, int index) {
           return children[index];
         },
@@ -161,6 +164,7 @@ class Swiper extends StatefulWidget {
     Axis scrollDirection: Axis.horizontal,
     SwiperPlugin pagination,
     SwiperPlugin control,
+    List<SwiperPlugin> plugins,
     SwiperController conttoller,
   }) {
     return new Swiper(
@@ -178,6 +182,7 @@ class Swiper extends StatefulWidget {
         control: control,
         controller: conttoller,
         loop: loop,
+        plugins:plugins,
         itemBuilder: (BuildContext context, int index) {
           return builder(context, list[index], index);
         },
@@ -346,6 +351,13 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
     if (widget.control != null) {
       config = ensureConfig(config);
       list.add(createPluginView(widget.control, config));
+    }
+
+    if(widget.plugins!=null){
+      config = ensureConfig(config);
+      for(SwiperPlugin plugin in widget.plugins){
+        list.add(createPluginView(plugin, config));
+      }
     }
 
     return new Stack(children: list);
