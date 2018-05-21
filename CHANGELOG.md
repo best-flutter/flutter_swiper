@@ -15,6 +15,11 @@
     * Update README
     * Support none loop mode
     * Add more examples
+    
+## [0.0.4] - [2018/05/20]
+    * Update README
+ 
+
         
    
 
