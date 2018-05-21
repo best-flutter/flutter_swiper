@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'src/ExampleCustom.dart';
+import 'src/config.dart';
 
 void main() => runApp(new MyApp());
 
@@ -13,7 +15,11 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Flutter Swiper'),
+      // home: new MyHomePage(title: 'Flutter Swiper'),
+      home: new ScaffoldWidget(
+        child: new ExampleCustom(),
+        title: "Custom All",
+      ),
       routes: {
         '/example01': (BuildContext context) => new ExampleHorizontal(),
         '/example02': (BuildContext context) => new ExampleVertical(),
@@ -21,6 +27,10 @@ class MyApp extends StatelessWidget {
         '/example04': (BuildContext context) => new ExampleCustomPagination(),
         '/example05': (BuildContext context) => new ExamplePhone(),
         '/example06': (BuildContext context) => new ExamplePlugins(),
+        '/example07': (BuildContext context) => new ScaffoldWidget(
+              child: new ExampleCustom(),
+              title: "Custom All",
+            )
       },
     );
   }
@@ -76,18 +86,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ["Vertical", "Scroll Vertical", "/example02"],
           ["Fraction", "Fraction style", "/example03"],
           ["Custom Pagination", "Custom Pagination", "/example04"],
-          ["Phone", "Phone view", "/example05"]
+          ["Phone", "Phone view", "/example05"],
+          ["Custom", "Custom all properties", "/example07"]
         ]),
       ),
     );
   }
 }
-
-const List<String> images = [
-  "images/bg0.jpeg",
-  "images/bg1.jpeg",
-  "images/bg2.jpeg",
-];
 
 const List<String> titles = [
   "Flutter Swiper is awosome",
@@ -317,5 +322,22 @@ class ExamplePlugins extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+  }
+}
+
+class ScaffoldWidget extends StatelessWidget {
+  final Widget child;
+  final String title;
+
+  ScaffoldWidget({this.child, this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(title),
+      ),
+      body: child,
+    );
   }
 }

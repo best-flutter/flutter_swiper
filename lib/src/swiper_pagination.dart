@@ -104,6 +104,11 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
   Widget build(BuildContext context, SwiperPluginConfig config) {
     List<Widget> list = [];
 
+    if (config.itemCount > 20) {
+      print(
+          "The itemCount is too big, we suggest use FractionPaginationBuilder instead of DotSwiperPaginationBuilder in this sitituation");
+    }
+
     int itemCount = config.itemCount;
     int activeIndex = config.activeIndex;
 
