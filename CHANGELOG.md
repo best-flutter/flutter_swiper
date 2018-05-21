@@ -13,11 +13,10 @@
     
 ## [0.0.3] - [2018/05/20]
     * Update README
-    
-## [0.0.4] - [2018/05/21]
     * Support none loop mode
-    * Fix some bugs
     * Add more examples
+        
+   
 
 
     
