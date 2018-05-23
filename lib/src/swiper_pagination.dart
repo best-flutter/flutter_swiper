@@ -3,24 +3,16 @@ import 'swiper_plugin.dart';
 import 'package:flutter/foundation.dart';
 
 class FractionPaginationBuilder extends SwiperPlugin {
-  /**
-   * color
-   */
+  ///color
   final Color color;
 
-  /**
-   * color when active
-   */
+  ///color when active
   final Color activeColor;
 
-  /**
-   * font size
-   */
+  ////font size
   final double fontSize;
 
-  /**
-   * font size when active
-   */
+  ///font size when active
   final double activeFontSize;
 
   const FractionPaginationBuilder(
@@ -68,29 +60,19 @@ class FractionPaginationBuilder extends SwiperPlugin {
 }
 
 class DotSwiperPaginationBuilder extends SwiperPlugin {
-  /**
-   * color when current index
-   */
+  ///color when current index
   final Color activeColor;
 
-  /**
-   *
-   */
+
   final Color color;
 
-  /**
-   * Size of the dot when activate
-   */
+  ///Size of the dot when activate
   final double activeSize;
 
-  /**
-   * Size of the dot
-   */
+  ///Size of the dot
   final double size;
 
-  /**
-   * Space between dots
-   */
+  /// Space between dots
   final double space;
 
   const DotSwiperPaginationBuilder(
@@ -115,7 +97,7 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
     for (int i = 0; i < itemCount; ++i) {
       bool active = i == activeIndex;
       list.add(new Container(
-        key: new Key("pagination_${i}"),
+        key: new Key("pagination_$i"),
         margin: new EdgeInsets.all(space),
         child: new ClipOval(
           child: new Container(
@@ -155,18 +137,11 @@ class SwiperCustomPagination extends SwiperPlugin {
   }
 }
 
-/**
- *
- */
 class SwiperPagination extends SwiperPlugin {
-  /**
-   * dot style pagination
-   */
+  /// dot style pagination
   static const SwiperPlugin dots = const DotSwiperPaginationBuilder();
 
-  /**
-   * fraction style pagination
-   */
+  /// fraction style pagination
   static const SwiperPlugin fraction = const FractionPaginationBuilder();
 
   final AlignmentGeometry alignment;

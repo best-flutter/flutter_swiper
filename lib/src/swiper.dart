@@ -18,71 +18,42 @@ class Swiper extends StatefulWidget {
 
   final ValueChanged<int> onIndexChanged;
 
-  /**
-   * auto play config
-   */
+  ///auto play config
   final bool autoplay;
 
-  /**
-   * Delay between auto play transitions (in millisecond).
-   */
+  ///Delay between auto play transitions (in millisecond).
   final int autoplayDely;
 
-  /**
-   * disable auto play when interaction
-   */
+  ///disable auto play when interaction
   final bool autoplayDiableOnInteraction;
 
-  /**
-   * reverse direction
-   */
+  ///reverse direction
   final bool reverse;
 
-  /**
-   * auto play transition duration (in millisecond)
-   */
+  ///auto play transition duration (in millisecond)
   final int duration;
 
-  /**
-   *
-   * horizontal/vertical
-   *
-   */
+  ///horizontal/vertical
   final Axis scrollDirection;
 
-  /**
-   * transition curve
-   */
+  ///transition curve
   final Curve curve;
 
-  /**
-   * Set to false to disable continuous loop mode.
-   */
+  /// Set to false to disable continuous loop mode.
   final bool loop;
-  /**
-   *
-   *  Index number of initial slide.
-   */
+  ///Index number of initial slide.
   final int index;
 
-  /**
-   * Called when tap
-   */
+  ///Called when tap
   final SwiperOnTap onTap;
 
-  /**
-   *The swiper pagination plugin
-   */
+  ///The swiper pagination plugin
   final SwiperPlugin pagination;
 
-  /**
-   * the swiper control button plugin
-   */
+  ///the swiper control button plugin
   final SwiperPlugin control;
 
-  /**
-   * other plugins, you can cutom your own plugin
-   */
+  ///other plugins, you can cutom your own plugin
   final List<SwiperPlugin> plugins;
 
   final SwiperController controller;
@@ -107,9 +78,11 @@ class Swiper extends StatefulWidget {
       this.pagination,
       this.plugins,
       this.physics,
+      Key key,
       SwiperController controller})
       : controller =
-            controller == null ? new SwiperController(index) : controller;
+            controller == null ? new SwiperController(index) : controller,
+        super(key: key);
 
   factory Swiper.children(
       {List<Widget> children,
@@ -128,6 +101,7 @@ class Swiper extends StatefulWidget {
       SwiperPlugin control,
       List<SwiperPlugin> plugins,
       SwiperController conttoller,
+      Key key,
       ScrollPhysics physics}) {
     return new Swiper(
         autoplay: autoplay,
@@ -146,6 +120,7 @@ class Swiper extends StatefulWidget {
         loop: loop,
         plugins: plugins,
         physics: physics,
+        key: key,
         itemBuilder: (BuildContext context, int index) {
           return children[index];
         },
@@ -170,6 +145,7 @@ class Swiper extends StatefulWidget {
       SwiperPlugin control,
       List<SwiperPlugin> plugins,
       SwiperController conttoller,
+      Key key,
       ScrollPhysics physics}) {
     return new Swiper(
         autoplay: autoplay,
@@ -181,6 +157,7 @@ class Swiper extends StatefulWidget {
         index: index,
         onTap: onTap,
         curve: curve,
+        key: key,
         scrollDirection: scrollDirection,
         pagination: pagination,
         control: control,
@@ -348,11 +325,13 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
     return false;
   }
 
+  final Key _scrollViewKey = const Key("swiper_scroll_view");
+
   Widget createPageView(
       BuildContext context, IndexedWidgetBuilder itemBuilder) {
     if (widget.loop) {
       InfinityPageView infinityPageView = new InfinityPageView(
-        key: const Key("swiper_bg"),
+        key: _scrollViewKey,
         reverse: widget.reverse,
         itemBuilder: itemBuilder,
         itemCount: widget.itemCount,
@@ -364,7 +343,7 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
       return infinityPageView;
     } else {
       PageView view = new PageView.builder(
-        key: widget.key,
+        key: _scrollViewKey,
         scrollDirection: widget.scrollDirection,
         reverse: widget.reverse,
         controller: _pageController.controller,

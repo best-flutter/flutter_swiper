@@ -2,31 +2,19 @@ import 'package:flutter/material.dart';
 import 'swiper_plugin.dart';
 
 class SwiperControl extends SwiperPlugin {
-  /**
-   * IconData for previous
-   */
+  ///IconData for previous
   final IconData iconPrevious;
 
-  /**
-   * iconData fopr next
-   */
+  ///iconData fopr next
   final IconData iconNext;
 
-  /**
-   * icon size
-   */
+  ///icon size
   final double size;
 
-  /**
-   * Icon normal color
-   */
+  ///Icon normal color
   final Color color;
 
-  /**
-   *
-   * if set loop=false on Swiper, this color will be used when swiper goto the last slide.
-   *
-   */
+  ///if set loop=false on Swiper, this color will be used when swiper goto the last slide.
   final Color disableColor;
 
   final EdgeInsetsGeometry padding;
@@ -116,6 +104,3 @@ class SwiperControl extends SwiperPlugin {
           );
   }
 }
-
-//â€º
-//

@@ -1,10 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:infinity_page_view/infinity_page_view.dart';
 import 'swiper_controller.dart';
 
-/**
- * plugin to display swiper components
- */
+/// plugin to display swiper components
+///
 abstract class SwiperPlugin {
   const SwiperPlugin();
 
