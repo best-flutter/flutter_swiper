@@ -23,8 +23,8 @@ class FormWidget extends StatelessWidget {
 }
 
 class NumberPad extends StatelessWidget {
-  VoidCallback onSub;
-  VoidCallback onAdd;
+  final VoidCallback onSub;
+  final VoidCallback onAdd;
   final int number;
 
   NumberPad({this.onAdd, this.onSub, this.number});

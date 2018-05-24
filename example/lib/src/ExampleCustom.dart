@@ -12,7 +12,6 @@ class ExampleCustom extends StatefulWidget {
 
 class _ExampleCustomState extends State<ExampleCustom> {
   //properties whant to custom
-  int _index;
 
   int _itemCount;
 
@@ -31,7 +30,6 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   @override
   void initState() {
-    _index = 0;
     _loop = true;
     _itemCount = 3;
     _autoplay = true;
