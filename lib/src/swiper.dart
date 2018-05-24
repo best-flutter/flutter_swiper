@@ -297,11 +297,12 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
 
   void _onPageChage(int index) {
     _controller.index = index;
-    if(_activeIndex == index){
+    if(_activeIndex!=index){
       setState(() {
         _activeIndex = index;
       });
     }
+
     if (widget.onIndexChanged != null) {
       widget.onIndexChanged(index);
     }

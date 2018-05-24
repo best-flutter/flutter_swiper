@@ -22,7 +22,8 @@
 ## [0.0.5] - [2018/05/24]
     * Fix zero itemCount bug
  
-
+## [0.0.6] - [2018/05/24]
+    * Fix index bug
         
    
 
