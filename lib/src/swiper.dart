@@ -103,6 +103,11 @@ class Swiper extends StatefulWidget {
       SwiperController conttoller,
       Key key,
       ScrollPhysics physics}) {
+
+    assert(children!=null,"children must not be null");
+
+
+
     return new Swiper(
         autoplay: autoplay,
         autoplayDely: autoplayDely,
@@ -147,6 +152,7 @@ class Swiper extends StatefulWidget {
       SwiperController conttoller,
       Key key,
       ScrollPhysics physics}) {
+
     return new Swiper(
         autoplay: autoplay,
         autoplayDely: autoplayDely,
@@ -290,14 +296,12 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
   }
 
   void _onPageChage(int index) {
-    //print("${new DateTime.now()} _onPageChage ${index}");
-
     _controller.index = index;
-
-    setState(() {
-      _activeIndex = index;
-    });
-
+    if(_activeIndex == index){
+      setState(() {
+        _activeIndex = index;
+      });
+    }
     if (widget.onIndexChanged != null) {
       widget.onIndexChanged(index);
     }

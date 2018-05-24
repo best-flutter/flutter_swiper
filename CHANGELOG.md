@@ -18,6 +18,9 @@
     
 ## [0.0.4] - [2018/05/20]
     * Update README
+    
+## [0.0.5] - [2018/05/24]
+    * Fix zero itemCount bug
  
 
         
