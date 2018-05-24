@@ -21,6 +21,8 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   int _autoplayDely;
 
+  Axis _axis;
+
   Widget _buildItem(BuildContext context, int index) {
     return new Image.asset(
       images[index % images.length],
@@ -32,8 +34,9 @@ class _ExampleCustomState extends State<ExampleCustom> {
   void initState() {
     _loop = true;
     _itemCount = 3;
-    _autoplay = true;
+    _autoplay = false;
     _autoplayDely = 3000;
+    _axis = Axis.horizontal;
     super.initState();
   }
 
@@ -44,6 +47,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
       autoplay: _autoplay,
       itemBuilder: _buildItem,
       itemCount: _itemCount,
+      scrollDirection: _axis,
       pagination: new SwiperPagination(),
       control: new SwiperControl(),
     );
@@ -79,6 +83,16 @@ class _ExampleCustomState extends State<ExampleCustom> {
               () => _itemCount = (_itemCount - 1 < 0 ? 0 : _itemCount - 1)),
         ),
       ),
+      /*
+      not support dynamic change yet , is it a Flutter bug ?
+
+      new FormWidget(
+        label: "scrollDirection",
+        child: new Switch(
+            value: _axis == Axis.horizontal,
+            onChanged: (bool value) => setState(() => _axis=value ? Axis.horizontal : Axis.vertical )),
+      ),
+      */
     ]);
   }
 }

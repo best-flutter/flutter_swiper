@@ -25,7 +25,9 @@
 ## [0.0.6] - [2018/05/24]
     * Fix index bug
         
-   
-
+## [0.0.7] - [2018/05/24]
+    * The default color of pagination is ThemeData.scaffoldBackgroundColor and ThemeData.primaryColor
+    * The default color of control buttons is ThemeData.primaryColor and ThemeData.disabledColor
+    * The alignment of pagination is Alignment.bottomCenter by default when scrollDirection== Axis.horizontal, Alignment.centerRight by default when scrollDirection== Axis.vertical
 
     

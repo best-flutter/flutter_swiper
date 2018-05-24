@@ -39,7 +39,7 @@ Add
 
 ```bash
 
-flutter_swiper : ^0.0.6
+flutter_swiper : ^0.0.7
 
 ```
 to your pubspec.yaml ,and run 

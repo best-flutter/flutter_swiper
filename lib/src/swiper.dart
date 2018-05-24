@@ -41,6 +41,7 @@ class Swiper extends StatefulWidget {
 
   /// Set to false to disable continuous loop mode.
   final bool loop;
+
   ///Index number of initial slide.
   final int index;
 
@@ -103,10 +104,7 @@ class Swiper extends StatefulWidget {
       SwiperController conttoller,
       Key key,
       ScrollPhysics physics}) {
-
-    assert(children!=null,"children must not be null");
-
-
+    assert(children != null, "children must not be null");
 
     return new Swiper(
         autoplay: autoplay,
@@ -152,7 +150,6 @@ class Swiper extends StatefulWidget {
       SwiperController conttoller,
       Key key,
       ScrollPhysics physics}) {
-
     return new Swiper(
         autoplay: autoplay,
         autoplayDely: autoplayDely,
@@ -297,7 +294,7 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
 
   void _onPageChage(int index) {
     _controller.index = index;
-    if(_activeIndex!=index){
+    if (_activeIndex != index) {
       setState(() {
         _activeIndex = index;
       });
@@ -336,7 +333,7 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
       BuildContext context, IndexedWidgetBuilder itemBuilder) {
     if (widget.loop) {
       InfinityPageView infinityPageView = new InfinityPageView(
-        key: _scrollViewKey,
+        //  key: _scrollViewKey,
         reverse: widget.reverse,
         itemBuilder: itemBuilder,
         itemCount: widget.itemCount,
@@ -348,7 +345,7 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
       return infinityPageView;
     } else {
       PageView view = new PageView.builder(
-        key: _scrollViewKey,
+        // key: _scrollViewKey,
         scrollDirection: widget.scrollDirection,
         reverse: widget.reverse,
         controller: _pageController.controller,
@@ -404,7 +401,8 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
           itemCount: widget.itemCount,
           activeIndex: _activeIndex,
           scrollDirection: widget.scrollDirection,
-          controller: _controller);
+          controller: _controller,
+          loop: widget.loop);
     }
     return config;
   }

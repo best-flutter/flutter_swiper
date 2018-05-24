@@ -11,10 +11,11 @@ class SwiperControl extends SwiperPlugin {
   ///icon size
   final double size;
 
-  ///Icon normal color
+  ///Icon normal color, The theme's [ThemeData.primaryColor] by default.
   final Color color;
 
   ///if set loop=false on Swiper, this color will be used when swiper goto the last slide.
+  ///The theme's [ThemeData.disabledColor] by default.
   final Color disableColor;
 
   final EdgeInsetsGeometry padding;
@@ -22,13 +23,29 @@ class SwiperControl extends SwiperPlugin {
   const SwiperControl(
       {this.iconPrevious: Icons.arrow_back_ios,
       this.iconNext: Icons.arrow_forward_ios,
-      this.color: Colors.blueAccent,
-      this.disableColor: Colors.black12,
+      this.color,
+      this.disableColor,
       this.size: 30.0,
       this.padding: const EdgeInsets.all(5.0)});
 
   @override
   Widget build(BuildContext context, SwiperPluginConfig config) {
+    ThemeData themeData = Theme.of(context);
+
+    Color color = this.color ?? themeData.primaryColor;
+    Color disableColor = this.disableColor ?? themeData.disabledColor;
+    Color prevColor;
+    Color nextColor;
+
+    if (config.loop) {
+      prevColor = nextColor = color;
+    } else {
+      bool next = config.activeIndex < config.itemCount - 2;
+      bool prev = config.activeIndex > 0;
+      prevColor = prev ? color : disableColor;
+      nextColor = next ? color : disableColor;
+    }
+
     return config.scrollDirection == Axis.horizontal
         ? new Row(
             children: <Widget>[
@@ -44,7 +61,7 @@ class SwiperControl extends SwiperPlugin {
                             child: new Icon(
                               iconPrevious,
                               size: size,
-                              color: color,
+                              color: prevColor,
                             )),
                       ))),
               new Expanded(
@@ -59,7 +76,7 @@ class SwiperControl extends SwiperPlugin {
                             child: new Icon(
                               iconNext,
                               size: size,
-                              color: color,
+                              color: nextColor,
                             )),
                       )))
             ],
@@ -80,7 +97,7 @@ class SwiperControl extends SwiperPlugin {
                                 child: new Icon(
                                   iconPrevious,
                                   size: size,
-                                  color: color,
+                                  color: prevColor,
                                 ))),
                       ))),
               new Expanded(
@@ -97,7 +114,7 @@ class SwiperControl extends SwiperPlugin {
                                 child: new Icon(
                                   iconNext,
                                   size: size,
-                                  color: color,
+                                  color: nextColor,
                                 ),
                               )))))
             ],

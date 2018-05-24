@@ -10,8 +10,6 @@ class SwiperController extends ChangeNotifier {
 
   SwiperControllerEvent _event;
 
-
-
   SwiperControllerEvent get event => _event;
 
   SwiperController(this.index);

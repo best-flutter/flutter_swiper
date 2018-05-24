@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: new MyHomePage(title: 'Flutter Swiper'),
-      home: new ScaffoldWidget(
-        child: new ExampleCustom(),
-        title: "Custom All",
-      ),
+      home: new MyHomePage(title: 'Flutter Swiper'),
+//      home: new ScaffoldWidget(
+//        child: new ExampleCustom(),
+//        title: "Custom All",
+//      ),
       routes: {
         '/example01': (BuildContext context) => new ExampleHorizontal(),
         '/example02': (BuildContext context) => new ExampleVertical(),

@@ -13,15 +13,16 @@ class SwiperPluginConfig {
   final int activeIndex;
   final int itemCount;
   final Axis scrollDirection;
-
+  final bool loop;
   final SwiperController controller;
 
-  const SwiperPluginConfig({
-    this.activeIndex,
-    this.itemCount,
-    this.scrollDirection,
-    this.controller,
-  })  : assert(scrollDirection != null),
+  const SwiperPluginConfig(
+      {this.activeIndex,
+      this.itemCount,
+      this.scrollDirection,
+      this.controller,
+      this.loop})
+      : assert(scrollDirection != null),
         assert(controller != null);
 }
 

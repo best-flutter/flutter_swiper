@@ -3,10 +3,10 @@ import 'swiper_plugin.dart';
 import 'package:flutter/foundation.dart';
 
 class FractionPaginationBuilder extends SwiperPlugin {
-  ///color
+  ///color ,if set null , will be Theme.of(context).scaffoldBackgroundColor
   final Color color;
 
-  ///color when active
+  ///color when active,if set null , will be Theme.of(context).primaryColor
   final Color activeColor;
 
   ////font size
@@ -16,13 +16,17 @@ class FractionPaginationBuilder extends SwiperPlugin {
   final double activeFontSize;
 
   const FractionPaginationBuilder(
-      {this.color: Colors.blueGrey,
+      {this.color,
       this.fontSize: 20.0,
-      this.activeColor: Colors.blueAccent,
+      this.activeColor,
       this.activeFontSize: 35.0});
 
   @override
   Widget build(BuildContext context, SwiperPluginConfig config) {
+    ThemeData themeData = Theme.of(context);
+    Color activeColor = this.activeColor ?? themeData.primaryColor;
+    Color color = this.color ?? themeData.scaffoldBackgroundColor;
+
     if (Axis.vertical == config.scrollDirection) {
       return new Column(
         mainAxisSize: MainAxisSize.min,
@@ -60,10 +64,10 @@ class FractionPaginationBuilder extends SwiperPlugin {
 }
 
 class DotSwiperPaginationBuilder extends SwiperPlugin {
-  ///color when current index
+  ///color when current index,if set null , will be Theme.of(context).primaryColor
   final Color activeColor;
 
-
+  ///,if set null , will be Theme.of(context).scaffoldBackgroundColor
   final Color color;
 
   ///Size of the dot when activate
@@ -76,8 +80,8 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
   final double space;
 
   const DotSwiperPaginationBuilder(
-      {this.activeColor: Colors.blueAccent,
-      this.color: Colors.black12,
+      {this.activeColor,
+      this.color,
       this.size: 10.0,
       this.activeSize: 10.0,
       this.space: 3.0});
@@ -93,6 +97,11 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
 
     int itemCount = config.itemCount;
     int activeIndex = config.activeIndex;
+
+    ThemeData themeData = Theme.of(context);
+
+    Color activeColor = this.activeColor ?? themeData.primaryColor;
+    Color color = this.color ?? themeData.scaffoldBackgroundColor;
 
     for (int i = 0; i < itemCount; ++i) {
       bool active = i == activeIndex;
@@ -144,16 +153,23 @@ class SwiperPagination extends SwiperPlugin {
   /// fraction style pagination
   static const SwiperPlugin fraction = const FractionPaginationBuilder();
 
+  /// Alignment.bottomCenter by default when scrollDirection== Axis.horizontal
+  /// Alignment.centerRight by default when scrollDirection== Axis.vertical
   final AlignmentGeometry alignment;
   final EdgeInsetsGeometry margin;
   final SwiperPlugin builder;
 
   const SwiperPagination(
-      {this.alignment: Alignment.bottomCenter,
+      {this.alignment,
       this.margin: const EdgeInsets.all(10.0),
       this.builder: SwiperPagination.dots});
 
   Widget build(BuildContext context, SwiperPluginConfig config) {
+    AlignmentGeometry alignment = this.alignment ??
+        (config.scrollDirection == Axis.horizontal
+            ? Alignment.bottomCenter
+            : Alignment.centerRight);
+
     return new Align(
       key: const Key("swiper_pagination"),
       alignment: alignment,
