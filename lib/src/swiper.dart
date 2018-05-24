@@ -63,7 +63,7 @@ class Swiper extends StatefulWidget {
   Swiper(
       {@required this.itemBuilder,
       @required this.itemCount,
-      this.autoplay: true,
+      this.autoplay: false,
       this.autoplayDely: 3000,
       this.reverse: false,
       this.autoplayDiableOnInteraction: true,
@@ -86,7 +86,7 @@ class Swiper extends StatefulWidget {
 
   factory Swiper.children(
       {List<Widget> children,
-      bool autoplay: true,
+      bool autoplay: false,
       int autoplayDely: 3000,
       bool reverse: false,
       bool autoplayDiableOnInteraction: true,
@@ -130,7 +130,7 @@ class Swiper extends StatefulWidget {
   factory Swiper.list(
       {List list,
       SwiperDataBuilder builder,
-      bool autoplay: true,
+      bool autoplay: false,
       int autoplayDely: 3000,
       bool reverse: false,
       bool autoplayDiableOnInteraction: true,
