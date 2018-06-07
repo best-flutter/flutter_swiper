@@ -12,5 +12,5 @@ tar xf ~/development/flutter_linux_v0.4.4-beta.tar.xz
 export PATH=~/development/flutter/bin:$PATH
 
 
-cd $ROOT/package
+cd $ROOT
 flutter packages get
