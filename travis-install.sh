@@ -17,6 +17,3 @@ export PATH=~/development/flutter/bin:$PATH
 cd $ROOT
 flutter packages get || exit $?
 
-
-echo 'Formating code'
-flutter format . || exit $?

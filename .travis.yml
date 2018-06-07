@@ -1,2 +1,4 @@
+install:
+  - ./travis-install.sh
 script:
-  - ./travis.sh
+  - ./travis-script.sh
