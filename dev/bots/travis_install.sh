@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-echo "Trying to instasll sdk"
-
 echo "$PWD"
 export ROOT="$PWD"
 
@@ -14,6 +11,6 @@ tar xf ~/development/flutter_linux_v0.4.4-beta.tar.xz
 
 export PATH=~/development/flutter/bin:$PATH
 
-cd $ROOT
-flutter packages get || exit $?
 
+cd $ROOT/package
+flutter packages get
