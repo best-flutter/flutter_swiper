@@ -143,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
 | scrollDirection | Axis.horizontal  |滚动方向，设置为Axis.vertical如果需要垂直滚动   |
 | loop            | true             |无限轮播模式开关                              |
 | index           | 0                |初始的时候下标位置                            |
-| autoplay        | true             |自动播放开关. |
+| autoplay        | false             |自动播放开关. |
 | onIndexChanged  | void onIndexChanged(int index)  | 当用户手动拖拽或者自动播放引起下标改变的时候调用 |
 | onTap           | void onTap(int index)  | 当用户点击某个轮播的时候调用 |
 | duration        | 300.0            | 动画时间，单位是毫秒 |
