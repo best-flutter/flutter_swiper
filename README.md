@@ -1,3 +1,5 @@
+language : [English](https://github.com/jzoom/flutter_swiper) | [中文](https://github.com/jzoom/flutter_swiper/blob/master/README-ZH.md)
+
 # flutter_swiper
 
 The best swiper for flutter.
@@ -39,7 +41,7 @@ Add
 
 ```bash
 
-flutter_swiper : ^0.0.7
+flutter_swiper : ^0.0.8
 
 ```
 to your pubspec.yaml ,and run 
@@ -167,7 +169,7 @@ The control also extends from `SwiperPlugin`,set `new SwiperControl()` to show d
 | :------------ |:---------------:| :-----|
 | iconPrevious | Icons.arrow_back_ios  | The icon data to display `previous` control button |
 | iconNext | Icons.arrow_forward_ios | The icon data to display `next`. |
-| color | Colors.blueAccent | Control button color |
+| color | Theme.of(context).primaryColor | Control button color |
 | size | 30.0 | Control button size |
 | padding | const EdgeInsets.all(5.0) | Control button padding |
 

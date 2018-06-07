@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
         '/example03': (BuildContext context) => new ExampleFraction(),
         '/example04': (BuildContext context) => new ExampleCustomPagination(),
         '/example05': (BuildContext context) => new ExamplePhone(),
-        '/example06': (BuildContext context) => new ExamplePlugins(),
+        '/example06': (BuildContext context) => new ScaffoldWidget(
+            child: new ExampleSwiperInScrollView(), title: "ScrollView"),
         '/example07': (BuildContext context) => new ScaffoldWidget(
               child: new ExampleCustom(),
               title: "Custom All",
@@ -87,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ["Fraction", "Fraction style", "/example03"],
           ["Custom Pagination", "Custom Pagination", "/example04"],
           ["Phone", "Phone view", "/example05"],
+          ["ScrollView ", "In a ScrollView", "/example06"],
           ["Custom", "Custom all properties", "/example07"]
         ]),
       ),
@@ -318,10 +320,45 @@ class ExamplePhone extends StatelessWidget {
   }
 }
 
-class ExamplePlugins extends StatelessWidget {
+class ExampleSwiperInScrollView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    return new CustomScrollView(
+      slivers: <Widget>[
+        new SliverList(
+            delegate: new SliverChildBuilderDelegate((c, i) {
+          return new Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              new SizedBox(
+                height: 100.0,
+                child: new Swiper(
+                  itemBuilder: (c, i) {
+                    return new Container(
+                      color: Colors.grey,
+                      child: new Text("$i"),
+                    );
+                  },
+                  itemCount: 10,
+                  pagination: new SwiperPagination(),
+                ),
+              ),
+              new SizedBox(
+                height: 100.0,
+                child: new Swiper(
+                    itemBuilder: (c, i) {
+                      return new Container(
+                        color: Colors.grey,
+                        child: new Text("$i"),
+                      );
+                    },
+                    itemCount: 10000),
+              )
+            ],
+          );
+        }, childCount: 1))
+      ],
+    );
   }
 }
 

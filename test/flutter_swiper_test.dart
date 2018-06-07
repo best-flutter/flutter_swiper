@@ -1,13 +1,31 @@
-import 'package:test/test.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:infinity_page_view/infinity_page_view.dart';
 
 void main() {
-//  test('adds one to input values', () {
-//    final calculator = new Calculator();
-//    expect(calculator.addOne(2), 3);
-//    expect(calculator.addOne(-7), -6);
-//    expect(calculator.addOne(0), 1);
-//    expect(() => calculator.addOne(null), throwsNoSuchMethodError);
-//  });
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+
+    SwiperController controller = new SwiperController(1);
+    await tester.pumpWidget(new MaterialApp(
+        home: new Swiper(
+            controller: controller,
+            itemBuilder: (context, index) {
+              return new Text("0");
+            },
+            itemCount: 1)));
+
+//    // Verify that our counter starts at 0.
+    expect(find.text("0", skipOffstage: false), findsOneWidget);
+//    expect(find.text('1'), findsNothing);
+//
+//    // Tap the '+' icon and trigger a frame.
+//    await tester.tap(find.byIcon(Icons.add));
+//    await tester.pump();
+//
+//    // Verify that our counter has incremented.
+//    expect(find.text('0'), findsNothing);
+//    expect(find.text('1'), findsOneWidget);
+  });
 }

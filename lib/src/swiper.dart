@@ -11,6 +11,12 @@ typedef void SwiperOnTap(int index);
 
 typedef Widget SwiperDataBuilder(BuildContext context, dynamic data, int index);
 
+/// default auto play delay
+const int kDefaultAutoplayDelayMs = 3000;
+
+///  Default auto play transition duration (in millisecond)
+const int kDefaultAutopayTransactionDuration = 300;
+
 class Swiper extends StatefulWidget {
   final IndexedWidgetBuilder itemBuilder;
 
@@ -65,10 +71,10 @@ class Swiper extends StatefulWidget {
       {@required this.itemBuilder,
       @required this.itemCount,
       this.autoplay: false,
-      this.autoplayDely: 3000,
+      this.autoplayDely: kDefaultAutoplayDelayMs,
       this.reverse: false,
       this.autoplayDiableOnInteraction: true,
-      this.duration: 300,
+      this.duration: kDefaultAutopayTransactionDuration,
       this.onIndexChanged,
       this.index: 0,
       this.onTap,
@@ -88,10 +94,10 @@ class Swiper extends StatefulWidget {
   factory Swiper.children(
       {List<Widget> children,
       bool autoplay: false,
-      int autoplayDely: 3000,
+      int autoplayDely: kDefaultAutoplayDelayMs,
       bool reverse: false,
       bool autoplayDiableOnInteraction: true,
-      int duration: 300,
+      int duration: kDefaultAutopayTransactionDuration,
       ValueChanged<int> onIndexChanged,
       int index: 0,
       SwiperOnTap onTap,
@@ -134,10 +140,10 @@ class Swiper extends StatefulWidget {
       {List list,
       SwiperDataBuilder builder,
       bool autoplay: false,
-      int autoplayDely: 3000,
+      int autoplayDely: kDefaultAutoplayDelayMs,
       bool reverse: false,
       bool autoplayDiableOnInteraction: true,
-      int duration: 300,
+      int duration: kDefaultAutopayTransactionDuration,
       ValueChanged<int> onIndexChanged,
       int index: 0,
       SwiperOnTap onTap,
@@ -327,8 +333,6 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
     return false;
   }
 
-  final Key _scrollViewKey = const Key("swiper_scroll_view");
-
   Widget createPageView(
       BuildContext context, IndexedWidgetBuilder itemBuilder) {
     if (widget.loop) {
@@ -375,27 +379,27 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
     SwiperPluginConfig config;
     // pagination ?
     if (widget.pagination != null) {
-      config = ensureConfig(config);
-      list.add(createPluginView(widget.pagination, config));
+      config = _ensureConfig(config);
+      list.add(_createPluginView(widget.pagination, config));
     }
 
     //controll?
     if (widget.control != null) {
-      config = ensureConfig(config);
-      list.add(createPluginView(widget.control, config));
+      config = _ensureConfig(config);
+      list.add(_createPluginView(widget.control, config));
     }
 
     if (widget.plugins != null) {
-      config = ensureConfig(config);
+      config = _ensureConfig(config);
       for (SwiperPlugin plugin in widget.plugins) {
-        list.add(createPluginView(plugin, config));
+        list.add(_createPluginView(plugin, config));
       }
     }
 
     return new Stack(children: list);
   }
 
-  SwiperPluginConfig ensureConfig(SwiperPluginConfig config) {
+  SwiperPluginConfig _ensureConfig(SwiperPluginConfig config) {
     if (config == null) {
       config = new SwiperPluginConfig(
           itemCount: widget.itemCount,
@@ -407,7 +411,7 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
     return config;
   }
 
-  Widget createPluginView(SwiperPlugin plugin, SwiperPluginConfig config) {
+  Widget _createPluginView(SwiperPlugin plugin, SwiperPluginConfig config) {
     return new SwiperPluginView(plugin, config);
   }
 }

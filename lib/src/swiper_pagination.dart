@@ -156,7 +156,11 @@ class SwiperPagination extends SwiperPlugin {
   /// Alignment.bottomCenter by default when scrollDirection== Axis.horizontal
   /// Alignment.centerRight by default when scrollDirection== Axis.vertical
   final AlignmentGeometry alignment;
+
+  /// Distance between pagination and the container
   final EdgeInsetsGeometry margin;
+
+  /// Build the widet
   final SwiperPlugin builder;
 
   const SwiperPagination(

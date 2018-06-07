@@ -25,4 +25,7 @@
       </value>
     </option>
   </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/test/lib/SwiperApp.dart" />
+  </component>
 </project>

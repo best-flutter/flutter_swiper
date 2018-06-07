@@ -1,6 +1,6 @@
 name: flutter_swiper
 description: A new flutter package project.
-version: 0.0.7
+version: 0.0.8
 author: JZoom <jzoom8112@gmail.com>
 homepage: https://github.com/jzoom/flutter_swiper
 
@@ -8,7 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  infinity_page_view : ^0.0.5
+  infinity_page_view : ^1.0.0
 
 environment:
   sdk: ">=2.0.0-dev.48.0 <3.0.0"

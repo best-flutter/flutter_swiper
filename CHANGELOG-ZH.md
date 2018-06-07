@@ -33,8 +33,8 @@
     
     
 ## [0.0.8] - [2018/06/07]
-    * And chinese document
-    * Update infinity_page_view version to 1.0.0
+    * 新增中文文档
+    * 更新依赖包：infinity_page_view 版本到 1.0.0
     
     
     
