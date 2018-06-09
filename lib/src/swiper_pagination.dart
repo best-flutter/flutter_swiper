@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'swiper_plugin.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class FractionPaginationBuilder extends SwiperPlugin {
   ///color ,if set null , will be Theme.of(context).scaffoldBackgroundColor
@@ -174,6 +174,8 @@ class SwiperPagination extends SwiperPlugin {
 
   /// Build the widet
   final SwiperPlugin builder;
+
+
 
   final Key key;
 

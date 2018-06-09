@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'package:infinity_page_view/infinity_page_view.dart';
-import 'swiper_controller.dart';
-import 'swiper_plugin.dart';
+
 
 import 'dart:async';
 
@@ -55,10 +55,10 @@ class Swiper extends StatefulWidget {
   final SwiperOnTap onTap;
 
   ///The swiper pagination plugin
-  final SwiperPlugin pagination;
+  final SwiperPagination pagination;
 
   ///the swiper control button plugin
-  final SwiperPlugin control;
+  final SwiperControl control;
 
   ///other plugins, you can cutom your own plugin
   final List<SwiperPlugin> plugins;
