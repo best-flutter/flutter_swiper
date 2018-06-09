@@ -55,10 +55,10 @@ class Swiper extends StatefulWidget {
   final SwiperOnTap onTap;
 
   ///The swiper pagination plugin
-  final SwiperPagination pagination;
+  final SwiperPlugin pagination;
 
   ///the swiper control button plugin
-  final SwiperControl control;
+  final SwiperPlugin control;
 
   ///other plugins, you can cutom your own plugin
   final List<SwiperPlugin> plugins;

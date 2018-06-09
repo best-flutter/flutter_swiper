@@ -15,9 +15,12 @@ class FractionPaginationBuilder extends SwiperPlugin {
   ///font size when active
   final double activeFontSize;
 
+  final Key key;
+
   const FractionPaginationBuilder(
       {this.color,
       this.fontSize: 20.0,
+        this.key,
       this.activeColor,
       this.activeFontSize: 35.0});
 
@@ -29,6 +32,7 @@ class FractionPaginationBuilder extends SwiperPlugin {
 
     if (Axis.vertical == config.scrollDirection) {
       return new Column(
+        key: key,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new Text(
@@ -47,6 +51,7 @@ class FractionPaginationBuilder extends SwiperPlugin {
       );
     } else {
       return new Row(
+        key: key,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new Text(
