@@ -17,8 +17,8 @@ class SwiperController extends ChangeNotifier {
   ///move to index
   void move(int index, {bool animation: true}) {
     _event = SwiperControllerEvent.INDEX;
-    index = index;
-    animation = animation;
+    this.index = index;
+    this.animation = animation;
     notifyListeners();
   }
 

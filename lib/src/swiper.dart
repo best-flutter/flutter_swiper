@@ -4,7 +4,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'package:infinity_page_view/infinity_page_view.dart';
 
-
 import 'dart:async';
 
 typedef void SwiperOnTap(int index);
@@ -192,8 +191,9 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
   Timer _timer;
   int _activeIndex;
 
-  Widget _wrapInkWell(BuildContext context, int index) {
-    return new InkWell(
+  Widget _wrapTap(BuildContext context, int index) {
+    return new GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () {
         this.widget.onTap(index);
       },
@@ -365,7 +365,7 @@ class _SwiperState extends State<Swiper> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     IndexedWidgetBuilder itemBuilder =
-        widget.onTap == null ? widget.itemBuilder : _wrapInkWell;
+        widget.onTap == null ? widget.itemBuilder : _wrapTap;
 
     List<Widget> list = [];
 

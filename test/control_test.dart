@@ -24,20 +24,17 @@ void main() {
 
     expect(find.byKey(key), findsOneWidget);
 
-    bool first =true;
+    bool first = true;
 
-    await tester.tap(  find.byWidgetPredicate( ( Widget widget  ){
-
-      if(widget is GestureDetector && first){
-        first  =false;
+    await tester.tap(find.byWidgetPredicate((Widget widget) {
+      if (widget is GestureDetector && first) {
+        first = false;
         return true;
       }
 
       return false;
-
-    }) );
+    }));
   });
-
 
   testWidgets('Control vertical', (WidgetTester tester) async {
     SwiperController controller = new SwiperController(0);
@@ -52,28 +49,23 @@ void main() {
     Key key = new UniqueKey();
     await tester.pumpWidget(new MaterialApp(
       home: new Scaffold(body: new Builder(builder: (BuildContext context) {
-        return new SwiperControl(key: key,color: Colors.white,disableColor: Colors.black87).build(context, config);
+        return new SwiperControl(
+                key: key, color: Colors.white, disableColor: Colors.black87)
+            .build(context, config);
       })),
     ));
 
     expect(find.byKey(key), findsOneWidget);
 
-    bool first =true;
+    bool first = true;
 
-    await tester.tap(  find.byWidgetPredicate( ( Widget widget  ){
-
-      if(widget is GestureDetector && first){
-        first  =false;
+    await tester.tap(find.byWidgetPredicate((Widget widget) {
+      if (widget is GestureDetector && first) {
+        first = false;
         return true;
       }
 
       return false;
-
-    }) );
-
-
-
-
-
+    }));
   });
 }

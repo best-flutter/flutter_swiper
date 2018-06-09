@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c786231b-ff91-4235-b541-261fe51b92a1" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/lib/src/swiper.dart" afterPath="$PROJECT_DIR$/lib/src/swiper.dart" />
+      <change beforePath="$PROJECT_DIR$/lib/src/swiper_control.dart" afterPath="$PROJECT_DIR$/lib/src/swiper_control.dart" />
+      <change beforePath="$PROJECT_DIR$/lib/src/swiper_controller.dart" afterPath="$PROJECT_DIR$/lib/src/swiper_controller.dart" />
       <change beforePath="$PROJECT_DIR$/lib/src/swiper_pagination.dart" afterPath="$PROJECT_DIR$/lib/src/swiper_pagination.dart" />
       <change beforePath="$PROJECT_DIR$/test/control_test.dart" afterPath="$PROJECT_DIR$/test/control_test.dart" />
       <change beforePath="$PROJECT_DIR$/test/flutter_swiper_test.dart" afterPath="$PROJECT_DIR$/test/flutter_swiper_test.dart" />
@@ -21,31 +24,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pagination_test.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/pagination_test.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="81" column="58" lean-forward="true" selection-start-line="81" selection-start-column="58" selection-end-line="81" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="swiper_plugin.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/swiper_plugin.dart">
+      <file leaf-file-name="flutter_swiper_test.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/flutter_swiper_test.dart">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="249">
-              <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+              <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="swiper_control.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/src/swiper_control.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="181">
+              <caret line="69" column="60" lean-forward="false" selection-start-line="69" selection-start-column="60" selection-end-line="69" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="swiper_pagination.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/swiper_pagination.dart">
+      <file leaf-file-name="control_test.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/control_test.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="46" column="31" lean-forward="false" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="31" />
+            <state relative-caret-position="420">
+              <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pagination_test.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/pagination_test.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -73,13 +88,14 @@
       <find>_onTimer</find>
       <find>index</find>
       <find>_PageControllerAdapter</find>
-      <find>_onController</find>
       <find>print</find>
       <find>controller</find>
       <find>autoplayDely</find>
-      <find>autoplay</find>
       <find>blue</find>
       <find>InkWell</find>
+      <find>_onController</find>
+      <find>autoplay</find>
+      <find>onTap</find>
     </findStrings>
     <replaceStrings>
       <replace>pagination</replace>
@@ -106,7 +122,6 @@
         <option value="$PROJECT_DIR$/example/lib/src/forms/form_switch.dart" />
         <option value="$PROJECT_DIR$/example/lib/src/forms/form_widget.dart" />
         <option value="$PROJECT_DIR$/example/lib/src/ExampleCustom.dart" />
-        <option value="$PROJECT_DIR$/lib/src/swiper_controller.dart" />
         <option value="$PROJECT_DIR$/test/lib/SwiperApp.dart" />
         <option value="$USER_HOME$/SourceCode/GitHub/infinity_page_view/README.md" />
         <option value="$PROJECT_DIR$/README-CN.md" />
@@ -117,21 +132,22 @@
         <option value="$PROJECT_DIR$/ROADMAP.md" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/README-ZH.md" />
-        <option value="$PROJECT_DIR$/lib/src/swiper_control.dart" />
         <option value="$PROJECT_DIR$/lib/src/swiper_plugin.dart" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/dev/bots/travis_script.sh" />
-        <option value="$PROJECT_DIR$/dev/bots/travis_install.sh" />
         <option value="$PROJECT_DIR$/test/control_test.dart" />
-        <option value="$PROJECT_DIR$/lib/src/swiper.dart" />
-        <option value="$PROJECT_DIR$/test/flutter_swiper_test.dart" />
         <option value="$PROJECT_DIR$/lib/src/swiper_pagination.dart" />
         <option value="$PROJECT_DIR$/test/pagination_test.dart" />
+        <option value="$PROJECT_DIR$/dev/bots/travis_install.sh" />
+        <option value="$PROJECT_DIR$/lib/src/swiper_controller.dart" />
+        <option value="$PROJECT_DIR$/lib/src/swiper_control.dart" />
+        <option value="$PROJECT_DIR$/lib/src/swiper.dart" />
+        <option value="$PROJECT_DIR$/test/flutter_swiper_test.dart" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="331" />
+    <option name="x" value="213" />
     <option name="y" value="23" />
     <option name="width" value="1680" />
     <option name="height" value="979" />
@@ -168,7 +184,23 @@
             <path>
               <item name="flutter_swiper" type="b2602c69:ProjectViewProjectNode" />
               <item name="flutter_swiper" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="coverage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="flutter_swiper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="flutter_swiper" type="462c0819:PsiDirectoryNode" />
+              <item name="dev" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="flutter_swiper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="flutter_swiper" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="flutter_swiper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="flutter_swiper" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="flutter_swiper" type="b2602c69:ProjectViewProjectNode" />
@@ -187,6 +219,9 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -209,7 +244,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter.main.dart">
+  <component name="RunManager" selected="Flutter Test.flutter_swiper_test.dart">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -248,7 +283,7 @@
       <option name="filePath" value="$PROJECT_DIR$/example/lib/main.dart" />
     </configuration>
     <configuration name="flutter_swiper_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test">
-      <option name="testFile" value="$PROJECT_DIR$/test/control_test.dart" />
+      <option name="testFile" value="$PROJECT_DIR$/test/flutter_swiper_test.dart" />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -324,24 +359,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 15h 09m 56s.xml">
-      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
-    </history-entry>
-    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 15h 10m 18s.xml">
-      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
-    </history-entry>
-    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 15h 10m 42s.xml">
-      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
-    </history-entry>
-    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 15h 11m 07s.xml">
-      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
-    </history-entry>
-    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 15h 13m 27s.xml">
-      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
-    </history-entry>
-    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 15h 14m 23s.xml">
-      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
-    </history-entry>
     <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 15h 14m 48s.xml">
       <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
     </history-entry>
@@ -352,6 +369,24 @@
       <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
     </history-entry>
     <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 15h 16m 53s.xml">
+      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
+    </history-entry>
+    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 16h 52m 10s.xml">
+      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
+    </history-entry>
+    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 16h 52m 31s.xml">
+      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
+    </history-entry>
+    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 16h 52m 41s.xml">
+      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
+    </history-entry>
+    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 16h 54m 05s.xml">
+      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
+    </history-entry>
+    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 16h 54m 16s.xml">
+      <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
+    </history-entry>
+    <history-entry file="flutter_swiper_test_dart - 2018.06.09 at 16h 54m 27s.xml">
       <configuration name="flutter_swiper_test.dart" configurationId="FlutterTestConfigType" />
     </history-entry>
   </component>
@@ -365,7 +400,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="331" y="23" width="1680" height="979" extended-state="0" />
+    <frame x="213" y="23" width="1680" height="979" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -421,12 +456,19 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/src/swiper_controller.dart</url>
+          <line>24</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="dart-exception">
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="45" />
+      <option name="time" value="49" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -483,6 +525,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="60" column="8" lean-forward="false" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -569,7 +612,7 @@
         <state relative-caret-position="-26">
           <caret line="61" column="21" lean-forward="true" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -706,32 +749,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/swiper_controller.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/swiper_control.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coverage/lcov.info">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3803">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/bots/travis_script.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -740,56 +757,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/bots/travis_install.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="25" lean-forward="false" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/control_test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="37" column="9" lean-forward="false" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/swiper.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-703">
-          <caret line="60" column="20" lean-forward="false" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-            <marker date="1528531566408" expanded="true" signature="10920:10944" ph="(...)" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
           <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/flutter_swiper_test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="103" column="41" lean-forward="false" selection-start-line="103" selection-start-column="25" selection-end-line="103" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -809,13 +781,158 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/pagination_test.dart">
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="81" column="58" lean-forward="true" selection-start-line="81" selection-start-column="58" selection-end-line="81" selection-end-column="58" />
+        <state relative-caret-position="75">
+          <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/coverage/lcov.info">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="606">
+          <caret line="56" column="8" lean-forward="true" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/bots/travis_install.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/swiper_controller.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/swiper.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="195" column="39" lean-forward="false" selection-start-line="195" selection-start-column="39" selection-end-line="195" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+            <marker date="1528534424834" expanded="true" signature="10959:10983" ph="(...)" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/pagination_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/control_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/swiper_control.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="69" column="60" lean-forward="false" selection-start-line="69" selection-start-column="60" selection-end-line="69" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/flutter_swiper_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>flutter_swiper</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Dart Packages</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

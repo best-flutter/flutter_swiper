@@ -48,7 +48,7 @@ class SwiperControl extends SwiperPlugin {
               quarterTurns: quarterTurns,
               child: new Icon(
                 iconDaga,
-                semanticLabel: previous ? "Previous":"Next",
+                semanticLabel: previous ? "Previous" : "Next",
                 size: size,
                 color: color,
               ))),
@@ -67,7 +67,7 @@ class SwiperControl extends SwiperPlugin {
     if (config.loop) {
       prevColor = nextColor = color;
     } else {
-      bool next = config.activeIndex < config.itemCount - 2;
+      bool next = config.activeIndex < config.itemCount - 1;
       bool prev = config.activeIndex > 0;
       prevColor = prev ? color : disableColor;
       nextColor = next ? color : disableColor;
@@ -99,6 +99,5 @@ class SwiperControl extends SwiperPlugin {
       child: child,
       width: double.infinity,
     );
-
   }
 }

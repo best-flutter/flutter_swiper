@@ -39,7 +39,6 @@ void main() {
     expect(find.byKey(key), findsOneWidget);
   });
 
-
   testWidgets('Pagination vertical', (WidgetTester tester) async {
     SwiperController controller = new SwiperController(0);
 
@@ -53,12 +52,12 @@ void main() {
     await tester.pumpWidget(new MaterialApp(
       home: new Scaffold(body: new Builder(builder: (BuildContext context) {
         return new DotSwiperPaginationBuilder(
-            key: key,
-            activeColor: new Color(0xff000000),
-            color: new Color(0xffffffff),
-            space: 10.0,
-            size: 10.0,
-            activeSize: 20.0)
+                key: key,
+                activeColor: new Color(0xff000000),
+                color: new Color(0xffffffff),
+                space: 10.0,
+                size: 10.0,
+                activeSize: 20.0)
             .build(context, config);
       })),
     ));
@@ -76,8 +75,6 @@ void main() {
     expect(find.byKey(key), findsOneWidget);
   });
 
-
-
   testWidgets('Pagination fraction', (WidgetTester tester) async {
     SwiperController controller = new SwiperController(0);
 
@@ -93,8 +90,8 @@ void main() {
         return new FractionPaginationBuilder(
           key: key,
           activeColor: new Color(0xff000000),
-          color: new Color(0xffffffff),)
-            .build(context, config);
+          color: new Color(0xffffffff),
+        ).build(context, config);
       })),
     ));
 
@@ -103,9 +100,6 @@ void main() {
 
     expect(find.byKey(key), findsOneWidget);
   });
-
-
-
 
   testWidgets('Pagination fraction vertical', (WidgetTester tester) async {
     SwiperController controller = new SwiperController(0);
@@ -122,8 +116,8 @@ void main() {
         return new FractionPaginationBuilder(
           key: key,
           activeColor: new Color(0xff000000),
-          color: new Color(0xffffffff),)
-            .build(context, config);
+          color: new Color(0xffffffff),
+        ).build(context, config);
       })),
     ));
 

@@ -20,7 +20,7 @@ class FractionPaginationBuilder extends SwiperPlugin {
   const FractionPaginationBuilder(
       {this.color,
       this.fontSize: 20.0,
-        this.key,
+      this.key,
       this.activeColor,
       this.activeFontSize: 35.0});
 
@@ -179,8 +179,6 @@ class SwiperPagination extends SwiperPlugin {
 
   /// Build the widet
   final SwiperPlugin builder;
-
-
 
   final Key key;
 
