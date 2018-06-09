@@ -1,5 +1,7 @@
 语言 : [English](https://github.com/jzoom/flutter_swiper) | [中文](https://github.com/jzoom/flutter_swiper/blob/master/README-ZH.md)
 
+[![build_status](https://travis-ci.org/jzoom/flutter_swiper.svg?branch=master)](https://travis-ci.org/jzoom/flutter_swiper)
+
 
 # flutter_swiper
 
@@ -27,7 +29,7 @@ flutter最强大的siwiper
 - [x] 控制按钮
 - [x] 分页指示器
 - [x] 非无限循环模式
-- [ ] 单元测试
+- [x] 单元测试
 - [x] 例子
 - [x] 滚动方向
 - [x] 可定制控制按钮

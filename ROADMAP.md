@@ -3,7 +3,7 @@ V1
 - [x] Control buttons
 - [x] Pagination
 - [x] None loop
-- [ ] Unit tests
+- [x] Unit tests
 - [x] Examples
 - [x] Direction
 - [x] Custom control buttons
