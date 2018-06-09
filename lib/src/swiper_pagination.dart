@@ -63,6 +63,13 @@ class FractionPaginationBuilder extends SwiperPlugin {
   }
 }
 
+class RectSwiperPaginationBuilder extends SwiperPlugin {
+  @override
+  Widget build(BuildContext context, SwiperPluginConfig config) {
+    return null;
+  }
+}
+
 class DotSwiperPaginationBuilder extends SwiperPlugin {
   ///color when current index,if set null , will be Theme.of(context).primaryColor
   final Color activeColor;
@@ -79,9 +86,12 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
   /// Space between dots
   final double space;
 
+  final Key key;
+
   const DotSwiperPaginationBuilder(
       {this.activeColor,
       this.color,
+      this.key,
       this.size: 10.0,
       this.activeSize: 10.0,
       this.space: 3.0});
@@ -120,11 +130,13 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
 
     if (config.scrollDirection == Axis.vertical) {
       return new Column(
+        key: key,
         mainAxisSize: MainAxisSize.min,
         children: list,
       );
     } else {
       return new Row(
+        key: key,
         mainAxisSize: MainAxisSize.min,
         children: list,
       );
@@ -163,8 +175,11 @@ class SwiperPagination extends SwiperPlugin {
   /// Build the widet
   final SwiperPlugin builder;
 
+  final Key key;
+
   const SwiperPagination(
       {this.alignment,
+      this.key,
       this.margin: const EdgeInsets.all(10.0),
       this.builder: SwiperPagination.dots});
 
@@ -175,10 +190,9 @@ class SwiperPagination extends SwiperPlugin {
             : Alignment.centerRight);
 
     return new Align(
-      key: const Key("swiper_pagination"),
+      key: key,
       alignment: alignment,
       child: new Container(
-        key: const Key("swiper_pagination_container"),
         margin: margin,
         child: this.builder.build(context, config),
       ),

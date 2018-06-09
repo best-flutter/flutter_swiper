@@ -20,13 +20,39 @@ class SwiperControl extends SwiperPlugin {
 
   final EdgeInsetsGeometry padding;
 
+  final Key key;
+
   const SwiperControl(
       {this.iconPrevious: Icons.arrow_back_ios,
       this.iconNext: Icons.arrow_forward_ios,
       this.color,
       this.disableColor,
+      this.key,
       this.size: 30.0,
       this.padding: const EdgeInsets.all(5.0)});
+
+  Widget buildButton(SwiperPluginConfig config, Color color, IconData iconDaga,
+      int quarterTurns, bool previous) {
+    return new GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        if (previous) {
+          config.controller.previous(animation: true);
+        } else {
+          config.controller.next(animation: true);
+        }
+      },
+      child: new Padding(
+          padding: padding,
+          child: new RotatedBox(
+              quarterTurns: quarterTurns,
+              child: new Icon(
+                iconDaga,
+                size: size,
+                color: color,
+              ))),
+    );
+  }
 
   @override
   Widget build(BuildContext context, SwiperPluginConfig config) {
@@ -46,78 +72,102 @@ class SwiperControl extends SwiperPlugin {
       nextColor = next ? color : disableColor;
     }
 
-    return config.scrollDirection == Axis.horizontal
-        ? new Row(
-            children: <Widget>[
-              new Expanded(
-                  child: new Align(
-                      alignment: Alignment.centerLeft,
-                      child: new InkWell(
-                        onTap: () {
-                          config.controller.previous(animation: true);
-                        },
-                        child: new Padding(
-                            padding: padding,
-                            child: new Icon(
-                              iconPrevious,
-                              size: size,
-                              color: prevColor,
-                            )),
-                      ))),
-              new Expanded(
-                  child: new Align(
-                      alignment: Alignment.centerRight,
-                      child: new InkWell(
-                        onTap: () {
-                          config.controller.next(animation: true);
-                        },
-                        child: new Padding(
-                            padding: padding,
-                            child: new Icon(
-                              iconNext,
-                              size: size,
-                              color: nextColor,
-                            )),
-                      )))
-            ],
-          )
-        : new Column(
-            children: <Widget>[
-              new Expanded(
-                  child: new Align(
-                      alignment: Alignment.topCenter,
-                      child: new InkWell(
-                        onTap: () {
-                          config.controller.previous(animation: true);
-                        },
-                        child: new Padding(
-                            padding: padding,
-                            child: new RotatedBox(
-                                quarterTurns: -3,
-                                child: new Icon(
-                                  iconPrevious,
-                                  size: size,
-                                  color: prevColor,
-                                ))),
-                      ))),
-              new Expanded(
-                  child: new Align(
-                      alignment: Alignment.bottomCenter,
-                      child: new InkWell(
-                          onTap: () {
-                            config.controller.next(animation: true);
-                          },
-                          child: new Padding(
-                              padding: padding,
-                              child: new RotatedBox(
-                                quarterTurns: -3,
-                                child: new Icon(
-                                  iconNext,
-                                  size: size,
-                                  color: nextColor,
-                                ),
-                              )))))
-            ],
-          );
+    if (config.scrollDirection == Axis.horizontal) {
+      return new Row(
+        key: key,
+        children: <Widget>[
+          buildButton(config, prevColor, iconPrevious, null, true),
+          buildButton(config, nextColor, iconNext, null, false)
+        ],
+      );
+    } else {
+      return new Column(
+        key: key,
+        children: <Widget>[
+          buildButton(config, prevColor, iconPrevious, -3, true),
+          buildButton(config, nextColor, iconNext, -3, false)
+        ],
+      );
+    }
+
+//    return config.scrollDirection == Axis.horizontal
+//        ? new Row(
+//            key: key,
+//            children: <Widget>[
+//              new Expanded(
+//                  child: new Align(
+//                      alignment: Alignment.centerLeft,
+//                      child: new GestureDetector(
+//                        behavior: HitTestBehavior.opaque,
+//                        onTap: () {
+//                          config.controller.previous(animation: true);
+//                        },
+//                        child: new Padding(
+//                            padding: padding,
+//                            child: new Icon(
+//                              iconPrevious,
+//                              size: size,
+//                              color: prevColor,
+//                            )),
+//                      ))),
+//              new Expanded(
+//                  child: new Align(
+//                      alignment: Alignment.centerRight,
+//                      child: new GestureDetector(
+//                        behavior: HitTestBehavior.opaque,
+//                        onTap: () {
+//                          config.controller.next(animation: true);
+//                        },
+//                        child: new Padding(
+//                            padding: padding,
+//                            child: new Icon(
+//                              iconNext,
+//                              size: size,
+//                              color: nextColor,
+//                            )),
+//                      )))
+//            ],
+//          )
+//        : new Column(
+//            key: key,
+//            children: <Widget>[
+//              new Expanded(
+//                  child: new Align(
+//                      alignment: Alignment.topCenter,
+//                      child: new GestureDetector(
+//                        behavior: HitTestBehavior.opaque,
+//                        onTap: () {
+//                          config.controller.previous(animation: true);
+//                        },
+//                        child: new Padding(
+//                            padding: padding,
+//                            child: new RotatedBox(
+//                                quarterTurns: -3,
+//                                child: new Icon(
+//                                  iconPrevious,
+//                                  size: size,
+//                                  color: prevColor,
+//                                ))),
+//                      ))),
+//              new Expanded(
+//                  child: new Align(
+//                      alignment: Alignment.bottomCenter,
+//                      child: new GestureDetector(
+//                          behavior: HitTestBehavior.opaque,
+//                          onTap: () {
+//                            config.controller.next(animation: true);
+//                          },
+//                          child: new Padding(
+//                              padding: padding,
+//                              child: new RotatedBox(
+//                                quarterTurns: -3,
+//                                child: new Icon(
+//                                  iconNext,
+//                                  size: size,
+//                                  color: nextColor,
+//                                ),
+//                              )))))
+//            ],
+//          );
   }
 }
