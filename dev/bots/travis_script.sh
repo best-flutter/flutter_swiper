@@ -12,8 +12,6 @@ else
   # tests shard
   cd $ROOT
 
-  flutter test test/control_test.dart || exit $?
-  flutter test test/flutter_swiper_test.dart || exit $?
-  flutter test test/pagination_test.dart || exit $?
+  flutter test --coverage test/* || exit $?
 
 fi

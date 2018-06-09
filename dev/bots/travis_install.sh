@@ -14,3 +14,5 @@ export PATH=~/development/flutter/bin:$PATH
 
 cd $ROOT
 flutter packages get
+
+gem install coveralls-lcov
