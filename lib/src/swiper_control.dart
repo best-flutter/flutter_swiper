@@ -48,6 +48,7 @@ class SwiperControl extends SwiperPlugin {
               quarterTurns: quarterTurns,
               child: new Icon(
                 iconDaga,
+                semanticLabel: previous ? "Previous":"Next",
                 size: size,
                 color: color,
               ))),
@@ -72,17 +73,20 @@ class SwiperControl extends SwiperPlugin {
       nextColor = next ? color : disableColor;
     }
 
+    Widget child;
     if (config.scrollDirection == Axis.horizontal) {
-      return new Row(
+      child = new Row(
         key: key,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          buildButton(config, prevColor, iconPrevious, null, true),
-          buildButton(config, nextColor, iconNext, null, false)
+          buildButton(config, prevColor, iconPrevious, 0, true),
+          buildButton(config, nextColor, iconNext, 0, false)
         ],
       );
     } else {
-      return new Column(
+      child = new Column(
         key: key,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           buildButton(config, prevColor, iconPrevious, -3, true),
           buildButton(config, nextColor, iconNext, -3, false)
@@ -90,84 +94,11 @@ class SwiperControl extends SwiperPlugin {
       );
     }
 
-//    return config.scrollDirection == Axis.horizontal
-//        ? new Row(
-//            key: key,
-//            children: <Widget>[
-//              new Expanded(
-//                  child: new Align(
-//                      alignment: Alignment.centerLeft,
-//                      child: new GestureDetector(
-//                        behavior: HitTestBehavior.opaque,
-//                        onTap: () {
-//                          config.controller.previous(animation: true);
-//                        },
-//                        child: new Padding(
-//                            padding: padding,
-//                            child: new Icon(
-//                              iconPrevious,
-//                              size: size,
-//                              color: prevColor,
-//                            )),
-//                      ))),
-//              new Expanded(
-//                  child: new Align(
-//                      alignment: Alignment.centerRight,
-//                      child: new GestureDetector(
-//                        behavior: HitTestBehavior.opaque,
-//                        onTap: () {
-//                          config.controller.next(animation: true);
-//                        },
-//                        child: new Padding(
-//                            padding: padding,
-//                            child: new Icon(
-//                              iconNext,
-//                              size: size,
-//                              color: nextColor,
-//                            )),
-//                      )))
-//            ],
-//          )
-//        : new Column(
-//            key: key,
-//            children: <Widget>[
-//              new Expanded(
-//                  child: new Align(
-//                      alignment: Alignment.topCenter,
-//                      child: new GestureDetector(
-//                        behavior: HitTestBehavior.opaque,
-//                        onTap: () {
-//                          config.controller.previous(animation: true);
-//                        },
-//                        child: new Padding(
-//                            padding: padding,
-//                            child: new RotatedBox(
-//                                quarterTurns: -3,
-//                                child: new Icon(
-//                                  iconPrevious,
-//                                  size: size,
-//                                  color: prevColor,
-//                                ))),
-//                      ))),
-//              new Expanded(
-//                  child: new Align(
-//                      alignment: Alignment.bottomCenter,
-//                      child: new GestureDetector(
-//                          behavior: HitTestBehavior.opaque,
-//                          onTap: () {
-//                            config.controller.next(animation: true);
-//                          },
-//                          child: new Padding(
-//                              padding: padding,
-//                              child: new RotatedBox(
-//                                quarterTurns: -3,
-//                                child: new Icon(
-//                                  iconNext,
-//                                  size: size,
-//                                  color: nextColor,
-//                                ),
-//                              )))))
-//            ],
-//          );
+    return new Container(
+      height: double.infinity,
+      child: child,
+      width: double.infinity,
+    );
+
   }
 }
