@@ -61,7 +61,7 @@ flutter最强大的siwiper
 
 ```bash
 
-flutter_swiper : ^0.0.8
+flutter_swiper : ^lastest_version
 
 ```
 到项目根目录下的 pubspec.yaml ,并且根目录运行命令行 

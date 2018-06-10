@@ -36,5 +36,10 @@
     * And chinese document
     * Update infinity_page_view version to 1.0.0
     
+## [0.0.9] - [2018/06/10]
+    * Add ci
+    * Add testcase
     
+
+
     

@@ -45,7 +45,7 @@ Add
 
 ```bash
 
-flutter_swiper : ^0.0.8
+flutter_swiper : ^lastest_version
 
 ```
 to your pubspec.yaml ,and run 
