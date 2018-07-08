@@ -97,6 +97,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
       controller: _controller,
       layout: _layout,
       outer: _outer,
+      itemHeight: 200.0,
       viewportFraction: _viewportFraction,
       autoplayDely: _autoplayDely,
       loop: _loop,

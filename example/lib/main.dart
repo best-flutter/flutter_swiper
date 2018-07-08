@@ -16,21 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-     // home: MyHomePage(title: 'Flutter Swiper'),
-      home: ScaffoldWidget(
-        child: Swiper(
-          itemBuilder: (BuildContext context, int index) {
-            return new Image.network(
-              "http://via.placeholder.com/288x188",
-              fit: BoxFit.fill,
-            );
-          },
-          itemCount: 10,
-          viewportFraction: 0.8,
-          scale: 0.9,
-        ),
-        title: "Custom All",
-      ),
+      home: MyHomePage(title: 'Flutter Swiper'),
+
       routes: {
         '/example01': (BuildContext context) => ExampleHorizontal(),
         '/example02': (BuildContext context) => ExampleVertical(),
