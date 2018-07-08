@@ -33,7 +33,7 @@ class SwiperControl extends SwiperPlugin {
 
   Widget buildButton(SwiperPluginConfig config, Color color, IconData iconDaga,
       int quarterTurns, bool previous) {
-    return new GestureDetector(
+    return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
         if (previous) {
@@ -42,11 +42,11 @@ class SwiperControl extends SwiperPlugin {
           config.controller.next(animation: true);
         }
       },
-      child: new Padding(
+      child: Padding(
           padding: padding,
-          child: new RotatedBox(
+          child: RotatedBox(
               quarterTurns: quarterTurns,
-              child: new Icon(
+              child: Icon(
                 iconDaga,
                 semanticLabel: previous ? "Previous" : "Next",
                 size: size,
@@ -75,7 +75,7 @@ class SwiperControl extends SwiperPlugin {
 
     Widget child;
     if (config.scrollDirection == Axis.horizontal) {
-      child = new Row(
+      child = Row(
         key: key,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -84,7 +84,7 @@ class SwiperControl extends SwiperPlugin {
         ],
       );
     } else {
-      child = new Column(
+      child = Column(
         key: key,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -94,7 +94,7 @@ class SwiperControl extends SwiperPlugin {
       );
     }
 
-    return new Container(
+    return Container(
       height: double.infinity,
       child: child,
       width: double.infinity,

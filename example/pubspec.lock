@@ -29,6 +29,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.3"
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.5"
   charcode:
     dependency: transitive
     description:
@@ -82,7 +89,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.8"
+    version: "1.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -130,13 +137,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.2"
-  infinity_page_view:
-    dependency: transitive
-    description:
-      name: infinity_page_view
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.0"
   io:
     dependency: transitive
     description:

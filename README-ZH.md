@@ -5,7 +5,19 @@
 
 # flutter_swiper
 
-flutter最强大的siwiper
+flutter最强大的siwiper, 多种布局方式，无限轮播，Android和IOS双端适配.
+
+
+# :sparkles::sparkles: 新功能
+
+
+![](https://github.com/jzoom/images/raw/master/layout1.gif)
+
+![](https://github.com/jzoom/images/raw/master/layout2.gif)
+
+![](https://github.com/jzoom/images/raw/master/layout3.gif)
+
+[更多](#内建的布局)
 
 
 # 截图
@@ -35,8 +47,9 @@ flutter最强大的siwiper
 - [x] 可定制控制按钮
 - [x] 可定制分页
 - [x] 自动播放
-- [ ] 修正bug
 - [x] 控制器
+- [x] 外部分页指示器
+- [ ] 更多布局方式
 
 
 ## 更新日志
@@ -53,7 +66,7 @@ flutter最强大的siwiper
   + [控制按钮](#控制按钮)
   + [控制器](#控制器)
   + [自动播放](#自动播放)
-
++ [内建的布局](#内建的布局)
 
 ### 安装
 
@@ -217,3 +230,60 @@ new Swiper(
 | autoplayDiableOnInteraction | true | 当用户拖拽的时候，是否停止自动播放. |
 
 
+
+## 内建的布局
+![](https://github.com/jzoom/images/raw/master/layout1.gif)
+
+```
+Swiper(
+  itemBuilder: (BuildContext context, int index) {
+    return new Image.network(
+      "http://via.placeholder.com/288x188",
+      fit: BoxFit.fill,
+    );
+  },
+  itemCount: 10,
+  viewportFraction: 0.8,
+  scale: 0.9,
+)
+
+```
+
+
+
+![](https://github.com/jzoom/images/raw/master/layout2.gif)
+
+```
+Swiper(
+  itemBuilder: (BuildContext context, int index) {
+    return new Image.network(
+      "http://via.placeholder.com/288x188",
+      fit: BoxFit.fill,
+    );
+  },
+  itemCount: 10,
+  itemWidth: 300.0,
+  layout: SwiperLayout.STACK,
+)
+```
+
+![](https://github.com/jzoom/images/raw/master/layout3.gif)
+
+```
+Swiper(
+    itemBuilder: (BuildContext context, int index) {
+      return new Image.network(
+        "http://via.placeholder.com/288x188",
+        fit: BoxFit.fill,
+      );
+    },
+    itemCount: 10,
+    itemWidth: 300.0,
+    itemHeight: 400.0,
+    layout: SwiperLayout.TINDER,
+ )
+```
+
+这里可以找到所有的定制选项
+
+>https://github.com/jzoom/flutter_swiper/blob/master/example/lib/src/ExampleCustom.dart

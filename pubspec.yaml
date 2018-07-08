@@ -1,14 +1,12 @@
 name: flutter_swiper
-description: A new flutter package project.
-version: 0.0.9
+description: The best swiper for flutter with multiple layouts, infinite loop. Compatible with Android & iOS.
+version: 1.0.0
 author: JZoom <jzoom8112@gmail.com>
 homepage: https://github.com/jzoom/flutter_swiper
 
 dependencies:
   flutter:
     sdk: flutter
-
-  infinity_page_view : ^1.0.0
 
 environment:
   sdk: ">=2.0.0-dev.48.0 <3.0.0"

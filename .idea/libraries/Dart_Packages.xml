@@ -30,6 +30,13 @@
             </list>
           </value>
         </entry>
+        <entry key="carousel_slider">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/carousel_slider-0.0.5/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="charcode">
           <value>
             <list>
@@ -125,13 +132,6 @@
           <value>
             <list>
               <option value="$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/http_parser-3.1.2/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="infinity_page_view">
-          <value>
-            <list>
-              <option value="$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/infinity_page_view-1.0.0/lib" />
             </list>
           </value>
         </entry>
@@ -387,6 +387,7 @@
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/args-1.4.3/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/async-2.0.7/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/boolean_selector-1.0.3/lib" />
+      <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/carousel_slider-0.0.5/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/charcode-1.1.1/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/collection-1.14.6/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/convert-2.0.1/lib" />
@@ -399,7 +400,6 @@
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/http-0.11.3+16/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/http_multi_server-2.0.4/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/http_parser-3.1.2/lib" />
-      <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/infinity_page_view-1.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/io-0.3.2+1/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/js-0.6.1/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/kernel-0.3.0-alpha.12/lib" />

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:infinity_page_view/infinity_page_view.dart';
 
 void main() {
   testWidgets('Default Swiper', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(new MaterialApp(
-        home: new Swiper(
+    await tester.pumpWidget(MaterialApp(
+        home: Swiper(
             itemBuilder: (context, index) {
-              return new Text("0");
+              return Text("0");
             },
             itemCount: 10)));
 
@@ -18,11 +17,11 @@ void main() {
 
   testWidgets('Default Swiper loop:false', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(new MaterialApp(
-        home: new Swiper(
+    await tester.pumpWidget(MaterialApp(
+        home: Swiper(
       onTap: (int inde) {},
       itemBuilder: (context, index) {
-        return new Text("0");
+        return Text("0");
       },
       itemCount: 10,
       loop: false,
@@ -33,9 +32,9 @@ void main() {
 
   testWidgets('Create Swiper with children', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(new MaterialApp(
-        home: new Swiper.children(
-      children: <Widget>[new Text("0"), new Text("1")],
+    await tester.pumpWidget(MaterialApp(
+        home: Swiper.children(
+      children: <Widget>[Text("0"), Text("1")],
     )));
 
     expect(find.text("0", skipOffstage: false), findsOneWidget);
@@ -43,11 +42,11 @@ void main() {
 
   testWidgets('Create Swiper with list', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(new MaterialApp(
-        home: new Swiper.list(
+    await tester.pumpWidget(MaterialApp(
+        home: Swiper.list(
       list: ["0", "1"],
       builder: (BuildContext context, dynamic data, int index) {
-        return new Text(data);
+        return Text(data);
       },
     )));
 
@@ -56,16 +55,16 @@ void main() {
 
   testWidgets('Swiper with default plugins', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    SwiperController controller = new SwiperController(0);
-    await tester.pumpWidget(new MaterialApp(
-        home: new Swiper(
+    SwiperController controller = SwiperController();
+    await tester.pumpWidget(MaterialApp(
+        home: Swiper(
       controller: controller,
       itemBuilder: (context, index) {
-        return new Text("0");
+        return Text("0");
       },
       itemCount: 10,
-      pagination: new SwiperPagination(),
-      control: new SwiperControl(),
+      pagination: SwiperPagination(),
+      control: SwiperControl(),
     )));
 
     expect(find.text("0", skipOffstage: false), findsOneWidget);
@@ -79,27 +78,27 @@ void main() {
 
   testWidgets('Customize pagination', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    SwiperController controller = new SwiperController(0);
-    await tester.pumpWidget(new MaterialApp(
-        home: new Swiper(
+    SwiperController controller = SwiperController();
+    await tester.pumpWidget(MaterialApp(
+        home: Swiper(
       controller: controller,
       itemBuilder: (context, index) {
-        return new Text("0");
+        return Text("0");
       },
       itemCount: 10,
-      pagination: new SwiperCustomPagination(
+      pagination: SwiperCustomPagination(
           builder: (BuildContext context, SwiperPluginConfig config) {
-        return new ConstrainedBox(
-          child: new Row(
+        return ConstrainedBox(
+          child: Row(
             children: <Widget>[
-              new Text(
+              Text(
                 "${titles[config.activeIndex]} ${config.activeIndex+1}/${config.itemCount}",
-                style: new TextStyle(fontSize: 20.0),
+                style: TextStyle(fontSize: 20.0),
               ),
-              new Expanded(
-                child: new Align(
+              Expanded(
+                child: Align(
                   alignment: Alignment.centerRight,
-                  child: new DotSwiperPaginationBuilder(
+                  child: DotSwiperPaginationBuilder(
                           color: Colors.black12,
                           activeColor: Colors.black,
                           size: 10.0,
@@ -109,10 +108,10 @@ void main() {
               )
             ],
           ),
-          constraints: new BoxConstraints.expand(height: 50.0),
+          constraints: BoxConstraints.expand(height: 50.0),
         );
       }),
-      control: new SwiperControl(),
+      control: SwiperControl(),
     )));
 
     controller.startAutoplay();
@@ -130,16 +129,16 @@ void main() {
 
   testWidgets('Swiper fraction', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    SwiperController controller = new SwiperController(0);
-    await tester.pumpWidget(new MaterialApp(
-        home: new Swiper(
+    SwiperController controller = SwiperController();
+    await tester.pumpWidget(MaterialApp(
+        home: Swiper(
       controller: controller,
       itemBuilder: (context, index) {
-        return new Text("0");
+        return Text("0");
       },
       itemCount: 10,
-      pagination: new SwiperPagination(builder: SwiperPagination.fraction),
-      control: new SwiperControl(),
+      pagination: SwiperPagination(builder: SwiperPagination.fraction),
+      control: SwiperControl(),
     )));
 
     expect(find.text("0", skipOffstage: false), findsOneWidget);

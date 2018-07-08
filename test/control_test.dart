@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-import 'dart:async' as Async;
-
 void main() {
   testWidgets('Control horizontal', (WidgetTester tester) async {
-    SwiperController controller = new SwiperController(0);
+    SwiperController controller = new SwiperController();
 
     SwiperPluginConfig config = new SwiperPluginConfig(
         activeIndex: 0,
@@ -37,7 +35,7 @@ void main() {
   });
 
   testWidgets('Control vertical', (WidgetTester tester) async {
-    SwiperController controller = new SwiperController(0);
+    SwiperController controller = new SwiperController();
 
     SwiperPluginConfig config = new SwiperPluginConfig(
         activeIndex: 0,

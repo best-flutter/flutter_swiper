@@ -39,6 +39,11 @@
 ## [0.0.9] - [2018/06/10]
     * Add ci
     * Add testcase
+
+## [1.0.0] - [2018/07/08]
+    * Add layouts ( DEFAULT,STACK,TINDER )
+    * Allow to put pagination outer of the swiper container.
+
     
 
 

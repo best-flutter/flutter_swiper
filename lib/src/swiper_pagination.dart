@@ -31,36 +31,36 @@ class FractionPaginationBuilder extends SwiperPlugin {
     Color color = this.color ?? themeData.scaffoldBackgroundColor;
 
     if (Axis.vertical == config.scrollDirection) {
-      return new Column(
+      return Column(
         key: key,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          new Text(
+          Text(
             "${config.activeIndex+1}",
-            style: new TextStyle(color: activeColor, fontSize: activeFontSize),
+            style: TextStyle(color: activeColor, fontSize: activeFontSize),
           ),
-          new Text(
+          Text(
             "/",
-            style: new TextStyle(color: color, fontSize: fontSize),
+            style: TextStyle(color: color, fontSize: fontSize),
           ),
-          new Text(
+          Text(
             "${config.itemCount}",
-            style: new TextStyle(color: color, fontSize: fontSize),
+            style: TextStyle(color: color, fontSize: fontSize),
           )
         ],
       );
     } else {
-      return new Row(
+      return Row(
         key: key,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          new Text(
+          Text(
             "${config.activeIndex+1}",
-            style: new TextStyle(color: activeColor, fontSize: activeFontSize),
+            style: TextStyle(color: activeColor, fontSize: activeFontSize),
           ),
-          new Text(
+          Text(
             " / ${config.itemCount}",
-            style: new TextStyle(color: color, fontSize: fontSize),
+            style: TextStyle(color: color, fontSize: fontSize),
           )
         ],
       );
@@ -69,9 +69,74 @@ class FractionPaginationBuilder extends SwiperPlugin {
 }
 
 class RectSwiperPaginationBuilder extends SwiperPlugin {
+  ///color when current index,if set null , will be Theme.of(context).primaryColor
+  final Color activeColor;
+
+  ///,if set null , will be Theme.of(context).scaffoldBackgroundColor
+  final Color color;
+
+  ///Size of the rect when activate
+  final Size activeSize;
+
+  ///Size of the rect
+  final Size size;
+
+  /// Space between rects
+  final double space;
+
+  final Key key;
+
+  const RectSwiperPaginationBuilder(
+      {this.activeColor,
+      this.color,
+      this.key,
+      this.size: const Size(10.0, 2.0),
+      this.activeSize: const Size(10.0, 2.0),
+      this.space: 3.0});
+
   @override
   Widget build(BuildContext context, SwiperPluginConfig config) {
-    return null;
+    ThemeData themeData = Theme.of(context);
+    Color activeColor = this.activeColor ?? themeData.primaryColor;
+    Color color = this.color ?? themeData.scaffoldBackgroundColor;
+
+    List<Widget> list = [];
+
+    if (config.itemCount > 20) {
+      print(
+          "The itemCount is too big, we suggest use FractionPaginationBuilder instead of DotSwiperPaginationBuilder in this sitituation");
+    }
+
+    int itemCount = config.itemCount;
+    int activeIndex = config.activeIndex;
+
+    for (int i = 0; i < itemCount; ++i) {
+      bool active = i == activeIndex;
+      Size size = active ? this.activeSize : this.size;
+      list.add(SizedBox(
+        width: size.width,
+        height: size.height,
+        child: Container(
+          color: active ? activeColor : color,
+          key: Key("pagination_$i"),
+          margin: EdgeInsets.all(space),
+        ),
+      ));
+    }
+
+    if (config.scrollDirection == Axis.vertical) {
+      return Column(
+        key: key,
+        mainAxisSize: MainAxisSize.min,
+        children: list,
+      );
+    } else {
+      return Row(
+        key: key,
+        mainAxisSize: MainAxisSize.min,
+        children: list,
+      );
+    }
   }
 }
 
@@ -120,11 +185,11 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
 
     for (int i = 0; i < itemCount; ++i) {
       bool active = i == activeIndex;
-      list.add(new Container(
-        key: new Key("pagination_$i"),
-        margin: new EdgeInsets.all(space),
-        child: new ClipOval(
-          child: new Container(
+      list.add(Container(
+        key: Key("pagination_$i"),
+        margin: EdgeInsets.all(space),
+        child: ClipOval(
+          child: Container(
             color: active ? activeColor : color,
             width: active ? activeSize : size,
             height: active ? activeSize : size,
@@ -134,13 +199,13 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
     }
 
     if (config.scrollDirection == Axis.vertical) {
-      return new Column(
+      return Column(
         key: key,
         mainAxisSize: MainAxisSize.min,
         children: list,
       );
     } else {
-      return new Row(
+      return Row(
         key: key,
         mainAxisSize: MainAxisSize.min,
         children: list,
@@ -170,9 +235,11 @@ class SwiperPagination extends SwiperPlugin {
   /// fraction style pagination
   static const SwiperPlugin fraction = const FractionPaginationBuilder();
 
+  static const SwiperPlugin rect = const RectSwiperPaginationBuilder();
+
   /// Alignment.bottomCenter by default when scrollDirection== Axis.horizontal
   /// Alignment.centerRight by default when scrollDirection== Axis.vertical
-  final AlignmentGeometry alignment;
+  final Alignment alignment;
 
   /// Distance between pagination and the container
   final EdgeInsetsGeometry margin;
@@ -189,18 +256,21 @@ class SwiperPagination extends SwiperPlugin {
       this.builder: SwiperPagination.dots});
 
   Widget build(BuildContext context, SwiperPluginConfig config) {
-    AlignmentGeometry alignment = this.alignment ??
+    Alignment alignment = this.alignment ??
         (config.scrollDirection == Axis.horizontal
             ? Alignment.bottomCenter
             : Alignment.centerRight);
-
-    return new Align(
-      key: key,
-      alignment: alignment,
-      child: new Container(
-        margin: margin,
-        child: this.builder.build(context, config),
-      ),
+    Widget child = Container(
+      margin: margin,
+      child: this.builder.build(context, config),
     );
+    if (!config.outer) {
+      child = new Align(
+        key: key,
+        alignment: alignment,
+        child: child,
+      );
+    }
+    return child;
   }
 }

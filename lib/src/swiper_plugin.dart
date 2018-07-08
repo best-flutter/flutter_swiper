@@ -14,11 +14,13 @@ class SwiperPluginConfig {
   final int itemCount;
   final Axis scrollDirection;
   final bool loop;
+  final bool outer;
   final SwiperController controller;
 
   const SwiperPluginConfig(
       {this.activeIndex,
       this.itemCount,
+      this.outer,
       this.scrollDirection,
       this.controller,
       this.loop})

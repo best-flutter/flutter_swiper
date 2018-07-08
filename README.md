@@ -6,7 +6,22 @@ language : [English](https://github.com/jzoom/flutter_swiper) | [中文](https:/
 
 # flutter_swiper
 
-The best swiper for flutter.
+The best swiper for flutter , with multiple layouts, infinite loop. Compatible with Android & iOS.
+
+
+# :sparkles::sparkles: New Features:Layout
+
+
+![](https://github.com/jzoom/images/raw/master/layout1.gif)
+
+![](https://github.com/jzoom/images/raw/master/layout2.gif)
+
+![](https://github.com/jzoom/images/raw/master/layout3.gif)
+
+[See More](#build-in-layouts)
+
+
+# Showcases
 
 ![Horizontal](https://github.com/jzoom/flutter_swiper/raw/master/example/res/1.gif)
 
@@ -37,6 +52,7 @@ The best swiper for flutter.
   + [Control buttons](#control-buttons)
   + [Controller](#controller)
   + [Autoplay](#autoplay)
+- [Build in layouts](#build-in-layouts)
 
 
 ### Installation
@@ -201,3 +217,60 @@ The `Controller` is used to control the `index` of the Swiper, start or stop aut
 | autoplayDiableOnInteraction | true | Disable autoplay when user drag. |
 
 
+## Build in layouts
+![](https://github.com/jzoom/images/raw/master/layout1.gif)
+
+```
+Swiper(
+  itemBuilder: (BuildContext context, int index) {
+    return new Image.network(
+      "http://via.placeholder.com/288x188",
+      fit: BoxFit.fill,
+    );
+  },
+  itemCount: 10,
+  viewportFraction: 0.8,
+  scale: 0.9,
+)
+
+```
+
+
+
+![](https://github.com/jzoom/images/raw/master/layout2.gif)
+
+```
+Swiper(
+  itemBuilder: (BuildContext context, int index) {
+    return new Image.network(
+      "http://via.placeholder.com/288x188",
+      fit: BoxFit.fill,
+    );
+  },
+  itemCount: 10,
+  itemWidth: 300.0,
+  layout: SwiperLayout.STACK,
+)
+```
+
+![](https://github.com/jzoom/images/raw/master/layout3.gif)
+
+```
+Swiper(
+    itemBuilder: (BuildContext context, int index) {
+      return new Image.network(
+        "http://via.placeholder.com/288x188",
+        fit: BoxFit.fill,
+      );
+    },
+    itemCount: 10,
+    itemWidth: 300.0,
+    itemHeight: 400.0,
+    layout: SwiperLayout.TINDER,
+ )
+```
+
+
+You can find all custom options here:
+
+>https://github.com/jzoom/flutter_swiper/blob/master/example/lib/src/ExampleCustom.dart

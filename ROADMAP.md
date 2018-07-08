@@ -9,5 +9,6 @@ V1
 - [x] Custom control buttons
 - [x] Custom pagination
 - [x] Autoplay
-- [ ] Fix bugs
 - [x] Controler
+- [x] Set indicator outside
+- [ ] More layouts
