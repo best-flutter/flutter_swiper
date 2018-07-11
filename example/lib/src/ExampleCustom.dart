@@ -99,7 +99,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
       outer: _outer,
       itemHeight: 200.0,
       viewportFraction: _viewportFraction,
-      autoplayDely: _autoplayDely,
+      autoplayDelay: _autoplayDely,
       loop: _loop,
       autoplay: _autoplay,
       itemBuilder: _buildItem,

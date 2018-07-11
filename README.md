@@ -213,7 +213,7 @@ The `Controller` is used to control the `index` of the Swiper, start or stop aut
 
 | Parameter  | Default   | Description |
 | :------------ |:---------------:| :-----|
-| autoplayDely | 3000  | Autoplay delay milliseconds. |
+| autoplayDelay | 3000  | Autoplay delay milliseconds. |
 | autoplayDiableOnInteraction | true | Disable autoplay when user drag. |
 
 

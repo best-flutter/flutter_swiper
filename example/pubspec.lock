@@ -29,13 +29,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.3"
-  carousel_slider:
-    dependency: "direct main"
-    description:
-      name: carousel_slider
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.0.5"
   charcode:
     dependency: transitive
     description:

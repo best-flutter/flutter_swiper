@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Swiper'),
-
       routes: {
         '/example01': (BuildContext context) => ExampleHorizontal(),
         '/example02': (BuildContext context) => ExampleVertical(),

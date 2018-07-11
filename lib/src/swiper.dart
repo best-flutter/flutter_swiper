@@ -44,8 +44,8 @@ class Swiper extends StatefulWidget {
   ///auto play config
   final bool autoplay;
 
-  ///Delay between auto play transitions (in millisecond).
-  final int autoplayDely;
+  ///Duration of the animation between transactions (in millisecond).
+  final int autoplayDelay;
 
   ///disable auto play when interaction
   final bool autoplayDiableOnInteraction;
@@ -82,9 +82,6 @@ class Swiper extends StatefulWidget {
   ///other plugins, you can cutom your own plugin
   final List<SwiperPlugin> plugins;
 
-  /// decoration of inner swiper
-  final BoxDecoration decoration;
-
   ///
   final SwiperController controller;
 
@@ -102,9 +99,8 @@ class Swiper extends StatefulWidget {
     @required this.itemBuilder,
     @required this.itemCount,
     this.autoplay: false,
-    this.decoration,
     this.layout,
-    this.autoplayDely: kDefaultAutoplayDelayMs,
+    this.autoplayDelay: kDefaultAutoplayDelayMs,
     this.reverse: false,
     this.autoplayDiableOnInteraction: true,
     this.duration: kDefaultAutopayTransactionDuration,
@@ -169,7 +165,7 @@ class Swiper extends StatefulWidget {
         outer: outer,
         scale: scale,
         autoplay: autoplay,
-        autoplayDely: autoplayDely,
+        autoplayDelay: autoplayDely,
         autoplayDiableOnInteraction: autoplayDiableOnInteraction,
         reverse: reverse,
         duration: duration,
@@ -228,7 +224,7 @@ class Swiper extends StatefulWidget {
         outer: outer,
         scale: scale,
         autoplay: autoplay,
-        autoplayDely: autoplayDely,
+        autoplayDelay: autoplayDely,
         autoplayDiableOnInteraction: autoplayDiableOnInteraction,
         reverse: reverse,
         duration: duration,
@@ -333,7 +329,7 @@ abstract class _SwiperTimerMixin extends State<Swiper> {
   void _startAutoplay() {
     assert(_timer == null, "Timer must be stopped before start!");
     _timer =
-        Timer.periodic(Duration(milliseconds: widget.autoplayDely), _onTimer);
+        Timer.periodic(Duration(milliseconds: widget.autoplayDelay), _onTimer);
   }
 
   void _onTimer(Timer timer) {
@@ -579,7 +575,8 @@ class _TinderSwiper extends _SubSwiper {
       IndexedWidgetBuilder itemBuilder,
       int index,
       int itemCount})
-      : assert(itemWidth != null && itemHeight != null),  super(
+      : assert(itemWidth != null && itemHeight != null),
+        super(
             key: key,
             itemWidth: itemWidth,
             itemHeight: itemHeight,
@@ -673,9 +670,10 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
   List<double> opacity;
   List<double> rotates;
 
-  double getOffsetY(double scale){
+  double getOffsetY(double scale) {
     return widget.itemHeight - widget.itemHeight * scale;
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -683,14 +681,7 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     _animationCount = 5;
     opacity = [0.0, 0.9, 0.9, 1.0, 0.0, 0.0];
     scales = [0.80, 0.80, 0.85, 0.90, 1.0, 1.0, 1.0];
-    offsetsX = [
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      _screenWidth,
-      _screenWidth
-    ];
+    offsetsX = [0.0, 0.0, 0.0, 0.0, _screenWidth, _screenWidth];
     offsetsY = [
       0.0,
       0.0,
@@ -710,26 +701,24 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     double o = _getValue(opacity, animationValue, i);
     double a = _getValue(rotates, animationValue, i);
 
-    return new Center(
-      child:  new Opacity(
-          opacity: o,
-          child: new Transform.rotate(
-            angle: a / 180.0,
-            child: new Transform.translate(
-              key: new ValueKey<int>(_currentIndex + i),
-              offset: new Offset(f, fy),
-              child: new Transform.scale(
-                scale: s,
-                alignment: Alignment.bottomCenter,
-                child: new SizedBox(
-                  width: widget.itemWidth ?? double.infinity,
-                  height: widget.itemHeight ?? double.infinity,
-                  child: widget.itemBuilder(context, realIndex),
-                ),
-              ),
+    return new Opacity(
+      opacity: o,
+      child: new Transform.rotate(
+        angle: a / 180.0,
+        child: new Transform.translate(
+          key: new ValueKey<int>(_currentIndex + i),
+          offset: new Offset(f, fy),
+          child: new Transform.scale(
+            scale: s,
+            alignment: Alignment.bottomCenter,
+            child: new SizedBox(
+              width: widget.itemWidth ?? double.infinity,
+              height: widget.itemHeight ?? double.infinity,
+              child: widget.itemBuilder(context, realIndex),
             ),
           ),
         ),
+      ),
     );
   }
 }
@@ -749,7 +738,7 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
     //Array below this line, '0' index is 1.0 ,witch is the first item show in swiper.
     _startIndex = -3;
     scales = [0.7, 0.8, 0.9, 1.0, 1.0];
-    offsets = [0.0, space / 3, space / 3 * 2, space, _screenWidth];
+    offsets = [-space, -space / 3 * 2, -space / 3, 0.0, _screenWidth];
     opacity = [0.0, 0.5, 1.0, 1.0, 1.0];
   }
 
@@ -865,10 +854,13 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     }
 
     return new GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onPanStart: _onPanStart,
       onPanEnd: _onPanEnd,
       onPanUpdate: _onPanUpdate,
-      child: _buildContainer(list),
+      child: new Center(
+        child: _buildContainer(list),
+      ),
     );
   }
 
