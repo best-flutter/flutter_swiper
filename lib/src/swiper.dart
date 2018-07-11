@@ -663,6 +663,88 @@ class _PageViewSwiper extends _SubSwiper {
   }
 }
 
+
+double _getValue(List<double> values, double animationValue, int index) {
+  double s = values[index];
+  if (animationValue >= 0.5) {
+    if (index < values.length - 1) {
+      s = s + (values[index + 1] - s) * (animationValue - 0.5) * 2.0;
+    }
+  } else {
+    if (index != 0) {
+      s = s - (s - values[index - 1]) * (0.5 - animationValue) * 2.0;
+    }
+  }
+  return s;
+}
+
+abstract class TransformBuilder<T>{
+  List<T> values;
+  TransformBuilder({this.values});
+  Widget build(int i, double animationValue ,Widget widget );
+}
+
+class ScaleTransformBuilder extends TransformBuilder<double>{
+  final Alignment alignment;
+  ScaleTransformBuilder({List<double> values,this.alignment:Alignment.center} ):super(values:values);
+
+
+  Widget build(int i, double animationValue ,Widget widget ){
+    double s = _getValue(values, animationValue, i);
+    return new Transform.scale(scale: s,child: widget);
+  }
+}
+
+class CustomLayoutOptionBuilder{
+
+  /// witch index is currently showing?
+  void setCurrent(int currentIndex){
+
+  }
+
+  /// Transform.translate
+  void addOffsetX( List<double> values ){
+
+  }
+
+  /// Transform.translate
+  void addOffsetY(List<double> values ){
+
+  }
+
+  void addScale(List<double> values,Alignment alignment){
+
+  }
+
+  void addRotate(List<double> values ){
+
+  }
+
+  void addOpacity(List<double> values ){
+
+  }
+
+
+  void build(){
+
+  }
+
+
+}
+
+
+/**
+ *
+ */
+class _CustomLayoutState extends _CustomLayoutStateBase<_SubSwiper>{
+
+  @override
+  Widget _buildItem(int i, int realIndex, double animationValue) {
+
+  }
+
+}
+
 class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
   List<double> scales;
   List<double> offsetsX;
