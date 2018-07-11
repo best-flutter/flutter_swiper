@@ -2,7 +2,8 @@ language : [English](https://github.com/jzoom/flutter_swiper) | [中文](https:/
 
 [![build_status](https://travis-ci.org/jzoom/flutter_swiper.svg?branch=master)](https://travis-ci.org/jzoom/flutter_swiper)
 [![Coverage Status](https://coveralls.io/repos/github/jzoom/flutter_swiper/badge.svg?branch=master)](https://coveralls.io/github/jzoom/flutter_swiper?branch=master)
-
+[ ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](https://github.com/jzoom/flutter_swiper/pulls)
+[![License MIT](http://img.shields.io/badge/license-MIT-orange.svg?style=flat)](https://raw.githubusercontent.com/jzoom/flutter_swiper/master/LICENSE)
 
 # flutter_swiper
 
