@@ -44,7 +44,8 @@
     * Add layouts ( DEFAULT,STACK,TINDER )
     * Allow to put pagination outer of the swiper container.
 
-    
+## [1.0.1] - [2018/07/11]
+    * Add layout (CUSTOM) so that you can create your own layout
 
 
     

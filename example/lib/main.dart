@@ -17,6 +17,42 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Swiper'),
+//      home: new Scaffold(
+//        appBar: new AppBar(
+//          title: new Text(""),
+//        ),
+//        body: new Container(
+//          color: Colors.black87,
+//          child: new Column(
+//            children: <Widget>[
+//              new SizedBox(
+//                height: 200.0,
+//                child: Swiper(
+//                    layout: SwiperLayout.CUSTOM,
+//                    customLayoutOption:
+//                        new CustomLayoutOption(startIndex: -1, stateCount: 3)
+//                            .addRotate(
+//                                [-45.0 / 180, 0.0, 45.0 / 180]).addTranslate([
+//                      new Offset(-370.0, -40.0),
+//                      new Offset(0.0, 0.0),
+//                      new Offset(370.0, -40.0)
+//                    ]),
+//                    itemWidth: 300.0,
+//                    itemHeight: 200.0,
+//                    itemBuilder: (context, index) {
+//                      return new Container(
+//                        color: Colors.grey,
+//                        child: new Center(
+//                          child: new Text("$index"),
+//                        ),
+//                      );
+//                    },
+//                    itemCount: 10),
+//              )
+//            ],
+//          ),
+//        ),
+//      ),
       routes: {
         '/example01': (BuildContext context) => ExampleHorizontal(),
         '/example02': (BuildContext context) => ExampleVertical(),

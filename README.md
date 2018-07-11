@@ -271,6 +271,58 @@ Swiper(
 ```
 
 
+![](https://github.com/jzoom/images/raw/master/layout4.gif)
+
+Very easy to create you own custom animation:
+```
+
+ Swiper(
+  layout: SwiperLayout.CUSTOM,
+  customLayoutOption: new CustomLayoutOption(
+      startIndex: -1,
+      stateCount: 3
+  ).addRotate([
+    -45.0/180,
+    0.0,
+    45.0/180
+  ]).addTranslate([
+    new Offset(-370.0, -40.0),
+    new Offset(0.0, 0.0),
+    new Offset(370.0, -40.0)
+  ]),
+  itemWidth: 300.0,
+  itemHeight: 200.0,
+  itemBuilder: (context, index) {
+    return new Container(
+      color: Colors.grey,
+      child: new Center(
+        child: new Text("$index"),
+      ),
+    );
+  },
+  itemCount: 10)
+
+```
+
+The `CustomLayoutOption` is designed to describe animations.
+It is very easy to specify every state of items in Swiper.
+
+```
+new CustomLayoutOption(
+      startIndex: -1,  /// Which index is the first item of array below      
+      stateCount: 3    /// array length 
+  ).addRotate([        // rotation of every item 
+    -45.0/180,
+    0.0,
+    45.0/180
+  ]).addTranslate([           /// offset of every item
+    new Offset(-370.0, -40.0),
+    new Offset(0.0, 0.0),
+    new Offset(370.0, -40.0)
+  ])
+
+```
+
 You can find all custom options here:
 
 >https://github.com/jzoom/flutter_swiper/blob/master/example/lib/src/ExampleCustom.dart

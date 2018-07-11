@@ -39,6 +39,8 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   Curve _curve;
 
+  CustomLayoutOption customLayoutOption;
+
   Widget _buildItem(BuildContext context, int index) {
     return ClipRRect(
       borderRadius: new BorderRadius.all(new Radius.circular(_radius)),
@@ -50,7 +52,24 @@ class _ExampleCustomState extends State<ExampleCustom> {
   }
 
   @override
+  void didUpdateWidget(ExampleCustom oldWidget) {
+    customLayoutOption = new CustomLayoutOption(startIndex: -1, stateCount: 3)
+        .addRotate([-45.0 / 180, 0.0, 45.0 / 180]).addTranslate([
+      new Offset(-370.0, -40.0),
+      new Offset(0.0, 0.0),
+      new Offset(370.0, -40.0)
+    ]);
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void initState() {
+    customLayoutOption = new CustomLayoutOption(startIndex: -1, stateCount: 3)
+        .addRotate([-25.0 / 180, 0.0, 25.0 / 180]).addTranslate([
+      new Offset(-350.0, 0.0),
+      new Offset(0.0, 0.0),
+      new Offset(350.0, 0.0)
+    ]);
     _currentIndex = 0;
     _curve = Curves.ease;
     _scale = 0.8;
@@ -85,6 +104,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
 //          );
 //        }));
       },
+      customLayoutOption: customLayoutOption,
       index: _currentIndex,
       onIndexChanged: (int index) {
         setState(() {
@@ -147,7 +167,8 @@ class _ExampleCustomState extends State<ExampleCustom> {
                   values: [
                     SwiperLayout.DEFAULT,
                     SwiperLayout.STACK,
-                    SwiperLayout.TINDER
+                    SwiperLayout.TINDER,
+                    SwiperLayout.CUSTOM
                   ],
                   valueChanged: (value) {
                     _layout = value;

@@ -16,7 +16,7 @@ const int kDefaultAutopayTransactionDuration = 300;
 const int kMaxValue = 2000000000;
 const int kMiddleValue = 1000000000;
 
-enum SwiperLayout { DEFAULT, STACK, TINDER }
+enum SwiperLayout { DEFAULT, STACK, TINDER, CUSTOM }
 
 class Swiper extends StatefulWidget {
   /// If set true , the pagination will display 'outer' of the 'content' container.
@@ -90,8 +90,12 @@ class Swiper extends StatefulWidget {
   ///
   final double viewportFraction;
 
-  ///
+  /// Build in layouts
   final SwiperLayout layout;
+
+  /// this value is valid when layout == SwiperLayout.CUSTOM
+  final CustomLayoutOption customLayoutOption;
+
   // This value is valid when viewportFraction is set and < 1.0
   final double scale;
 
@@ -116,6 +120,7 @@ class Swiper extends StatefulWidget {
     this.physics,
     Key key,
     this.controller,
+    this.customLayoutOption,
 
     /// since v1.0.0
     this.containerHeight,
@@ -145,6 +150,7 @@ class Swiper extends StatefulWidget {
     List<SwiperPlugin> plugins,
     SwiperController conttoller,
     Key key,
+    CustomLayoutOption customLayoutOption,
     ScrollPhysics physics,
     double containerHeight,
     double containerWidth,
@@ -157,6 +163,7 @@ class Swiper extends StatefulWidget {
     assert(children != null, "children must not be null");
 
     return Swiper(
+        customLayoutOption: customLayoutOption,
         containerHeight: containerHeight,
         containerWidth: containerWidth,
         viewportFraction: viewportFraction,
@@ -189,6 +196,7 @@ class Swiper extends StatefulWidget {
 
   factory Swiper.list({
     List list,
+    CustomLayoutOption customLayoutOption,
     SwiperDataBuilder builder,
     bool autoplay: false,
     int autoplayDely: kDefaultAutoplayDelayMs,
@@ -216,6 +224,7 @@ class Swiper extends StatefulWidget {
     double scale: 1.0,
   }) {
     return Swiper(
+        customLayoutOption: customLayoutOption,
         containerHeight: containerHeight,
         containerWidth: containerWidth,
         viewportFraction: viewportFraction,
@@ -424,6 +433,19 @@ class _SwiperState extends _SwiperTimerMixin {
       );
     } else if (widget.layout == SwiperLayout.TINDER) {
       return new _TinderSwiper(
+        itemWidth: widget.itemWidth,
+        itemHeight: widget.itemHeight,
+        itemCount: widget.itemCount,
+        itemBuilder: itemBuilder,
+        index: _activeIndex,
+        curve: widget.curve,
+        duration: widget.duration,
+        onIndexChanged: _onIndexChanged,
+        controller: _controller,
+      );
+    } else if (widget.layout == SwiperLayout.CUSTOM) {
+      return new _CustomLayoutSwiper(
+        option: widget.customLayoutOption,
         itemWidth: widget.itemWidth,
         itemHeight: widget.itemHeight,
         itemCount: widget.itemCount,
@@ -663,7 +685,6 @@ class _PageViewSwiper extends _SubSwiper {
   }
 }
 
-
 double _getValue(List<double> values, double animationValue, int index) {
   double s = values[index];
   if (animationValue >= 0.5) {
@@ -678,71 +699,173 @@ double _getValue(List<double> values, double animationValue, int index) {
   return s;
 }
 
-abstract class TransformBuilder<T>{
+Offset _getOffsetValue(List<Offset> values, double animationValue, int index) {
+  Offset s = values[index];
+  double dx = s.dx;
+  double dy = s.dy;
+  if (animationValue >= 0.5) {
+    if (index < values.length - 1) {
+      dx = dx + (values[index + 1].dx - dx) * (animationValue - 0.5) * 2.0;
+      dy = dy + (values[index + 1].dy - dy) * (animationValue - 0.5) * 2.0;
+    }
+  } else {
+    if (index != 0) {
+      dx = dx - (dx - values[index - 1].dx) * (0.5 - animationValue) * 2.0;
+      dy = dy - (dy - values[index - 1].dy) * (0.5 - animationValue) * 2.0;
+    }
+  }
+  return new Offset(dx, dy);
+}
+
+abstract class TransformBuilder<T> {
   List<T> values;
   TransformBuilder({this.values});
-  Widget build(int i, double animationValue ,Widget widget );
+  Widget build(int i, double animationValue, Widget widget);
 }
 
-class ScaleTransformBuilder extends TransformBuilder<double>{
+class ScaleTransformBuilder extends TransformBuilder<double> {
   final Alignment alignment;
-  ScaleTransformBuilder({List<double> values,this.alignment:Alignment.center} ):super(values:values);
+  ScaleTransformBuilder({List<double> values, this.alignment: Alignment.center})
+      : super(values: values);
 
-
-  Widget build(int i, double animationValue ,Widget widget ){
+  Widget build(int i, double animationValue, Widget widget) {
     double s = _getValue(values, animationValue, i);
-    return new Transform.scale(scale: s,child: widget);
+    return new Transform.scale(scale: s, child: widget);
   }
 }
 
-class CustomLayoutOptionBuilder{
+class OpacityTransformBuilder extends TransformBuilder<double> {
+  OpacityTransformBuilder({List<double> values}) : super(values: values);
 
-  /// witch index is currently showing?
-  void setCurrent(int currentIndex){
-
+  Widget build(int i, double animationValue, Widget widget) {
+    double v = _getValue(values, animationValue, i);
+    return new Opacity(
+      opacity: v,
+      child: widget,
+    );
   }
-
-  /// Transform.translate
-  void addOffsetX( List<double> values ){
-
-  }
-
-  /// Transform.translate
-  void addOffsetY(List<double> values ){
-
-  }
-
-  void addScale(List<double> values,Alignment alignment){
-
-  }
-
-  void addRotate(List<double> values ){
-
-  }
-
-  void addOpacity(List<double> values ){
-
-  }
-
-
-  void build(){
-
-  }
-
-
 }
 
+class RotateTransformBuilder extends TransformBuilder<double> {
+  RotateTransformBuilder({List<double> values}) : super(values: values);
 
-/**
- *
- */
-class _CustomLayoutState extends _CustomLayoutStateBase<_SubSwiper>{
+  Widget build(int i, double animationValue, Widget widget) {
+    double v = _getValue(values, animationValue, i);
+    return new Transform.rotate(
+      angle: v,
+      child: widget,
+    );
+  }
+}
+
+class TranslateTransformBuilder extends TransformBuilder<Offset> {
+  TranslateTransformBuilder({List<Offset> values}) : super(values: values);
 
   @override
-  Widget _buildItem(int i, int realIndex, double animationValue) {
+  Widget build(int i, double animationValue, Widget widget) {
+    Offset s = _getOffsetValue(values, animationValue, i);
+    return new Transform.translate(
+      offset: s,
+      child: widget,
+    );
+  }
+}
 
+class CustomLayoutOption {
+  final List<TransformBuilder> builders = [];
+  final int startIndex;
+  final int stateCount;
+
+  CustomLayoutOption({this.stateCount, this.startIndex})
+      : assert(startIndex != null, stateCount != null);
+
+  CustomLayoutOption addOpaticy(List<double> values) {
+    builders.add(new OpacityTransformBuilder(values: values));
+    return this;
   }
 
+  CustomLayoutOption addTranslate(List<Offset> values) {
+    builders.add(new TranslateTransformBuilder(values: values));
+    return this;
+  }
+
+  CustomLayoutOption addScale(List<double> values, Alignment alignment) {
+    builders
+        .add(new ScaleTransformBuilder(values: values, alignment: alignment));
+    return this;
+  }
+
+  CustomLayoutOption addRotate(List<double> values) {
+    builders.add(new RotateTransformBuilder(values: values));
+    return this;
+  }
+}
+
+class _CustomLayoutSwiper extends _SubSwiper {
+  final CustomLayoutOption option;
+
+  _CustomLayoutSwiper(
+      {this.option,
+      double itemWidth,
+      double itemHeight,
+      ValueChanged<int> onIndexChanged,
+      Key key,
+      IndexedWidgetBuilder itemBuilder,
+      Curve curve,
+      int duration,
+      int index,
+      int itemCount,
+      SwiperController controller})
+      : assert(option != null),
+        super(
+            onIndexChanged: onIndexChanged,
+            itemWidth: itemWidth,
+            itemHeight: itemHeight,
+            key: key,
+            itemBuilder: itemBuilder,
+            curve: curve,
+            duration: duration,
+            index: index,
+            itemCount: itemCount,
+            controller: controller);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _CustomLayoutState();
+  }
+}
+
+class _CustomLayoutState extends _CustomLayoutStateBase<_CustomLayoutSwiper> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _startIndex = widget.option.startIndex;
+    _animationCount = widget.option.stateCount;
+  }
+
+  @override
+  void didUpdateWidget(_CustomLayoutSwiper oldWidget) {
+    _startIndex = widget.option.startIndex;
+    _animationCount = widget.option.stateCount;
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  Widget _buildItem(int index, int realIndex, double animationValue) {
+    List<TransformBuilder> builders = widget.option.builders;
+
+    Widget child = new SizedBox(
+        width: widget.itemWidth ?? double.infinity,
+        height: widget.itemHeight ?? double.infinity,
+        child: widget.itemBuilder(context, realIndex));
+
+    for (int i = builders.length - 1; i >= 0; --i) {
+      TransformBuilder builder = builders[i];
+      child = builder.build(index, animationValue, child);
+    }
+
+    return child;
+  }
 }
 
 class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
@@ -896,20 +1019,6 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     widget.controller.removeListener(_onController);
     _animationController?.dispose();
     super.dispose();
-  }
-
-  double _getValue(List<double> values, double animationValue, int index) {
-    double s = values[index];
-    if (animationValue >= 0.5) {
-      if (index < values.length - 1) {
-        s = s + (values[index + 1] - s) * (animationValue - 0.5) * 2.0;
-      }
-    } else {
-      if (index != 0) {
-        s = s - (s - values[index - 1]) * (0.5 - animationValue) * 2.0;
-      }
-    }
-    return s;
   }
 
   Widget _buildItem(int i, int realIndex, double animationValue);

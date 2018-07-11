@@ -284,6 +284,60 @@ Swiper(
  )
 ```
 
+
+
+![](https://github.com/jzoom/images/raw/master/layout4.gif)
+
+构建你自己的动画十分简单:
+```
+
+ Swiper(
+  layout: SwiperLayout.CUSTOM,
+  customLayoutOption: new CustomLayoutOption(
+      startIndex: -1,
+      stateCount: 3
+  ).addRotate([
+    -45.0/180,
+    0.0,
+    45.0/180
+  ]).addTranslate([
+    new Offset(-370.0, -40.0),
+    new Offset(0.0, 0.0),
+    new Offset(370.0, -40.0)
+  ]),
+  itemWidth: 300.0,
+  itemHeight: 200.0,
+  itemBuilder: (context, index) {
+    return new Container(
+      color: Colors.grey,
+      child: new Center(
+        child: new Text("$index"),
+      ),
+    );
+  },
+  itemCount: 10)
+
+```
+
+`CustomLayoutOption` 被设计用来描述布局和动画,很简单的可以指定每一个元素的状态.
+
+```
+new CustomLayoutOption(
+      startIndex: -1,  /// 开始下标
+      stateCount: 3    /// 下面的数组长度 
+  ).addRotate([        //  每个元素的角度
+    -45.0/180,
+    0.0,
+    45.0/180
+  ]).addTranslate([           /// 每个元素的偏移
+    new Offset(-370.0, -40.0),
+    new Offset(0.0, 0.0),
+    new Offset(370.0, -40.0)
+  ])
+
+```
+
+
 这里可以找到所有的定制选项
 
 >https://github.com/jzoom/flutter_swiper/blob/master/example/lib/src/ExampleCustom.dart
