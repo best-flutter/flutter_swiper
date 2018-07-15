@@ -416,21 +416,40 @@ class _SwiperState extends _SwiperTimerMixin {
         controller: _controller,
       );
     } else if (widget.layout == null || widget.layout == SwiperLayout.DEFAULT) {
-      return new _PageViewSwiper(
-        containerWidth: widget.containerWidth,
-        containerHeight: widget.containerHeight,
-        viewportFraction: widget.viewportFraction,
-        scale: widget.scale,
-        itemCount: widget.itemCount,
-        itemBuilder: itemBuilder,
-        index: _activeIndex,
-        curve: widget.curve,
-        duration: widget.duration,
-        scrollDirection: widget.scrollDirection,
-        onIndexChanged: _onIndexChanged,
-        controller: _controller,
-        physics: widget.physics,
-      );
+      if(widget.loop){
+        return new _PageViewSwiper(
+          containerWidth: widget.containerWidth,
+          containerHeight: widget.containerHeight,
+          viewportFraction: widget.viewportFraction,
+          scale: widget.scale,
+          itemCount: widget.itemCount,
+          itemBuilder: itemBuilder,
+          index: _activeIndex,
+          curve: widget.curve,
+          duration: widget.duration,
+          scrollDirection: widget.scrollDirection,
+          onIndexChanged: _onIndexChanged,
+          controller: _controller,
+          physics: widget.physics,
+        );
+      }else{
+        return new _NoneLoopPageViewSwiper(
+          containerWidth: widget.containerWidth,
+          containerHeight: widget.containerHeight,
+          viewportFraction: widget.viewportFraction,
+          scale: widget.scale,
+          itemCount: widget.itemCount,
+          itemBuilder: itemBuilder,
+          index: _activeIndex,
+          curve: widget.curve,
+          duration: widget.duration,
+          scrollDirection: widget.scrollDirection,
+          onIndexChanged: _onIndexChanged,
+          controller: _controller,
+          physics: widget.physics,
+        );
+      }
+
     } else if (widget.layout == SwiperLayout.TINDER) {
       return new _TinderSwiper(
         itemWidth: widget.itemWidth,
@@ -646,6 +665,49 @@ class _StackSwiper extends _SubSwiper {
   }
 }
 
+class _NoneLoopPageViewSwiper extends _PageViewSwiper {
+
+  _NoneLoopPageViewSwiper(
+      {double scale,
+        ScrollPhysics physics,
+        Axis scrollDirection,
+        double viewportFraction,
+        double containerWidth,
+        double containerHeight,
+
+        ValueChanged<int> onIndexChanged,
+        Key key,
+
+        IndexedWidgetBuilder itemBuilder,
+        Curve curve,
+        int duration,
+        int index,
+        int itemCount,
+        SwiperController controller})
+      : super(
+
+      scale:scale,
+      physics:physics,
+      scrollDirection:scrollDirection,
+      viewportFraction:viewportFraction,
+      containerWidth:containerWidth,
+      containerHeight:containerHeight,
+
+      key: key,
+      itemBuilder: itemBuilder,
+      curve: curve,
+      duration: duration,
+      controller: controller,
+      onIndexChanged: onIndexChanged,
+      index: index,
+      itemCount: itemCount);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _NoneloopPageViewState();
+  }
+}
+
 class _PageViewSwiper extends _SubSwiper {
   final double scale;
   final double viewportFraction;
@@ -653,6 +715,7 @@ class _PageViewSwiper extends _SubSwiper {
   final double containerWidth;
   final double containerHeight;
   final Axis scrollDirection;
+  final bool loop;
 
   _PageViewSwiper(
       {this.scale,
@@ -1065,8 +1128,23 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
   double _currentPos;
   void _onPanUpdate(DragUpdateDetails details) {
     if (_lockScroll) return;
-    _animationController.value = _currentValue +
+
+
+
+    double value = _currentValue +
         (details.globalPosition.dx - _currentPos) / _screenWidth / 2;
+    // no loop ?
+    /*if(_currentIndex <= 0){
+      if(value < 0.5){
+        value = 0.5;
+      }
+    }else if(_currentIndex >= widget.itemCount - 1){
+      if(value > 0.5){
+        value = 0.5;
+      }
+    }*/
+
+    _animationController.value = value;
   }
 
   bool _lockScroll = false;
@@ -1118,9 +1196,11 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     if (_lockScroll) return;
     if (_animationController.value >= 0.75 ||
         details.velocity.pixelsPerSecond.dx > 500.0) {
+
       _move(1.0, nextIndex: _currentIndex - 1);
     } else if (_animationController.value < 0.25 ||
         details.velocity.pixelsPerSecond.dx < -500.0) {
+
       _move(0.0, nextIndex: _currentIndex + 1);
     } else {
       _move(0.5);
@@ -1136,31 +1216,68 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
   int _currentIndex = 0;
 }
 
-class _PageViewState extends State<_PageViewSwiper>
-    with SingleTickerProviderStateMixin {
+class _NoneloopPageViewState extends State<_PageViewSwiper>{
   PageController _pageController;
   SwiperController _controller;
   int _activeIndex;
 
+  _NoneloopPageViewState({
+    int activeIndex :  0
+  }) : _activeIndex = activeIndex;
+
+  ///
   int _calcIndex(int index) {
-    return index - kMiddleValue;
+    return index;
   }
 
+  /// return fixed page of the controller
   double _page() {
     if (_pageController.position.maxScrollExtent == null ||
         _pageController.position.minScrollExtent == null) {
       return 0.0;
     }
 
-    return _pageController.page - kMiddleValue;
+    return _pageController.page;
   }
 
-  int _initPage() {
-    return _activeIndex + kMiddleValue;
+  ///
+  int _activePositionPage() {
+    return _activeIndex;
   }
 
+  int _indexToPositionPage( int index ){
+    return index;
+  }
+
+  //
+  int _indexToActiveIndex(int index){
+    return index;
+  }
+
+  ///
   int _itemCount() {
-    return kMaxValue;
+    return widget.itemCount;
+  }
+
+  int _nextIndex(){
+    return _ensureIndex(_activeIndex + 1);
+  }
+
+  int _prevIndex(){
+    return _ensureIndex(_activeIndex - 1);
+  }
+
+
+
+  int _ensureIndex(int index){
+    if(index < 0 ){
+      index += widget.itemCount;
+    }
+    if(index >= widget.itemCount - 1 ){
+      index = widget.itemCount -1;
+    }
+
+    return index;
   }
 
   Widget _buildAnimationItem(BuildContext context, int index) {
@@ -1189,11 +1306,9 @@ class _PageViewState extends State<_PageViewSwiper>
   void initState() {
     if (widget.index != null) {
       _activeIndex = widget.index;
-    } else {
-      _activeIndex = 0;
     }
     _pageController = new PageController(
-      initialPage: _initPage(),
+      initialPage: _activePositionPage(),
       viewportFraction: widget.viewportFraction,
     );
 
@@ -1204,24 +1319,24 @@ class _PageViewState extends State<_PageViewSwiper>
 
   void _move(int nextIndex, bool animation) {
     if (animation) {
-      _pageController.animateToPage(nextIndex + kMiddleValue,
+      _pageController.animateToPage( _indexToPositionPage(nextIndex),
           duration: new Duration(milliseconds: widget.duration),
           curve: widget.curve);
     } else {
-      _pageController.jumpToPage(nextIndex + kMiddleValue);
+      _pageController.jumpToPage(_indexToPositionPage(nextIndex) + kMiddleValue);
     }
   }
 
   void _onController() {
     switch (widget.controller.event) {
       case SwiperControllerEvent.NEXT_INDEX:
-        _move(_activeIndex + 1, widget.controller.animation);
+        _move(_nextIndex() , widget.controller.animation);
         break;
       case SwiperControllerEvent.PREV_INDEX:
-        _move(_activeIndex - 1, widget.controller.animation);
+        _move(_prevIndex(), widget.controller.animation);
         break;
       case SwiperControllerEvent.MOVE_INDEX:
-        _move(widget.controller.index, widget.controller.animation);
+        _move(_ensureIndex(widget.controller.index), widget.controller.animation);
         break;
       case SwiperControllerEvent.STOP_AUTOPLAY:
       case SwiperControllerEvent.START_AUTOPLAY:
@@ -1247,7 +1362,7 @@ class _PageViewState extends State<_PageViewSwiper>
     if (widget.viewportFraction != oldWidget.viewportFraction ||
         (widget.index != null && widget.index != _activeIndex)) {
       _pageController = new PageController(
-        initialPage: _initPage(),
+        initialPage: _activePositionPage(),
         viewportFraction: widget.viewportFraction,
       );
     }
@@ -1295,7 +1410,53 @@ class _PageViewState extends State<_PageViewSwiper>
   }
 
   void _onPageChange(int index) {
-    _activeIndex = index - kMiddleValue;
+    _activeIndex =  _indexToActiveIndex(index);
     widget.onIndexChanged(widget.getCorrectIndex(_activeIndex));
   }
+
 }
+
+class _PageViewState extends _NoneloopPageViewState {
+  ///
+  @override
+  int _calcIndex(int index) {
+    return index - kMiddleValue;
+  }
+
+
+  @override
+  int _indexToActiveIndex(int index){
+    return index - kMiddleValue;
+  }
+
+  /// return fixed page of the controller
+  @override
+  double _page() {
+    if (_pageController.position.maxScrollExtent == null ||
+        _pageController.position.minScrollExtent == null) {
+      return 0.0;
+    }
+
+    return _pageController.page - kMiddleValue;
+  }
+
+  ///
+  @override
+  int _activePositionPage() {
+    return _activeIndex + kMiddleValue;
+  }
+  @override
+  int _indexToPositionPage(int index){
+    return index + kMiddleValue;
+  }
+
+  ///
+  @override
+  int _itemCount() {
+    return kMaxValue;
+  }
+
+}
+
+
+
