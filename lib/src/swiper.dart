@@ -405,6 +405,7 @@ class _SwiperState extends _SwiperTimerMixin {
 
     if (widget.layout == SwiperLayout.STACK) {
       return new _StackSwiper(
+          loop : widget.loop,
         itemWidth: widget.itemWidth,
         itemHeight: widget.itemHeight,
         itemCount: widget.itemCount,
@@ -418,6 +419,7 @@ class _SwiperState extends _SwiperTimerMixin {
     } else if (widget.layout == null || widget.layout == SwiperLayout.DEFAULT) {
       if(widget.loop){
         return new _PageViewSwiper(
+          loop: widget.loop,
           containerWidth: widget.containerWidth,
           containerHeight: widget.containerHeight,
           viewportFraction: widget.viewportFraction,
@@ -452,6 +454,7 @@ class _SwiperState extends _SwiperTimerMixin {
 
     } else if (widget.layout == SwiperLayout.TINDER) {
       return new _TinderSwiper(
+        loop: widget.loop,
         itemWidth: widget.itemWidth,
         itemHeight: widget.itemHeight,
         itemCount: widget.itemCount,
@@ -464,6 +467,7 @@ class _SwiperState extends _SwiperTimerMixin {
       );
     } else if (widget.layout == SwiperLayout.CUSTOM) {
       return new _CustomLayoutSwiper(
+        loop: widget.loop,
         option: widget.customLayoutOption,
         itemWidth: widget.itemWidth,
         itemHeight: widget.itemHeight,
@@ -577,9 +581,10 @@ abstract class _SubSwiper extends StatefulWidget {
   final Curve curve;
   final double itemWidth;
   final double itemHeight;
-
+  final bool loop;
   _SubSwiper(
       {Key key,
+        this.loop,
       this.itemHeight,
       this.itemWidth,
       this.duration,
@@ -615,9 +620,11 @@ class _TinderSwiper extends _SubSwiper {
       double itemWidth,
       IndexedWidgetBuilder itemBuilder,
       int index,
+        bool loop,
       int itemCount})
       : assert(itemWidth != null && itemHeight != null),
         super(
+          loop:loop,
             key: key,
             itemWidth: itemWidth,
             itemHeight: itemHeight,
@@ -646,8 +653,10 @@ class _StackSwiper extends _SubSwiper {
       double itemWidth,
       IndexedWidgetBuilder itemBuilder,
       int index,
+        bool loop,
       int itemCount})
       : super(
+          loop : loop,
             key: key,
             itemWidth: itemWidth,
             itemHeight: itemHeight,
@@ -715,10 +724,10 @@ class _PageViewSwiper extends _SubSwiper {
   final double containerWidth;
   final double containerHeight;
   final Axis scrollDirection;
-  final bool loop;
 
   _PageViewSwiper(
       {this.scale,
+        bool loop,
       this.physics,
       this.scrollDirection,
       this.viewportFraction,
@@ -733,6 +742,7 @@ class _PageViewSwiper extends _SubSwiper {
       int itemCount,
       SwiperController controller})
       : super(
+          loop:loop,
             key: key,
             itemBuilder: itemBuilder,
             curve: curve,
@@ -870,6 +880,7 @@ class _CustomLayoutSwiper extends _SubSwiper {
   _CustomLayoutSwiper(
       {this.option,
       double itemWidth,
+        bool loop,
       double itemHeight,
       ValueChanged<int> onIndexChanged,
       Key key,
@@ -881,6 +892,7 @@ class _CustomLayoutSwiper extends _SubSwiper {
       SwiperController controller})
       : assert(option != null),
         super(
+          loop:loop,
             onIndexChanged: onIndexChanged,
             itemWidth: itemWidth,
             itemHeight: itemHeight,
@@ -1074,7 +1086,21 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
       widget.controller.addListener(_onController);
     }
 
+    if(widget.loop != oldWidget.loop){
+      if(!widget.loop){
+        _currentIndex = _ensureIndex(_currentIndex);
+      }
+    }
+
     super.didUpdateWidget(oldWidget);
+  }
+
+  int _ensureIndex(int index){
+    index = index % widget.itemCount;
+    if(index < 0 ){
+      index += widget.itemCount;
+    }
+    return index;
   }
 
   @override
@@ -1126,26 +1152,6 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
 
   double _currentValue;
   double _currentPos;
-  void _onPanUpdate(DragUpdateDetails details) {
-    if (_lockScroll) return;
-
-
-
-    double value = _currentValue +
-        (details.globalPosition.dx - _currentPos) / _screenWidth / 2;
-    // no loop ?
-    /*if(_currentIndex <= 0){
-      if(value < 0.5){
-        value = 0.5;
-      }
-    }else if(_currentIndex >= widget.itemCount - 1){
-      if(value > 0.5){
-        value = 0.5;
-      }
-    }*/
-
-    _animationController.value = value;
-  }
 
   bool _lockScroll = false;
 
@@ -1175,17 +1181,37 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     }
   }
 
+  int _nextIndex(){
+    int index = _currentIndex + 1;
+    if( !widget.loop &&  index >= widget.itemCount - 1){
+      return widget.itemCount - 1;
+    }
+    return index;
+  }
+
+  int _prevIndex(){
+    int index = _currentIndex - 1;
+    if(!widget.loop &&  index < 0 ){
+      return 0;
+    }
+    return index;
+  }
+
   void _onController() {
     switch (widget.controller.event) {
       case SwiperControllerEvent.PREV_INDEX:
-        _move(1.0, nextIndex: _currentIndex - 1);
+        int prevIndex = _prevIndex();
+        if(prevIndex==_currentIndex)return;
+        _move(1.0, nextIndex:prevIndex);
         break;
       case SwiperControllerEvent.NEXT_INDEX:
-        _move(0.0, nextIndex: _currentIndex + 1);
+        int nextIndex = _nextIndex();
+        if(nextIndex == _currentIndex)return;
+        _move(0.0, nextIndex: nextIndex);
         break;
       case SwiperControllerEvent.MOVE_INDEX:
         throw new Exception(
-            "Not support SwiperControllerEvent.MOVE_INDEX  yet!");
+            "Custome layout does not support SwiperControllerEvent.MOVE_INDEX  yet!");
       case SwiperControllerEvent.STOP_AUTOPLAY:
       case SwiperControllerEvent.START_AUTOPLAY:
         break;
@@ -1197,15 +1223,41 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     if (_animationController.value >= 0.75 ||
         details.velocity.pixelsPerSecond.dx > 500.0) {
 
+      if (_currentIndex <= 0 && !widget.loop){
+        return;
+      }
       _move(1.0, nextIndex: _currentIndex - 1);
     } else if (_animationController.value < 0.25 ||
         details.velocity.pixelsPerSecond.dx < -500.0) {
-
+      if(_currentIndex >= widget.itemCount - 1  && !widget.loop){
+        return;
+      }
       _move(0.0, nextIndex: _currentIndex + 1);
     } else {
       _move(0.5);
     }
   }
+  void _onPanUpdate(DragUpdateDetails details) {
+    if (_lockScroll) return;
+    double value = _currentValue +
+        (details.globalPosition.dx - _currentPos) / _screenWidth / 2;
+    // no loop ?
+    if(!widget.loop){
+      if(_currentIndex >= widget.itemCount - 1){
+        if(value < 0.5){
+          value = 0.5;
+        }
+      }else if(_currentIndex <= 0){
+        if(value > 0.5){
+          value = 0.5;
+        }
+      }
+    }
+
+
+    _animationController.value = value;
+  }
+
 
   void _onPanStart(DragStartDetails details) {
     if (_lockScroll) return;
@@ -1271,10 +1323,10 @@ class _NoneloopPageViewState extends State<_PageViewSwiper>{
 
   int _ensureIndex(int index){
     if(index < 0 ){
-      index += widget.itemCount;
+      return 0;
     }
     if(index >= widget.itemCount - 1 ){
-      index = widget.itemCount -1;
+      return widget.itemCount -1;
     }
 
     return index;
@@ -1423,6 +1475,15 @@ class _PageViewState extends _NoneloopPageViewState {
     return index - kMiddleValue;
   }
 
+  @override
+  int _nextIndex() {
+    return _activeIndex + 1;
+  }
+
+  @override
+  int _prevIndex() {
+    return _activeIndex - 1;
+  }
 
   @override
   int _indexToActiveIndex(int index){
