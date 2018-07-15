@@ -47,5 +47,6 @@
 ## [1.0.1] - [2018/07/11]
     * Add layout (CUSTOM) so that you can create your own layout
 
-
+## [1.0.2] - [2018/07/16]
+    * Fix #4
     

@@ -8,8 +8,7 @@ import 'src/ExampleSwiperInScrollView.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
-  Widget buildHome(){
+  Widget buildHome() {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(""),
@@ -22,10 +21,9 @@ class MyApp extends StatelessWidget {
               height: 200.0,
               child: Swiper(
                   layout: SwiperLayout.DEFAULT,
-                  customLayoutOption:
-                  new CustomLayoutOption(startIndex: -1, stateCount: 3)
-                      .addRotate(
-                      [-45.0 / 180, 0.0, 45.0 / 180]).addTranslate([
+                  customLayoutOption: new CustomLayoutOption(
+                          startIndex: -1, stateCount: 3)
+                      .addRotate([-45.0 / 180, 0.0, 45.0 / 180]).addTranslate([
                     new Offset(-370.0, -40.0),
                     new Offset(0.0, 0.0),
                     new Offset(370.0, -40.0)
@@ -57,7 +55,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Swiper'),
- //     home: buildHome() ,
+      //     home: buildHome() ,
       routes: {
         '/example01': (BuildContext context) => ExampleHorizontal(),
         '/example02': (BuildContext context) => ExampleVertical(),

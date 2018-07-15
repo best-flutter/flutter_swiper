@@ -18,7 +18,6 @@ void main() {
               );
             },
             itemCount: 10)));
-
   });
 
   testWidgets('TINDER', (WidgetTester tester) async {
@@ -36,7 +35,6 @@ void main() {
               );
             },
             itemCount: 10)));
-
   });
 
   testWidgets('DEFAULT', (WidgetTester tester) async {
@@ -54,8 +52,6 @@ void main() {
               );
             },
             itemCount: 10)));
-
-
   });
 
   testWidgets('CUSTOM', (WidgetTester tester) async {
@@ -81,7 +77,5 @@ void main() {
               );
             },
             itemCount: 10)));
-
-
   });
 }
