@@ -205,7 +205,8 @@ class ExampleFraction extends StatelessWidget {
               autoplay: true,
               itemCount: images.length,
               reverse: false,
-              pagination: new SwiperPagination(builder: SwiperPagination.fraction),
+              pagination:
+                  new SwiperPagination(builder: SwiperPagination.fraction),
               control: new SwiperControl(),
             )),
             Expanded(
@@ -277,7 +278,7 @@ class ExampleCustomPagination extends StatelessWidget {
                 autoplay: true,
                 itemCount: images.length,
                 reverse: false,
-                pagination:new  SwiperPagination(
+                pagination: new SwiperPagination(
                     margin: new EdgeInsets.all(0.0),
                     builder: new SwiperCustomPagination(builder:
                         (BuildContext context, SwiperPluginConfig config) {
@@ -331,7 +332,7 @@ class ExamplePhone extends StatelessWidget {
           new Swiper.children(
             autoplay: false,
             pagination: new SwiperPagination(
-                margin:new  EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
+                margin: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
                 builder: new DotSwiperPaginationBuilder(
                     color: Colors.white30,
                     activeColor: Colors.white,
@@ -365,7 +366,7 @@ class ScaffoldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar:new  AppBar(
+      appBar: new AppBar(
         title: new Text(title),
         actions: actions,
       ),

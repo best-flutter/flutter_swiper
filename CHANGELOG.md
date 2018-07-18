@@ -53,3 +53,5 @@
 ## [1.0.3] - [2018/07/18]
     * Use new to create everything. See #5
     
+## [1.0.4] - [2018/07/18]
+    * Fix some typo,thanks to [csharad](https://github.com/csharad)
