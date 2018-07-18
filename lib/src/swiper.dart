@@ -11,7 +11,7 @@ typedef Widget SwiperDataBuilder(BuildContext context, dynamic data, int index);
 const int kDefaultAutoplayDelayMs = 3000;
 
 ///  Default auto play transition duration (in millisecond)
-const int kDefaultAutopayTransactionDuration = 300;
+const int kDefaultAutoplayTransactionDuration = 300;
 
 const int kMaxValue = 2000000000;
 const int kMiddleValue = 1000000000;
@@ -48,7 +48,7 @@ class Swiper extends StatefulWidget {
   final int autoplayDelay;
 
   ///disable auto play when interaction
-  final bool autoplayDiableOnInteraction;
+  final bool autoplayDisableOnInteraction;
 
   ///reverse direction
   final bool reverse;
@@ -66,8 +66,8 @@ class Swiper extends StatefulWidget {
   final bool loop;
 
   ///Index number of initial slide.
-  ///If not set , the `Swiper` is 'uncontrolled',whitch means manage index by itself
-  ///If set , the `Swiper` is 'controlled',whitch means the index is fully managed by parent widget.
+  ///If not set , the `Swiper` is 'uncontrolled', which means manage index by itself
+  ///If set , the `Swiper` is 'controlled', which means the index is fully managed by parent widget.
   final int index;
 
   ///Called when tap
@@ -79,7 +79,7 @@ class Swiper extends StatefulWidget {
   ///the swiper control button plugin
   final SwiperPlugin control;
 
-  ///other plugins, you can cutom your own plugin
+  ///other plugins, you can custom your own plugin
   final List<SwiperPlugin> plugins;
 
   ///
@@ -106,8 +106,8 @@ class Swiper extends StatefulWidget {
     this.layout,
     this.autoplayDelay: kDefaultAutoplayDelayMs,
     this.reverse: false,
-    this.autoplayDiableOnInteraction: true,
-    this.duration: kDefaultAutopayTransactionDuration,
+    this.autoplayDisableOnInteraction: true,
+    this.duration: kDefaultAutoplayTransactionDuration,
     this.onIndexChanged,
     this.index,
     this.onTap,
@@ -135,10 +135,10 @@ class Swiper extends StatefulWidget {
   factory Swiper.children({
     List<Widget> children,
     bool autoplay: false,
-    int autoplayDely: kDefaultAutoplayDelayMs,
+    int autoplayDelay: kDefaultAutoplayDelayMs,
     bool reverse: false,
-    bool autoplayDiableOnInteraction: true,
-    int duration: kDefaultAutopayTransactionDuration,
+    bool autoplayDisableOnInteraction: true,
+    int duration: kDefaultAutoplayTransactionDuration,
     ValueChanged<int> onIndexChanged,
     int index,
     SwiperOnTap onTap,
@@ -148,7 +148,7 @@ class Swiper extends StatefulWidget {
     SwiperPlugin pagination,
     SwiperPlugin control,
     List<SwiperPlugin> plugins,
-    SwiperController conttoller,
+    SwiperController controller,
     Key key,
     CustomLayoutOption customLayoutOption,
     ScrollPhysics physics,
@@ -172,8 +172,8 @@ class Swiper extends StatefulWidget {
         outer: outer,
         scale: scale,
         autoplay: autoplay,
-        autoplayDelay: autoplayDely,
-        autoplayDiableOnInteraction: autoplayDiableOnInteraction,
+        autoplayDelay: autoplayDelay,
+        autoplayDisableOnInteraction: autoplayDisableOnInteraction,
         reverse: reverse,
         duration: duration,
         onIndexChanged: onIndexChanged,
@@ -183,7 +183,7 @@ class Swiper extends StatefulWidget {
         scrollDirection: scrollDirection,
         pagination: pagination,
         control: control,
-        controller: conttoller,
+        controller: controller,
         loop: loop,
         plugins: plugins,
         physics: physics,
@@ -199,10 +199,10 @@ class Swiper extends StatefulWidget {
     CustomLayoutOption customLayoutOption,
     SwiperDataBuilder builder,
     bool autoplay: false,
-    int autoplayDely: kDefaultAutoplayDelayMs,
+    int autoplayDelay: kDefaultAutoplayDelayMs,
     bool reverse: false,
-    bool autoplayDiableOnInteraction: true,
-    int duration: kDefaultAutopayTransactionDuration,
+    bool autoplayDisableOnInteraction: true,
+    int duration: kDefaultAutoplayTransactionDuration,
     ValueChanged<int> onIndexChanged,
     int index,
     SwiperOnTap onTap,
@@ -212,7 +212,7 @@ class Swiper extends StatefulWidget {
     SwiperPlugin pagination,
     SwiperPlugin control,
     List<SwiperPlugin> plugins,
-    SwiperController conttoller,
+    SwiperController controller,
     Key key,
     ScrollPhysics physics,
     double containerHeight,
@@ -233,8 +233,8 @@ class Swiper extends StatefulWidget {
         outer: outer,
         scale: scale,
         autoplay: autoplay,
-        autoplayDelay: autoplayDely,
-        autoplayDiableOnInteraction: autoplayDiableOnInteraction,
+        autoplayDelay: autoplayDelay,
+        autoplayDisableOnInteraction: autoplayDisableOnInteraction,
         reverse: reverse,
         duration: duration,
         onIndexChanged: onIndexChanged,
@@ -245,7 +245,7 @@ class Swiper extends StatefulWidget {
         scrollDirection: scrollDirection,
         pagination: pagination,
         control: control,
-        controller: conttoller,
+        controller: controller,
         loop: loop,
         plugins: plugins,
         physics: physics,
@@ -846,7 +846,7 @@ class CustomLayoutOption {
   CustomLayoutOption({this.stateCount, this.startIndex})
       : assert(startIndex != null, stateCount != null);
 
-  CustomLayoutOption addOpaticy(List<double> values) {
+  CustomLayoutOption addOpacity(List<double> values) {
     builders.add(new OpacityTransformBuilder(values: values));
     return this;
   }
@@ -1205,7 +1205,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
         break;
       case SwiperControllerEvent.MOVE_INDEX:
         throw new Exception(
-            "Custome layout does not support SwiperControllerEvent.MOVE_INDEX  yet!");
+            "Custom layout does not support SwiperControllerEvent.MOVE_INDEX yet!");
       case SwiperControllerEvent.STOP_AUTOPLAY:
       case SwiperControllerEvent.START_AUTOPLAY:
         break;
