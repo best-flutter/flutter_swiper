@@ -162,7 +162,7 @@ class Swiper extends StatefulWidget {
   }) {
     assert(children != null, "children must not be null");
 
-    return Swiper(
+    return new Swiper(
         customLayoutOption: customLayoutOption,
         containerHeight: containerHeight,
         containerWidth: containerWidth,
@@ -223,7 +223,7 @@ class Swiper extends StatefulWidget {
     bool outer: false,
     double scale: 1.0,
   }) {
-    return Swiper(
+    return new Swiper(
         customLayoutOption: customLayoutOption,
         containerHeight: containerHeight,
         containerWidth: containerWidth,
@@ -257,7 +257,7 @@ class Swiper extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _SwiperState();
+    return new _SwiperState();
   }
 }
 
@@ -357,7 +357,7 @@ class _SwiperState extends _SwiperTimerMixin {
   int _activeIndex;
 
   Widget _wrapTap(BuildContext context, int index) {
-    return GestureDetector(
+    return new GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
         this.widget.onTap(index);
@@ -485,7 +485,7 @@ class _SwiperState extends _SwiperTimerMixin {
 
   SwiperPluginConfig _ensureConfig(SwiperPluginConfig config) {
     if (config == null) {
-      config = SwiperPluginConfig(
+      config = new SwiperPluginConfig(
           outer: widget.outer,
           itemCount: widget.itemCount,
           activeIndex: _activeIndex,
@@ -637,7 +637,7 @@ class _TinderSwiper extends _SubSwiper {
 
   @override
   State<StatefulWidget> createState() {
-    return _TinderState();
+    return new _TinderState();
   }
 }
 
@@ -669,7 +669,7 @@ class _StackSwiper extends _SubSwiper {
 
   @override
   State<StatefulWidget> createState() {
-    return _StackViewState();
+    return new _StackViewState();
   }
 }
 
@@ -707,7 +707,7 @@ class _NoneLoopPageViewSwiper extends _PageViewSwiper {
 
   @override
   State<StatefulWidget> createState() {
-    return _NoneloopPageViewState();
+    return new _NoneloopPageViewState();
   }
 }
 
@@ -748,7 +748,7 @@ class _PageViewSwiper extends _SubSwiper {
 
   @override
   State<StatefulWidget> createState() {
-    return _PageViewState();
+    return new _PageViewState();
   }
 }
 
@@ -900,7 +900,7 @@ class _CustomLayoutSwiper extends _SubSwiper {
 
   @override
   State<StatefulWidget> createState() {
-    return _CustomLayoutState();
+    return new _CustomLayoutState();
   }
 }
 
@@ -1420,7 +1420,7 @@ class _NoneloopPageViewState extends State<_PageViewSwiper> {
   @override
   Widget build(BuildContext context) {
     if (widget.itemCount == 0) {
-      return Container();
+      return new Container();
     }
 
     IndexedWidgetBuilder itemBuilder;

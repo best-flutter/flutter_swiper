@@ -5,7 +5,7 @@ import 'src/ExampleCustom.dart';
 import 'src/config.dart';
 import 'src/ExampleSwiperInScrollView.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   Widget buildHome() {
@@ -49,23 +49,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return new MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Swiper'),
+      home: new MyHomePage(title: 'Flutter Swiper'),
       //     home: buildHome() ,
       routes: {
-        '/example01': (BuildContext context) => ExampleHorizontal(),
-        '/example02': (BuildContext context) => ExampleVertical(),
-        '/example03': (BuildContext context) => ExampleFraction(),
-        '/example04': (BuildContext context) => ExampleCustomPagination(),
-        '/example05': (BuildContext context) => ExamplePhone(),
-        '/example06': (BuildContext context) => ScaffoldWidget(
-            child: ExampleSwiperInScrollView(), title: "ScrollView"),
-        '/example07': (BuildContext context) => ScaffoldWidget(
-              child: ExampleCustom(),
+        '/example01': (BuildContext context) => new ExampleHorizontal(),
+        '/example02': (BuildContext context) => new ExampleVertical(),
+        '/example03': (BuildContext context) => new ExampleFraction(),
+        '/example04': (BuildContext context) => new ExampleCustomPagination(),
+        '/example05': (BuildContext context) => new ExamplePhone(),
+        '/example06': (BuildContext context) => new ScaffoldWidget(
+            child: new ExampleSwiperInScrollView(), title: "ScrollView"),
+        '/example07': (BuildContext context) => new ScaffoldWidget(
+              child: new ExampleCustom(),
               title: "Custom All",
             )
       },
@@ -79,7 +79,7 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => new _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -95,16 +95,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget buildListTile(
       BuildContext context, String title, String subtitle, String url) {
-    return ListTile(
+    return new ListTile(
       onTap: () {
         Navigator.of(context).pushNamed(url);
       },
       isThreeLine: true,
       dense: false,
       leading: null,
-      title: Text(title),
-      subtitle: Text(subtitle),
-      trailing: Icon(
+      title: new Text(title),
+      subtitle: new Text(subtitle),
+      trailing: new Icon(
         Icons.arrow_right,
         color: Colors.blueAccent,
       ),
@@ -113,11 +113,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return new Scaffold(
+      appBar: new AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(
+      body: new ListView(
         children: render(context, [
           ["Horizontal", "Scroll Horizontal", "/example01"],
           ["Vertical", "Scroll Vertical", "/example02"],
@@ -141,13 +141,13 @@ const List<String> titles = [
 class ExampleHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
         appBar: AppBar(
           title: Text("ExampleHorizontal"),
         ),
-        body: Swiper(
+        body: new Swiper(
           itemBuilder: (BuildContext context, int index) {
-            return Image.asset(
+            return new Image.asset(
               images[index],
               fit: BoxFit.fill,
             );
@@ -155,8 +155,8 @@ class ExampleHorizontal extends StatelessWidget {
           autoplay: true,
           itemCount: images.length,
           reverse: false,
-          pagination: SwiperPagination(),
-          control: SwiperControl(),
+          pagination: new SwiperPagination(),
+          control: new SwiperControl(),
         ));
   }
 }
@@ -164,13 +164,13 @@ class ExampleHorizontal extends StatelessWidget {
 class ExampleVertical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
         appBar: AppBar(
           title: Text("ExampleVertical"),
         ),
-        body: Swiper(
+        body: new Swiper(
           itemBuilder: (BuildContext context, int index) {
-            return Image.asset(
+            return new Image.asset(
               images[index],
               fit: BoxFit.fill,
             );
@@ -179,8 +179,8 @@ class ExampleVertical extends StatelessWidget {
           itemCount: images.length,
           reverse: false,
           scrollDirection: Axis.vertical,
-          pagination: SwiperPagination(alignment: Alignment.centerRight),
-          control: SwiperControl(),
+          pagination: new SwiperPagination(alignment: Alignment.centerRight),
+          control: new SwiperControl(),
         ));
   }
 }
@@ -188,16 +188,16 @@ class ExampleVertical extends StatelessWidget {
 class ExampleFraction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
+    return new Scaffold(
+        appBar: new AppBar(
           title: Text("ExampleFraction"),
         ),
-        body: Column(
+        body: new Column(
           children: <Widget>[
             Expanded(
-                child: Swiper(
+                child: new Swiper(
               itemBuilder: (BuildContext context, int index) {
-                return Image.asset(
+                return new Image.asset(
                   images[index],
                   fit: BoxFit.fill,
                 );
@@ -205,13 +205,13 @@ class ExampleFraction extends StatelessWidget {
               autoplay: true,
               itemCount: images.length,
               reverse: false,
-              pagination: SwiperPagination(builder: SwiperPagination.fraction),
-              control: SwiperControl(),
+              pagination: new SwiperPagination(builder: SwiperPagination.fraction),
+              control: new SwiperControl(),
             )),
             Expanded(
-                child: Swiper(
+                child: new Swiper(
               itemBuilder: (BuildContext context, int index) {
-                return Image.asset(
+                return new Image.asset(
                   images[index],
                   fit: BoxFit.fill,
                 );
@@ -220,7 +220,7 @@ class ExampleFraction extends StatelessWidget {
               itemCount: images.length,
               reverse: false,
               scrollDirection: Axis.vertical,
-              pagination: SwiperPagination(
+              pagination: new SwiperPagination(
                   alignment: Alignment.centerRight,
                   builder: SwiperPagination.fraction),
             ))
@@ -232,16 +232,16 @@ class ExampleFraction extends StatelessWidget {
 class ExampleCustomPagination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Custom Pagination"),
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Custom Pagination"),
         ),
-        body: Column(
+        body: new Column(
           children: <Widget>[
-            Expanded(
-              child: Swiper(
+            new Expanded(
+              child: new Swiper(
                 itemBuilder: (BuildContext context, int index) {
-                  return Image.asset(
+                  return new Image.asset(
                     images[index],
                     fit: BoxFit.fill,
                   );
@@ -249,27 +249,27 @@ class ExampleCustomPagination extends StatelessWidget {
                 autoplay: true,
                 itemCount: images.length,
                 reverse: false,
-                pagination: SwiperPagination(
-                    margin: EdgeInsets.all(0.0),
-                    builder: SwiperCustomPagination(builder:
+                pagination: new SwiperPagination(
+                    margin: new EdgeInsets.all(0.0),
+                    builder: new SwiperCustomPagination(builder:
                         (BuildContext context, SwiperPluginConfig config) {
-                      return ConstrainedBox(
-                        child: Container(
+                      return new ConstrainedBox(
+                        child: new Container(
                             color: Colors.white,
-                            child: Text(
+                            child: new Text(
                               "${titles[config.activeIndex]} ${config.activeIndex+1}/${config.itemCount}",
-                              style: TextStyle(fontSize: 20.0),
+                              style: new TextStyle(fontSize: 20.0),
                             )),
-                        constraints: BoxConstraints.expand(height: 50.0),
+                        constraints: new BoxConstraints.expand(height: 50.0),
                       );
                     })),
-                control: SwiperControl(),
+                control: new SwiperControl(),
               ),
             ),
-            Expanded(
-              child: Swiper(
+            new Expanded(
+              child: new Swiper(
                 itemBuilder: (BuildContext context, int index) {
-                  return Image.asset(
+                  return new Image.asset(
                     images[index],
                     fit: BoxFit.fill,
                   );
@@ -277,21 +277,21 @@ class ExampleCustomPagination extends StatelessWidget {
                 autoplay: true,
                 itemCount: images.length,
                 reverse: false,
-                pagination: SwiperPagination(
-                    margin: EdgeInsets.all(0.0),
-                    builder: SwiperCustomPagination(builder:
+                pagination:new  SwiperPagination(
+                    margin: new EdgeInsets.all(0.0),
+                    builder: new SwiperCustomPagination(builder:
                         (BuildContext context, SwiperPluginConfig config) {
-                      return ConstrainedBox(
-                        child: Row(
+                      return new ConstrainedBox(
+                        child: new Row(
                           children: <Widget>[
-                            Text(
+                            new Text(
                               "${titles[config.activeIndex]} ${config.activeIndex+1}/${config.itemCount}",
                               style: TextStyle(fontSize: 20.0),
                             ),
-                            Expanded(
-                              child: Align(
+                            new Expanded(
+                              child: new Align(
                                 alignment: Alignment.centerRight,
-                                child: DotSwiperPaginationBuilder(
+                                child: new DotSwiperPaginationBuilder(
                                         color: Colors.black12,
                                         activeColor: Colors.black,
                                         size: 10.0,
@@ -301,10 +301,10 @@ class ExampleCustomPagination extends StatelessWidget {
                             )
                           ],
                         ),
-                        constraints: BoxConstraints.expand(height: 50.0),
+                        constraints: new BoxConstraints.expand(height: 50.0),
                       );
                     })),
-                control: SwiperControl(color: Colors.redAccent),
+                control: new SwiperControl(color: Colors.redAccent),
               ),
             )
           ],
@@ -315,38 +315,38 @@ class ExampleCustomPagination extends StatelessWidget {
 class ExamplePhone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Phone"),
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("Phone"),
       ),
-      body: Stack(
+      body: new Stack(
         children: <Widget>[
           ConstrainedBox(
-            constraints: BoxConstraints.expand(),
-            child: Image.asset(
+            constraints: new BoxConstraints.expand(),
+            child: new Image.asset(
               "images/bg.jpeg",
               fit: BoxFit.fill,
             ),
           ),
-          Swiper.children(
+          new Swiper.children(
             autoplay: false,
-            pagination: SwiperPagination(
-                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
-                builder: DotSwiperPaginationBuilder(
+            pagination: new SwiperPagination(
+                margin:new  EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
+                builder: new DotSwiperPaginationBuilder(
                     color: Colors.white30,
                     activeColor: Colors.white,
                     size: 20.0,
                     activeSize: 20.0)),
             children: <Widget>[
-              Image.asset(
+              new Image.asset(
                 "images/1.png",
                 fit: BoxFit.contain,
               ),
-              Image.asset(
+              new Image.asset(
                 "images/2.png",
                 fit: BoxFit.contain,
               ),
-              Image.asset("images/3.png", fit: BoxFit.contain)
+              new Image.asset("images/3.png", fit: BoxFit.contain)
             ],
           )
         ],
@@ -364,9 +364,9 @@ class ScaffoldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
+    return new Scaffold(
+      appBar:new  AppBar(
+        title: new Text(title),
         actions: actions,
       ),
       body: child,

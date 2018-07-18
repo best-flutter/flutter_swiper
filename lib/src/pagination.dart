@@ -20,7 +20,7 @@ class DotsPagination extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Pagination(
+    return new Pagination(
       padding: padding,
       direction: direction,
       itemBuilder: buildItem,
@@ -52,13 +52,13 @@ class Pagination extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EdgeInsets margin = EdgeInsets.only(left: space);
+    final EdgeInsets margin = new EdgeInsets.only(left: space);
 
     List list = [];
     for (int i = 0; i < itemCount; ++i) {
       Widget child = itemBuilder(i, itemCount, index == i);
       if (i > 0) {
-        child = Container(
+        child = new Container(
           margin: margin,
           child: child,
         );
@@ -67,11 +67,11 @@ class Pagination extends StatelessWidget {
     }
 
     Widget child = direction == Axis.vertical
-        ? Column(mainAxisSize: MainAxisSize.min, children: list)
-        : Row(
+        ? new Column(mainAxisSize: MainAxisSize.min, children: list)
+        : new Row(
             mainAxisSize: MainAxisSize.min,
             children: list,
           );
-    return Padding(padding: padding, child: child);
+    return new Padding(padding: padding, child: child);
   }
 }

@@ -35,6 +35,9 @@ flutter最强大的siwiper, 多种布局方式，无限轮播，Android和IOS双
 
 ![Phone](https://github.com/jzoom/flutter_swiper/raw/master/example/res/5.gif)
 
+![Example](https://github.com/jzoom/images/raw/master/swiper-example.gif)
+
+[更多](#代码)
 
 ## 功能路线
 
@@ -70,6 +73,7 @@ flutter最强大的siwiper, 多种布局方式，无限轮播，Android和IOS双
   + [控制器](#控制器)
   + [自动播放](#自动播放)
 + [内建的布局](#内建的布局)
++ [一些常用代码示例](#代码)
 
 ### 安装
 
@@ -238,7 +242,7 @@ new Swiper(
 ![](https://github.com/jzoom/images/raw/master/layout1.gif)
 
 ```
-Swiper(
+new Swiper(
   itemBuilder: (BuildContext context, int index) {
     return new Image.network(
       "http://via.placeholder.com/288x188",
@@ -257,7 +261,7 @@ Swiper(
 ![](https://github.com/jzoom/images/raw/master/layout2.gif)
 
 ```
-Swiper(
+new Swiper(
   itemBuilder: (BuildContext context, int index) {
     return new Image.network(
       "http://via.placeholder.com/288x188",
@@ -273,7 +277,7 @@ Swiper(
 ![](https://github.com/jzoom/images/raw/master/layout3.gif)
 
 ```
-Swiper(
+new Swiper(
     itemBuilder: (BuildContext context, int index) {
       return new Image.network(
         "http://via.placeholder.com/288x188",
@@ -294,7 +298,7 @@ Swiper(
 构建你自己的动画十分简单:
 ```
 
- Swiper(
+ new Swiper(
   layout: SwiperLayout.CUSTOM,
   customLayoutOption: new CustomLayoutOption(
       startIndex: -1,
@@ -339,6 +343,49 @@ new CustomLayoutOption(
   ])
 
 ```
+
+## 代码
+
+
+![Example](https://github.com/jzoom/images/raw/master/swiper-example.gif)
+
+```
+new ConstrainedBox(
+  child: new Swiper(
+    outer:false,
+    itemBuilder: (c, i) {
+      return new Wrap(
+        runSpacing:  6.0,
+        children: [0,1,2,3,4,5,6,7,8,9].map((i){
+          return new SizedBox(
+            width: MediaQuery.of(context).size.width/5,
+            child: new Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                new SizedBox(
+                  child:  new Container(
+                    child: new Image.network("https://fuss10.elemecdn.com/c/db/d20d49e5029281b9b73db1c5ec6f9jpeg.jpeg%3FimageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90"),
+                  ),
+                  height: MediaQuery.of(context).size.width * 0.12,
+                  width: MediaQuery.of(context).size.width * 0.12,
+                ),
+                new Padding(padding: new EdgeInsets.only(top:6.0),child: new Text("$i"),)
+              ],
+            ),
+          );
+        }).toList(),
+      );
+    },
+    pagination: new SwiperPagination(
+      margin: new EdgeInsets.all(5.0)
+    ),
+    itemCount: 10,
+  ),
+    constraints:new BoxConstraints.loose(new Size(screenWidth, 170.0))
+),
+
+```
+
 
 
 这里可以找到所有的定制选项

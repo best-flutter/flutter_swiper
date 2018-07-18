@@ -31,34 +31,34 @@ class FractionPaginationBuilder extends SwiperPlugin {
     Color color = this.color ?? themeData.scaffoldBackgroundColor;
 
     if (Axis.vertical == config.scrollDirection) {
-      return Column(
+      return new Column(
         key: key,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(
+          new Text(
             "${config.activeIndex+1}",
             style: TextStyle(color: activeColor, fontSize: activeFontSize),
           ),
-          Text(
+          new Text(
             "/",
             style: TextStyle(color: color, fontSize: fontSize),
           ),
-          Text(
+          new Text(
             "${config.itemCount}",
             style: TextStyle(color: color, fontSize: fontSize),
           )
         ],
       );
     } else {
-      return Row(
+      return new Row(
         key: key,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(
+          new Text(
             "${config.activeIndex+1}",
             style: TextStyle(color: activeColor, fontSize: activeFontSize),
           ),
-          Text(
+          new Text(
             " / ${config.itemCount}",
             style: TextStyle(color: color, fontSize: fontSize),
           )
@@ -125,13 +125,13 @@ class RectSwiperPaginationBuilder extends SwiperPlugin {
     }
 
     if (config.scrollDirection == Axis.vertical) {
-      return Column(
+      return new Column(
         key: key,
         mainAxisSize: MainAxisSize.min,
         children: list,
       );
     } else {
-      return Row(
+      return new Row(
         key: key,
         mainAxisSize: MainAxisSize.min,
         children: list,
@@ -199,13 +199,13 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
     }
 
     if (config.scrollDirection == Axis.vertical) {
-      return Column(
+      return new Column(
         key: key,
         mainAxisSize: MainAxisSize.min,
         children: list,
       );
     } else {
-      return Row(
+      return new Row(
         key: key,
         mainAxisSize: MainAxisSize.min,
         children: list,

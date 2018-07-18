@@ -33,7 +33,7 @@ class SwiperControl extends SwiperPlugin {
 
   Widget buildButton(SwiperPluginConfig config, Color color, IconData iconDaga,
       int quarterTurns, bool previous) {
-    return GestureDetector(
+    return new GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
         if (previous) {
@@ -94,7 +94,7 @@ class SwiperControl extends SwiperPlugin {
       );
     }
 
-    return Container(
+    return new Container(
       height: double.infinity,
       child: child,
       width: double.infinity,
