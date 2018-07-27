@@ -1,9 +1,28 @@
-language : [English](https://github.com/jzoom/flutter_swiper) | [中文](https://github.com/jzoom/flutter_swiper/blob/master/README-ZH.md)
+![Logo](banner.jpg)
 
-[![build_status](https://travis-ci.org/jzoom/flutter_swiper.svg?branch=master)](https://travis-ci.org/jzoom/flutter_swiper)
-[![Coverage Status](https://coveralls.io/repos/github/jzoom/flutter_swiper/badge.svg?branch=master)](https://coveralls.io/github/jzoom/flutter_swiper?branch=master)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](https://github.com/jzoom/flutter_swiper/pulls)
-[![pub package](https://img.shields.io/pub/v/flutter_swiper.svg)](https://pub.dartlang.org/packages/flutter_swiper)
+<p align="center">
+    <a href="https://travis-ci.org/jzoom/flutter_swiper">
+        <img src="https://travis-ci.org/jzoom/flutter_swiper.svg?branch=master" alt="Build Status" />
+    </a>
+    <a href="https://coveralls.io/github/jzoom/flutter_swiper?branch=master">
+        <img src="https://coveralls.io/repos/github/jzoom/flutter_swiper/badge.svg?branch=master" alt="Coverage Status" />
+    </a>
+    
+    <a href="https://github.com/jzoom/flutter_swiper/pulls">
+        <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg" alt="PRs Welcome" />
+    </a>
+    
+    <a href="https://pub.dartlang.org/packages/flutter_swiper">
+        <img src="https://img.shields.io/pub/v/flutter_swiper.svg" alt="pub package" />
+    </a>
+</p>
+<p align="center">
+    <a href="https://github.com/jzoom/flutter_swiper/blob/master/README-ZH.md">
+        <b>中文说明</b>
+    </a>
+</p>
+
+
 
 # flutter_swiper
 
