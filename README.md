@@ -7,11 +7,9 @@
     <a href="https://coveralls.io/github/jzoom/flutter_swiper?branch=master">
         <img src="https://coveralls.io/repos/github/jzoom/flutter_swiper/badge.svg?branch=master" alt="Coverage Status" />
     </a>
-    
     <a href="https://github.com/jzoom/flutter_swiper/pulls">
         <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg" alt="PRs Welcome" />
     </a>
-    
     <a href="https://pub.dartlang.org/packages/flutter_swiper">
         <img src="https://img.shields.io/pub/v/flutter_swiper.svg" alt="pub package" />
     </a>
