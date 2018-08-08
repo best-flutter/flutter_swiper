@@ -99,6 +99,9 @@ class Swiper extends StatefulWidget {
   // This value is valid when viewportFraction is set and < 1.0
   final double scale;
 
+  // This value is valid when viewportFraction is set and < 1.0
+  final double fade;
+
   Swiper({
     @required this.itemBuilder,
     @required this.itemCount,
@@ -130,6 +133,7 @@ class Swiper extends StatefulWidget {
     this.itemWidth,
     this.outer: false,
     this.scale: 1.0,
+    this.fade: 1.0,
   }) : super(key: key);
 
   factory Swiper.children({
@@ -423,6 +427,7 @@ class _SwiperState extends _SwiperTimerMixin {
           containerWidth: widget.containerWidth,
           containerHeight: widget.containerHeight,
           viewportFraction: widget.viewportFraction,
+          fade: widget.fade,
           scale: widget.scale,
           itemCount: widget.itemCount,
           itemBuilder: itemBuilder,
@@ -440,6 +445,7 @@ class _SwiperState extends _SwiperTimerMixin {
           containerHeight: widget.containerHeight,
           viewportFraction: widget.viewportFraction,
           scale: widget.scale,
+          fade: widget.fade,
           itemCount: widget.itemCount,
           itemBuilder: itemBuilder,
           index: _activeIndex,
@@ -676,6 +682,7 @@ class _StackSwiper extends _SubSwiper {
 class _NoneLoopPageViewSwiper extends _PageViewSwiper {
   _NoneLoopPageViewSwiper(
       {double scale,
+      double fade,
       ScrollPhysics physics,
       Axis scrollDirection,
       double viewportFraction,
@@ -691,6 +698,7 @@ class _NoneLoopPageViewSwiper extends _PageViewSwiper {
       SwiperController controller})
       : super(
             scale: scale,
+            fade: fade,
             physics: physics,
             scrollDirection: scrollDirection,
             viewportFraction: viewportFraction,
@@ -712,6 +720,7 @@ class _NoneLoopPageViewSwiper extends _PageViewSwiper {
 }
 
 class _PageViewSwiper extends _SubSwiper {
+  final double fade;
   final double scale;
   final double viewportFraction;
   final ScrollPhysics physics;
@@ -721,6 +730,7 @@ class _PageViewSwiper extends _SubSwiper {
 
   _PageViewSwiper(
       {this.scale,
+      this.fade,
       bool loop,
       this.physics,
       this.scrollDirection,
@@ -1322,24 +1332,34 @@ class _NoneloopPageViewState extends State<_PageViewSwiper> {
 
   Widget _buildAnimationItem(BuildContext context, int index) {
     return new AnimatedBuilder(
-        animation: _pageController,
-        builder: (BuildContext context, Widget w) {
-          int newIndex = _calcIndex(index);
-          double page = _page();
-          double scale = 1.0 -
-              widget.curve.transform((page - newIndex).abs().clamp(0.0, 1.0)) *
-                  (1.0 - widget.scale);
+      animation: _pageController,
+      builder: (BuildContext context, Widget w) {
+        int newIndex = _calcIndex(index);
+        double page = _page();
+        double fade = 1.0 -
+            widget.curve.transform((page - newIndex).abs().clamp(0.0, 1.0)) *
+                (1.0 - widget.fade);
+        double scale = 1.0 -
+            widget.curve.transform((page - newIndex).abs().clamp(0.0, 1.0)) *
+                (1.0 - widget.scale);
 
-          int renderIndex = newIndex % widget.itemCount;
-          if (renderIndex < 0) {
-            renderIndex += widget.itemCount;
-          }
+        int renderIndex = newIndex % widget.itemCount;
+        if (renderIndex < 0) {
+          renderIndex += widget.itemCount;
+        }
 
-          return new Transform.scale(
+        return new Opacity(
+          opacity: fade,
+          child: new Transform.scale(
             scale: scale,
-            child: widget.itemBuilder(context, renderIndex),
-          );
-        });
+            child: widget.itemBuilder(
+              context,
+              renderIndex,
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -1424,7 +1444,7 @@ class _NoneloopPageViewState extends State<_PageViewSwiper> {
     }
 
     IndexedWidgetBuilder itemBuilder;
-    if (widget.scale != null) {
+    if (widget.scale != null || widget.fade != null) {
       itemBuilder = _buildAnimationItem;
     } else {
       itemBuilder = widget.itemBuilder;
