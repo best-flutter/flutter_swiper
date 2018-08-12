@@ -50,3 +50,5 @@
 ## [1.0.4] - [2018/07/18]
     * 修复一些错别字，感谢[csharad](https://github.com/csharad)
     
+## [1.0.5] - [2018/08/09]
+    * viewportFraction<1.0增加fade参数

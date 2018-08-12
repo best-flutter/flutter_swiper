@@ -55,3 +55,6 @@
     
 ## [1.0.4] - [2018/07/18]
     * Fix some typo,thanks to [csharad](https://github.com/csharad)
+
+## [1.0.5] - [2018/08/09]
+    * Add feature : support fade for `viewportFraction`

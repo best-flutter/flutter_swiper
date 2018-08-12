@@ -39,6 +39,8 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   Curve _curve;
 
+  double _fade;
+
   CustomLayoutOption customLayoutOption;
 
   Widget _buildItem(BuildContext context, int index) {
@@ -70,6 +72,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
       new Offset(0.0, 0.0),
       new Offset(350.0, 0.0)
     ]);
+    _fade = 1.0;
     _currentIndex = 0;
     _curve = Curves.ease;
     _scale = 0.8;
@@ -105,6 +108,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
 //        }));
       },
       customLayoutOption: customLayoutOption,
+      fade: _fade,
       index: _currentIndex,
       onIndexChanged: (int index) {
         setState(() {
@@ -217,6 +221,19 @@ class _ExampleCustomState extends State<ExampleCustom> {
               max: 1.0,
               onChangeValue: (num value) {
                 _scale = value.toDouble();
+                setState(() {});
+              },
+            ),
+          ),
+          new FormWidget(
+            label: "fade",
+            child: new NumberPad(
+              number: _fade,
+              step: 0.1,
+              min: 0.0,
+              max: 1.0,
+              onChangeValue: (num value) {
+                _fade = value.toDouble();
                 setState(() {});
               },
             ),
