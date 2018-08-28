@@ -5,7 +5,8 @@ part of 'swiper.dart';
 
 abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     with SingleTickerProviderStateMixin {
-  double _screenWidth;
+  double _swiperWidth;
+  double _swiperHeight;
   Animation<double> _animation;
   AnimationController _animationController;
   int _startIndex;
@@ -23,6 +24,8 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     super.initState();
   }
 
+
+
   void _createAnimationController() {
     _animationController = new AnimationController(vsync: this, value: 0.5);
     Tween<double> tween = new Tween(begin: 0.0, end: 1.0);
@@ -31,8 +34,28 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
 
   @override
   void didChangeDependencies() {
-    _screenWidth = MediaQuery.of(context).size.width;
+
+
+    WidgetsBinding.instance
+        .addPostFrameCallback(_getSize);
     super.didChangeDependencies();
+  }
+
+  void _getSize(_){
+    afterRender();
+  }
+
+  @mustCallSuper
+  void afterRender(){
+
+    RenderObject renderObject = context.findRenderObject();
+    Size size = renderObject.paintBounds.size;
+    _swiperWidth = size.width;
+    _swiperHeight = size.height;
+    setState(() {
+
+
+    });
   }
 
   @override
@@ -75,6 +98,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
   }
 
   Widget _buildAnimation(BuildContext context, Widget w) {
+
     List<Widget> list = [];
 
     double animationValue = _animation.value;
@@ -94,14 +118,19 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
       onPanStart: _onPanStart,
       onPanEnd: _onPanEnd,
       onPanUpdate: _onPanUpdate,
-      child: new Center(
-        child: _buildContainer(list),
+      child: new ClipRect(
+        child: new Center(
+          child: _buildContainer(list),
+        ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    if(_animationCount==null){
+      return new Container();
+    }
     return new AnimatedBuilder(
         animation: _animationController, builder: _buildAnimation);
   }
@@ -176,14 +205,18 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
 
   void _onPanEnd(DragEndDetails details) {
     if (_lockScroll) return;
+
+    double velocity = widget.scrollDirection == Axis.horizontal?
+    details.velocity.pixelsPerSecond.dx :details.velocity.pixelsPerSecond.dy;
+
     if (_animationController.value >= 0.75 ||
-        details.velocity.pixelsPerSecond.dx > 500.0) {
+        velocity > 500.0) {
       if (_currentIndex <= 0 && !widget.loop) {
         return;
       }
       _move(1.0, nextIndex: _currentIndex - 1);
     } else if (_animationController.value < 0.25 ||
-        details.velocity.pixelsPerSecond.dx < -500.0) {
+        velocity < -500.0) {
       if (_currentIndex >= widget.itemCount - 1 && !widget.loop) {
         return;
       }
@@ -193,10 +226,19 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     }
   }
 
+  void _onPanStart(DragStartDetails details) {
+    if (_lockScroll) return;
+    _currentValue = _animationController.value ;
+    _currentPos =widget.scrollDirection == Axis.horizontal ?
+      details.globalPosition.dx : details.globalPosition.dy;
+  }
+
+
   void _onPanUpdate(DragUpdateDetails details) {
     if (_lockScroll) return;
     double value = _currentValue +
-        (details.globalPosition.dx - _currentPos) / _screenWidth / 2;
+        ((widget.scrollDirection == Axis.horizontal ?
+          details.globalPosition.dx : details.globalPosition.dy) - _currentPos) / _swiperWidth / 2;
     // no loop ?
     if (!widget.loop) {
       if (_currentIndex >= widget.itemCount - 1) {
@@ -213,11 +255,6 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     _animationController.value = value;
   }
 
-  void _onPanStart(DragStartDetails details) {
-    if (_lockScroll) return;
-    _currentValue = _animationController.value;
-    _currentPos = details.globalPosition.dx;
-  }
 
   int _currentIndex = 0;
 }
@@ -357,6 +394,7 @@ class _CustomLayoutSwiper extends _SubSwiper {
         int duration,
         int index,
         int itemCount,
+        Axis scrollDirection,
         SwiperController controller})
       : assert(option != null),
         super(
@@ -370,7 +408,8 @@ class _CustomLayoutSwiper extends _SubSwiper {
           duration: duration,
           index: index,
           itemCount: itemCount,
-          controller: controller);
+          controller: controller,
+      scrollDirection:scrollDirection);
 
   @override
   State<StatefulWidget> createState() {

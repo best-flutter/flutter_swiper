@@ -18,18 +18,12 @@ class MyApp extends StatelessWidget {
         child: new Column(
           children: <Widget>[
             new SizedBox(
-              height: 200.0,
+              height: 300.0,
               child: Swiper(
-                  layout: SwiperLayout.DEFAULT,
-                  customLayoutOption: new CustomLayoutOption(
-                          startIndex: -1, stateCount: 3)
-                      .addRotate([-45.0 / 180, 0.0, 45.0 / 180]).addTranslate([
-                    new Offset(-370.0, -40.0),
-                    new Offset(0.0, 0.0),
-                    new Offset(370.0, -40.0)
-                  ]),
+                  layout: SwiperLayout.TINDER,
                   itemWidth: 300.0,
                   itemHeight: 200.0,
+                  scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
                     return new Container(
                       color: Colors.grey,
@@ -55,7 +49,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: new MyHomePage(title: 'Flutter Swiper'),
-      //     home: buildHome() ,
+      //home: buildHome() ,
       routes: {
         '/example01': (BuildContext context) => new ExampleHorizontal(),
         '/example02': (BuildContext context) => new ExampleVertical(),

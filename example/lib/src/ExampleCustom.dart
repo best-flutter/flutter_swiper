@@ -21,7 +21,6 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   int _autoplayDely;
 
-  Axis _axis;
 
   double _padding;
 
@@ -36,6 +35,9 @@ class _ExampleCustomState extends State<ExampleCustom> {
   int _currentIndex;
 
   double _scale;
+
+
+  Axis _scrollDirection;
 
   Curve _curve;
 
@@ -84,9 +86,9 @@ class _ExampleCustomState extends State<ExampleCustom> {
     _itemCount = 3;
     _autoplay = false;
     _autoplayDely = 3000;
-    _axis = Axis.horizontal;
     _viewportFraction = 0.8;
     _outer = false;
+    _scrollDirection = Axis.horizontal;
     super.initState();
   }
 
@@ -115,6 +117,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
           _currentIndex = index;
         });
       },
+
       curve: _curve,
       scale: _scale,
       itemWidth: 300.0,
@@ -128,7 +131,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
       autoplay: _autoplay,
       itemBuilder: _buildItem,
       itemCount: _itemCount,
-      scrollDirection: _axis,
+      scrollDirection: _scrollDirection,
       pagination: new SwiperPagination(),
     );
   }
@@ -178,6 +181,12 @@ class _ExampleCustomState extends State<ExampleCustom> {
                     _layout = value;
                     setState(() {});
                   })),
+          new FormWidget(
+            label: "scrollDirection",
+            child: new Switch(
+                value: _scrollDirection == Axis.horizontal,
+                onChanged: (bool value) => setState(() => _scrollDirection = value ? Axis.horizontal : Axis.vertical)),
+          ),
           //Pannel Begin
           new FormWidget(
             label: "loop",

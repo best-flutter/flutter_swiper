@@ -24,10 +24,10 @@ class Swiper extends StatefulWidget {
   /// If set true , the pagination will display 'outer' of the 'content' container.
   final bool outer;
 
-  /// Inner item height, this property is valid if layout=STACK,
+  /// Inner item height, this property is valid if layout=STACK or layout=TINDER or LAYOUT=CUSTOM,
   final double itemHeight;
 
-  /// Inner item width, this property is valid if layout=STACK,
+  /// Inner item width, this property is valid if layout=STACK or layout=TINDER or LAYOUT=CUSTOM,
   final double itemWidth;
 
   // height of the inside container,this property is valid when outer=true,otherwise the inside container size is controlled by parent widget
@@ -362,6 +362,7 @@ abstract class _SwiperTimerMixin extends State<Swiper> {
 class _SwiperState extends _SwiperTimerMixin {
   int _activeIndex;
 
+
   Widget _wrapTap(BuildContext context, int index) {
     return new GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -375,6 +376,7 @@ class _SwiperState extends _SwiperTimerMixin {
   @override
   void initState() {
     _activeIndex = widget.index ?? 0;
+
 
     super.initState();
   }
@@ -421,6 +423,7 @@ class _SwiperState extends _SwiperTimerMixin {
         duration: widget.duration,
         onIndexChanged: _onIndexChanged,
         controller: _controller,
+        scrollDirection: widget.scrollDirection,
       );
     } else if (widget.layout == null || widget.layout == SwiperLayout.DEFAULT) {
       if (widget.loop) {
@@ -471,6 +474,7 @@ class _SwiperState extends _SwiperTimerMixin {
         duration: widget.duration,
         onIndexChanged: _onIndexChanged,
         controller: _controller,
+        scrollDirection: widget.scrollDirection,
       );
     } else if (widget.layout == SwiperLayout.CUSTOM) {
       return new _CustomLayoutSwiper(
@@ -485,6 +489,7 @@ class _SwiperState extends _SwiperTimerMixin {
         duration: widget.duration,
         onIndexChanged: _onIndexChanged,
         controller: _controller,
+        scrollDirection: widget.scrollDirection,
       );
     } else {
       return new Container();
@@ -589,6 +594,8 @@ abstract class _SubSwiper extends StatefulWidget {
   final double itemWidth;
   final double itemHeight;
   final bool loop;
+  final Axis scrollDirection;
+
   _SubSwiper(
       {Key key,
       this.loop,
@@ -600,8 +607,9 @@ abstract class _SubSwiper extends StatefulWidget {
       this.controller,
       this.index,
       this.itemCount,
+        this.scrollDirection : Axis.horizontal,
       this.onIndexChanged})
-      : super(key: key);
+      :super(key: key);
 
   @override
   State<StatefulWidget> createState();
@@ -628,7 +636,9 @@ class _TinderSwiper extends _SubSwiper {
       IndexedWidgetBuilder itemBuilder,
       int index,
       bool loop,
-      int itemCount})
+      int itemCount,
+        Axis scrollDirection,
+      })
       : assert(itemWidth != null && itemHeight != null),
         super(
             loop: loop,
@@ -641,7 +651,8 @@ class _TinderSwiper extends _SubSwiper {
             controller: controller,
             index: index,
             onIndexChanged: onIndexChanged,
-            itemCount: itemCount);
+            itemCount: itemCount,
+          scrollDirection:scrollDirection);
 
   @override
   State<StatefulWidget> createState() {
@@ -661,7 +672,9 @@ class _StackSwiper extends _SubSwiper {
       IndexedWidgetBuilder itemBuilder,
       int index,
       bool loop,
-      int itemCount})
+      int itemCount,
+      Axis scrollDirection,
+      })
       : super(
             loop: loop,
             key: key,
@@ -673,7 +686,8 @@ class _StackSwiper extends _SubSwiper {
             controller: controller,
             index: index,
             onIndexChanged: onIndexChanged,
-            itemCount: itemCount);
+            itemCount: itemCount,
+  scrollDirection:scrollDirection);
 
   @override
   State<StatefulWidget> createState() {
@@ -779,21 +793,59 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
+  }
+
+  @override
+  void didUpdateWidget(_TinderSwiper oldWidget) {
+    _updateValues();
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void afterRender() {
+    super.afterRender();
+
     _startIndex = -3;
     _animationCount = 5;
     opacity = [0.0, 0.9, 0.9, 1.0, 0.0, 0.0];
     scales = [0.80, 0.80, 0.85, 0.90, 1.0, 1.0, 1.0];
-    offsetsX = [0.0, 0.0, 0.0, 0.0, _screenWidth, _screenWidth];
-    offsetsY = [
-      0.0,
-      0.0,
-      -5.0,
-      -10.0,
-      -15.0,
-      -20.0,
-    ];
     rotates = [0.0, 0.0, 0.0, 0.0, 20.0, 25.0];
+    _updateValues();
+
   }
+
+
+
+  void _updateValues(){
+    if(widget.scrollDirection == Axis.horizontal){
+      offsetsX = [0.0, 0.0, 0.0, 0.0, _swiperWidth, _swiperWidth];
+      offsetsY = [
+        0.0,
+        0.0,
+        -5.0,
+        -10.0,
+        -15.0,
+        -20.0,
+      ];
+    }else{
+
+      offsetsX = [
+        0.0,
+        0.0,
+        5.0,
+        10.0,
+        15.0,
+        20.0,
+      ];
+
+      offsetsY = [0.0, 0.0, 0.0, 0.0, _swiperHeight, _swiperHeight];
+
+    }
+  }
+
+
+
 
   @override
   Widget _buildItem(int i, int realIndex, double animationValue) {
@@ -802,6 +854,9 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     double fy = _getValue(offsetsY, animationValue, i);
     double o = _getValue(opacity, animationValue, i);
     double a = _getValue(rotates, animationValue, i);
+
+    Alignment alignment = widget.scrollDirection == Axis.horizontal?
+       Alignment.bottomCenter : Alignment.centerLeft;
 
     return new Opacity(
       opacity: o,
@@ -812,7 +867,7 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
           offset: new Offset(f, fy),
           child: new Transform.scale(
             scale: s,
-            alignment: Alignment.bottomCenter,
+            alignment: alignment,
             child: new SizedBox(
               width: widget.itemWidth ?? double.infinity,
               height: widget.itemHeight ?? double.infinity,
@@ -832,7 +887,30 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    double space = (_screenWidth - widget.itemWidth) / 2;
+
+
+  }
+
+  void _updateValues(){
+    if(widget.scrollDirection == Axis.horizontal){
+      double space = (_swiperWidth - widget.itemWidth) / 2;
+      offsets = [-space, -space / 3 * 2, -space / 3, 0.0, _swiperWidth];
+    }else{
+      double space = (_swiperHeight - widget.itemHeight) / 2;
+      offsets = [-space, -space / 3 * 2, -space / 3, 0.0, _swiperHeight];
+    }
+  }
+
+  @override
+  void didUpdateWidget(_StackSwiper oldWidget) {
+    _updateValues();
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void afterRender() {
+
+    super.afterRender();
 
     //length of the values array below
     _animationCount = 5;
@@ -840,8 +918,9 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
     //Array below this line, '0' index is 1.0 ,witch is the first item show in swiper.
     _startIndex = -3;
     scales = [0.7, 0.8, 0.9, 1.0, 1.0];
-    offsets = [-space, -space / 3 * 2, -space / 3, 0.0, _screenWidth];
     opacity = [0.0, 0.5, 1.0, 1.0, 1.0];
+
+    _updateValues();
   }
 
   @override
@@ -850,14 +929,20 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
     double f = _getValue(offsets, animationValue, i);
     double o = _getValue(opacity, animationValue, i);
 
+    Offset offset = widget.scrollDirection == Axis.horizontal ?
+      new Offset(f, 0.0) : new Offset(0.0, f);
+
+    Alignment alignment = widget.scrollDirection == Axis.horizontal ?
+      Alignment.centerLeft :Alignment.topCenter;
+
     return new Opacity(
       opacity: o,
       child: new Transform.translate(
         key: new ValueKey<int>(_currentIndex + i),
-        offset: new Offset(f, 0.0),
+        offset: offset,
         child: new Transform.scale(
           scale: s,
-          alignment: Alignment.centerLeft,
+          alignment: alignment,
           child: new SizedBox(
             width: widget.itemWidth ?? double.infinity,
             height: widget.itemHeight ?? double.infinity,

@@ -58,3 +58,6 @@
 
 ## [1.0.5] - [2018/08/09]
     * Add feature : support fade for `viewportFraction`
+
+## [1.0.6] - [2018/08/28]
+    * Implement vertical scroll direction for `TINDER` and `STACK` layout, see #9

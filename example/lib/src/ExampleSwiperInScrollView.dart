@@ -23,6 +23,14 @@ class _ExampleState extends State<ExampleSwiperInScrollView> with TickerProvider
 
   _ExampleState();
 
+
+  @override
+  void dispose() {
+    controller.dispose();
+
+    super.dispose();
+  }
+
   @override
   void initState() {
     controller = new AnimationController(vsync: this);
@@ -33,6 +41,8 @@ class _ExampleState extends State<ExampleSwiperInScrollView> with TickerProvider
     controller.animateTo(1.0,duration: new Duration(seconds: 3));
     super.initState();
   }
+
+
 
   Widget _buildDynamicCard(){
     return new Card(
