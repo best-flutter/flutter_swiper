@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
               child: Swiper(
                   itemWidth: 300.0,
                   loop: true,
-                  viewportFraction: 0.8,
                   itemHeight: 200.0,
                   transformItemBuilder: (Widget child, double position) {
                     double pageWidth = 375.0;
@@ -52,7 +51,7 @@ class MyApp extends StatelessWidget {
                           MIN_SCALE + (1 - MIN_SCALE) * (1 - position);
 
                       return new Opacity(
-                        opacity: 1.0 - position,
+                        opacity: 1.0 - position ,
                         child: new Transform.translate(
                           offset: new Offset(pageWidth * -position, 0.0),
                           child: new Transform.scale(
