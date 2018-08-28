@@ -21,7 +21,6 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   int _autoplayDely;
 
-
   double _padding;
 
   bool _outer;
@@ -35,7 +34,6 @@ class _ExampleCustomState extends State<ExampleCustom> {
   int _currentIndex;
 
   double _scale;
-
 
   Axis _scrollDirection;
 
@@ -117,7 +115,6 @@ class _ExampleCustomState extends State<ExampleCustom> {
           _currentIndex = index;
         });
       },
-
       curve: _curve,
       scale: _scale,
       itemWidth: 300.0,
@@ -185,7 +182,8 @@ class _ExampleCustomState extends State<ExampleCustom> {
             label: "scrollDirection",
             child: new Switch(
                 value: _scrollDirection == Axis.horizontal,
-                onChanged: (bool value) => setState(() => _scrollDirection = value ? Axis.horizontal : Axis.vertical)),
+                onChanged: (bool value) => setState(() => _scrollDirection =
+                    value ? Axis.horizontal : Axis.vertical)),
           ),
           //Pannel Begin
           new FormWidget(

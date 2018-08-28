@@ -7,9 +7,7 @@ part 'custom_layout.dart';
 
 typedef void SwiperOnTap(int index);
 
-
-
-typedef Widget TransformItemBuilder(BuildContext context,int index,double position);
+typedef Widget TransformItemBuilder(Widget child, double position);
 
 typedef Widget SwiperDataBuilder(BuildContext context, dynamic data, int index);
 
@@ -21,8 +19,6 @@ const int kDefaultAutoplayTransactionDuration = 300;
 
 const int kMaxValue = 2000000000;
 const int kMiddleValue = 1000000000;
-
-
 
 enum SwiperLayout { DEFAULT, STACK, TINDER, CUSTOM }
 
@@ -149,10 +145,9 @@ class Swiper extends StatefulWidget {
     this.outer: false,
     this.scale: 1.0,
     this.fade: 1.0,
-  }) :  assert(
-    itemBuilder != null || transformItemBuilder!=null,
-  "itemBuilder and transformItemBuilder must not be both null"
-  ), super(key: key);
+  })  : assert(itemBuilder != null || transformItemBuilder != null,
+            "itemBuilder and transformItemBuilder must not be both null"),
+        super(key: key);
 
   factory Swiper.children({
     List<Widget> children,
@@ -186,7 +181,7 @@ class Swiper extends StatefulWidget {
     assert(children != null, "children must not be null");
 
     return new Swiper(
-        transformItemBuilder:transformItemBuilder,
+        transformItemBuilder: transformItemBuilder,
         customLayoutOption: customLayoutOption,
         containerHeight: containerHeight,
         containerWidth: containerWidth,
@@ -249,7 +244,7 @@ class Swiper extends StatefulWidget {
     double scale: 1.0,
   }) {
     return new Swiper(
-        transformItemBuilder:transformItemBuilder,
+        transformItemBuilder: transformItemBuilder,
         customLayoutOption: customLayoutOption,
         containerHeight: containerHeight,
         containerWidth: containerWidth,
@@ -446,6 +441,7 @@ class _SwiperState extends _SwiperTimerMixin {
     } else if (widget.layout == null || widget.layout == SwiperLayout.DEFAULT) {
       if (widget.loop) {
         return new _PageViewSwiper(
+          transformItemBuilder: widget.transformItemBuilder,
           loop: widget.loop,
           containerWidth: widget.containerWidth,
           containerHeight: widget.containerHeight,
@@ -464,6 +460,7 @@ class _SwiperState extends _SwiperTimerMixin {
         );
       } else {
         return new _NoneLoopPageViewSwiper(
+          transformItemBuilder: widget.transformItemBuilder,
           containerWidth: widget.containerWidth,
           containerHeight: widget.containerHeight,
           viewportFraction: widget.viewportFraction,
@@ -715,6 +712,7 @@ class _NoneLoopPageViewSwiper extends _PageViewSwiper {
   _NoneLoopPageViewSwiper(
       {double scale,
       double fade,
+      TransformItemBuilder transformItemBuilder,
       ScrollPhysics physics,
       Axis scrollDirection,
       double viewportFraction,
@@ -732,6 +730,7 @@ class _NoneLoopPageViewSwiper extends _PageViewSwiper {
             scale: scale,
             fade: fade,
             physics: physics,
+            transformItemBuilder: transformItemBuilder,
             scrollDirection: scrollDirection,
             viewportFraction: viewportFraction,
             containerWidth: containerWidth,
@@ -759,10 +758,12 @@ class _PageViewSwiper extends _SubSwiper {
   final double containerWidth;
   final double containerHeight;
   final Axis scrollDirection;
+  final TransformItemBuilder transformItemBuilder;
 
   _PageViewSwiper(
       {this.scale,
       this.fade,
+      this.transformItemBuilder,
       bool loop,
       this.physics,
       this.scrollDirection,
@@ -1020,6 +1021,20 @@ class _NoneloopPageViewState extends State<_PageViewSwiper> {
     return index;
   }
 
+  ScrollMetrics _pageMetrics;
+
+  double _calculatePagePosition(int index) {
+    final double viewportFraction = widget.viewportFraction ?? 1.0;
+    final double pageViewWidth =
+        (_pageMetrics?.viewportDimension ?? 1.0) * viewportFraction;
+    final double pageX = pageViewWidth * (_pageMetrics == null ? 0.0 :_indexToPositionPage(index));
+    final double scrollX = (_pageMetrics?.pixels ?? 0.0);
+    final double pagePosition = (pageX - scrollX) / pageViewWidth;
+    final double safePagePosition = !pagePosition.isNaN ? pagePosition : 0.0;
+
+    return safePagePosition;
+  }
+
   Widget _buildAnimationItem(BuildContext context, int index) {
     return new AnimatedBuilder(
       animation: _pageController,
@@ -1042,7 +1057,7 @@ class _NoneloopPageViewState extends State<_PageViewSwiper> {
           opacity: fade,
           child: new Transform.scale(
             scale: scale,
-            child: widget.itemBuilder(
+            child: _itemBuilder(
               context,
               renderIndex,
             ),
@@ -1050,21 +1065,6 @@ class _NoneloopPageViewState extends State<_PageViewSwiper> {
         );
       },
     );
-  }
-
-  @override
-  void initState() {
-    if (widget.index != null) {
-      _activeIndex = widget.index;
-    }
-    _pageController = new PageController(
-      initialPage: _activePositionPage(),
-      viewportFraction: widget.viewportFraction,
-    );
-
-    widget.controller.addListener(_onController);
-
-    super.initState();
   }
 
   void _move(int nextIndex, bool animation) {
@@ -1128,26 +1128,71 @@ class _NoneloopPageViewState extends State<_PageViewSwiper> {
   }
 
   @override
+  void initState() {
+    if (widget.index != null) {
+      _activeIndex = widget.index;
+    }
+    _pageController = new PageController(
+      initialPage: _activePositionPage(),
+      viewportFraction: widget.viewportFraction,
+    );
+
+    widget.controller.addListener(_onController);
+
+    super.initState();
+  }
+
+  Widget _buildItemWithPosition(BuildContext context, int index) {
+    Widget child = widget.itemBuilder(context, index);
+
+    return widget.transformItemBuilder(child, _calculatePagePosition(index));
+  }
+
+  IndexedWidgetBuilder _calcItemBuilder() {
+    IndexedWidgetBuilder itemBuilder;
+    if (widget.scale != null || widget.fade != null) {
+      if (widget.transformItemBuilder == null) {
+        _itemBuilder = widget.itemBuilder;
+      } else {
+        _itemBuilder = _buildItemWithPosition;
+      }
+      itemBuilder = _buildAnimationItem;
+    } else {
+      if (widget.transformItemBuilder == null) {
+        itemBuilder = widget.itemBuilder;
+      } else {
+        itemBuilder = _buildItemWithPosition;
+      }
+    }
+
+    return itemBuilder;
+  }
+
+  IndexedWidgetBuilder _itemBuilder;
+
+  @override
   Widget build(BuildContext context) {
     if (widget.itemCount == 0) {
       return new Container();
     }
 
-    IndexedWidgetBuilder itemBuilder;
-    if (widget.scale != null || widget.fade != null) {
-      itemBuilder = _buildAnimationItem;
-    } else {
-      itemBuilder = widget.itemBuilder;
-    }
+    IndexedWidgetBuilder itemBuilder = _calcItemBuilder();
 
     int itemCount = _itemCount();
-    PageView pageView = new PageView.builder(
+    Widget pageView = new PageView.builder(
       scrollDirection: widget.scrollDirection,
       physics: widget.physics,
       onPageChanged: _onPageChange,
       controller: _pageController,
       itemBuilder: itemBuilder,
       itemCount: itemCount,
+    );
+
+    //if we have to listen scroll notification?
+
+    pageView = new NotificationListener<ScrollNotification>(
+      onNotification: _handleScrollNotification,
+      child: pageView,
     );
 
     if (widget.containerWidth != null || widget.containerHeight != null) {
@@ -1164,6 +1209,12 @@ class _NoneloopPageViewState extends State<_PageViewSwiper> {
   void _onPageChange(int index) {
     _activeIndex = _indexToActiveIndex(index);
     widget.onIndexChanged(widget.getCorrectIndex(_activeIndex));
+  }
+
+  bool _handleScrollNotification(ScrollNotification notification) {
+    _pageMetrics = notification.metrics;
+
+    return false;
   }
 }
 
