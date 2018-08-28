@@ -7,6 +7,10 @@ part 'custom_layout.dart';
 
 typedef void SwiperOnTap(int index);
 
+
+
+typedef Widget TransformItemBuilder(BuildContext context,int index,double position);
+
 typedef Widget SwiperDataBuilder(BuildContext context, dynamic data, int index);
 
 /// default auto play delay
@@ -17,6 +21,8 @@ const int kDefaultAutoplayTransactionDuration = 300;
 
 const int kMaxValue = 2000000000;
 const int kMiddleValue = 1000000000;
+
+
 
 enum SwiperLayout { DEFAULT, STACK, TINDER, CUSTOM }
 
@@ -37,6 +43,10 @@ class Swiper extends StatefulWidget {
 
   /// Build item on index
   final IndexedWidgetBuilder itemBuilder;
+
+  /// Support transform like Android PageView did
+  /// `itemBuilder` and `transformItemBuilder` must have one not null
+  final TransformItemBuilder transformItemBuilder;
 
   /// count of the display items
   final int itemCount;
@@ -105,7 +115,10 @@ class Swiper extends StatefulWidget {
   final double fade;
 
   Swiper({
-    @required this.itemBuilder,
+    this.itemBuilder,
+
+    ///
+    this.transformItemBuilder,
     @required this.itemCount,
     this.autoplay: false,
     this.layout,
@@ -136,11 +149,15 @@ class Swiper extends StatefulWidget {
     this.outer: false,
     this.scale: 1.0,
     this.fade: 1.0,
-  }) : super(key: key);
+  }) :  assert(
+    itemBuilder != null || transformItemBuilder!=null,
+  "itemBuilder and transformItemBuilder must not be both null"
+  ), super(key: key);
 
   factory Swiper.children({
     List<Widget> children,
     bool autoplay: false,
+    TransformItemBuilder transformItemBuilder,
     int autoplayDelay: kDefaultAutoplayDelayMs,
     bool reverse: false,
     bool autoplayDisableOnInteraction: true,
@@ -169,6 +186,7 @@ class Swiper extends StatefulWidget {
     assert(children != null, "children must not be null");
 
     return new Swiper(
+        transformItemBuilder:transformItemBuilder,
         customLayoutOption: customLayoutOption,
         containerHeight: containerHeight,
         containerWidth: containerWidth,
@@ -201,6 +219,7 @@ class Swiper extends StatefulWidget {
   }
 
   factory Swiper.list({
+    TransformItemBuilder transformItemBuilder,
     List list,
     CustomLayoutOption customLayoutOption,
     SwiperDataBuilder builder,
@@ -230,6 +249,7 @@ class Swiper extends StatefulWidget {
     double scale: 1.0,
   }) {
     return new Swiper(
+        transformItemBuilder:transformItemBuilder,
         customLayoutOption: customLayoutOption,
         containerHeight: containerHeight,
         containerWidth: containerWidth,
@@ -362,7 +382,6 @@ abstract class _SwiperTimerMixin extends State<Swiper> {
 class _SwiperState extends _SwiperTimerMixin {
   int _activeIndex;
 
-
   Widget _wrapTap(BuildContext context, int index) {
     return new GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -376,7 +395,6 @@ class _SwiperState extends _SwiperTimerMixin {
   @override
   void initState() {
     _activeIndex = widget.index ?? 0;
-
 
     super.initState();
   }
@@ -607,9 +625,9 @@ abstract class _SubSwiper extends StatefulWidget {
       this.controller,
       this.index,
       this.itemCount,
-        this.scrollDirection : Axis.horizontal,
+      this.scrollDirection: Axis.horizontal,
       this.onIndexChanged})
-      :super(key: key);
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState();
@@ -625,21 +643,20 @@ abstract class _SubSwiper extends StatefulWidget {
 }
 
 class _TinderSwiper extends _SubSwiper {
-  _TinderSwiper(
-      {Key key,
-      Curve curve,
-      int duration,
-      SwiperController controller,
-      ValueChanged<int> onIndexChanged,
-      double itemHeight,
-      double itemWidth,
-      IndexedWidgetBuilder itemBuilder,
-      int index,
-      bool loop,
-      int itemCount,
-        Axis scrollDirection,
-      })
-      : assert(itemWidth != null && itemHeight != null),
+  _TinderSwiper({
+    Key key,
+    Curve curve,
+    int duration,
+    SwiperController controller,
+    ValueChanged<int> onIndexChanged,
+    double itemHeight,
+    double itemWidth,
+    IndexedWidgetBuilder itemBuilder,
+    int index,
+    bool loop,
+    int itemCount,
+    Axis scrollDirection,
+  })  : assert(itemWidth != null && itemHeight != null),
         super(
             loop: loop,
             key: key,
@@ -652,7 +669,7 @@ class _TinderSwiper extends _SubSwiper {
             index: index,
             onIndexChanged: onIndexChanged,
             itemCount: itemCount,
-          scrollDirection:scrollDirection);
+            scrollDirection: scrollDirection);
 
   @override
   State<StatefulWidget> createState() {
@@ -661,21 +678,20 @@ class _TinderSwiper extends _SubSwiper {
 }
 
 class _StackSwiper extends _SubSwiper {
-  _StackSwiper(
-      {Key key,
-      Curve curve,
-      int duration,
-      SwiperController controller,
-      ValueChanged<int> onIndexChanged,
-      double itemHeight,
-      double itemWidth,
-      IndexedWidgetBuilder itemBuilder,
-      int index,
-      bool loop,
-      int itemCount,
-      Axis scrollDirection,
-      })
-      : super(
+  _StackSwiper({
+    Key key,
+    Curve curve,
+    int duration,
+    SwiperController controller,
+    ValueChanged<int> onIndexChanged,
+    double itemHeight,
+    double itemWidth,
+    IndexedWidgetBuilder itemBuilder,
+    int index,
+    bool loop,
+    int itemCount,
+    Axis scrollDirection,
+  }) : super(
             loop: loop,
             key: key,
             itemWidth: itemWidth,
@@ -687,7 +703,7 @@ class _StackSwiper extends _SubSwiper {
             index: index,
             onIndexChanged: onIndexChanged,
             itemCount: itemCount,
-  scrollDirection:scrollDirection);
+            scrollDirection: scrollDirection);
 
   @override
   State<StatefulWidget> createState() {
@@ -778,7 +794,6 @@ class _PageViewSwiper extends _SubSwiper {
   }
 }
 
-
 class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
   List<double> scales;
   List<double> offsetsX;
@@ -793,7 +808,6 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
   }
 
   @override
@@ -812,13 +826,10 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     scales = [0.80, 0.80, 0.85, 0.90, 1.0, 1.0, 1.0];
     rotates = [0.0, 0.0, 0.0, 0.0, 20.0, 25.0];
     _updateValues();
-
   }
 
-
-
-  void _updateValues(){
-    if(widget.scrollDirection == Axis.horizontal){
+  void _updateValues() {
+    if (widget.scrollDirection == Axis.horizontal) {
       offsetsX = [0.0, 0.0, 0.0, 0.0, _swiperWidth, _swiperWidth];
       offsetsY = [
         0.0,
@@ -828,8 +839,7 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
         -15.0,
         -20.0,
       ];
-    }else{
-
+    } else {
       offsetsX = [
         0.0,
         0.0,
@@ -840,12 +850,8 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
       ];
 
       offsetsY = [0.0, 0.0, 0.0, 0.0, _swiperHeight, _swiperHeight];
-
     }
   }
-
-
-
 
   @override
   Widget _buildItem(int i, int realIndex, double animationValue) {
@@ -855,8 +861,9 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     double o = _getValue(opacity, animationValue, i);
     double a = _getValue(rotates, animationValue, i);
 
-    Alignment alignment = widget.scrollDirection == Axis.horizontal?
-       Alignment.bottomCenter : Alignment.centerLeft;
+    Alignment alignment = widget.scrollDirection == Axis.horizontal
+        ? Alignment.bottomCenter
+        : Alignment.centerLeft;
 
     return new Opacity(
       opacity: o,
@@ -887,15 +894,13 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-
   }
 
-  void _updateValues(){
-    if(widget.scrollDirection == Axis.horizontal){
+  void _updateValues() {
+    if (widget.scrollDirection == Axis.horizontal) {
       double space = (_swiperWidth - widget.itemWidth) / 2;
       offsets = [-space, -space / 3 * 2, -space / 3, 0.0, _swiperWidth];
-    }else{
+    } else {
       double space = (_swiperHeight - widget.itemHeight) / 2;
       offsets = [-space, -space / 3 * 2, -space / 3, 0.0, _swiperHeight];
     }
@@ -909,7 +914,6 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
 
   @override
   void afterRender() {
-
     super.afterRender();
 
     //length of the values array below
@@ -929,11 +933,13 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
     double f = _getValue(offsets, animationValue, i);
     double o = _getValue(opacity, animationValue, i);
 
-    Offset offset = widget.scrollDirection == Axis.horizontal ?
-      new Offset(f, 0.0) : new Offset(0.0, f);
+    Offset offset = widget.scrollDirection == Axis.horizontal
+        ? new Offset(f, 0.0)
+        : new Offset(0.0, f);
 
-    Alignment alignment = widget.scrollDirection == Axis.horizontal ?
-      Alignment.centerLeft :Alignment.topCenter;
+    Alignment alignment = widget.scrollDirection == Axis.horizontal
+        ? Alignment.centerLeft
+        : Alignment.topCenter;
 
     return new Opacity(
       opacity: o,
@@ -953,7 +959,6 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
     );
   }
 }
-
 
 class _NoneloopPageViewState extends State<_PageViewSwiper> {
   PageController _pageController;
