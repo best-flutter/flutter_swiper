@@ -212,6 +212,13 @@
             </list>
           </value>
         </entry>
+        <entry key="percent_indicator">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/percent_indicator-1.0.9/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="plugin">
           <value>
             <list>
@@ -404,6 +411,7 @@
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/package_config-1.0.3/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/package_resolver-1.0.2/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/path-1.5.1/lib" />
+      <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/percent_indicator-1.0.9/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/plugin-0.2.0+2/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/pool-1.3.4/lib" />
       <root url="file://$PROJECT_DIR$/../flutter/.pub-cache/hosted/pub.flutter-io.cn/pub_semver-1.4.1/lib" />
