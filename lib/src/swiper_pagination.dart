@@ -36,7 +36,7 @@ class FractionPaginationBuilder extends SwiperPlugin {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new Text(
-            "${config.activeIndex+1}",
+            "${config.activeIndex + 1}",
             style: TextStyle(color: activeColor, fontSize: activeFontSize),
           ),
           new Text(
@@ -55,7 +55,7 @@ class FractionPaginationBuilder extends SwiperPlugin {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new Text(
-            "${config.activeIndex+1}",
+            "${config.activeIndex + 1}",
             style: TextStyle(color: activeColor, fontSize: activeFontSize),
           ),
           new Text(

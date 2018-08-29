@@ -92,7 +92,7 @@ void main() {
           child: Row(
             children: <Widget>[
               Text(
-                "${titles[config.activeIndex]} ${config.activeIndex+1}/${config.itemCount}",
+                "${titles[config.activeIndex]} ${config.activeIndex + 1}/${config.itemCount}",
                 style: TextStyle(fontSize: 20.0),
               ),
               Expanded(

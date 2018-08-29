@@ -8,78 +8,6 @@ import 'src/ExampleSwiperInScrollView.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  Widget buildHome() {
-    List<Color> colors = [
-      Colors.green,
-      Colors.blueAccent,
-      Colors.yellowAccent,
-      Colors.red
-    ];
-
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(""),
-      ),
-      body: new Container(
-        color: Colors.black87,
-        child: new Column(
-          children: <Widget>[
-            new SizedBox(
-              height: 300.0,
-              child: Swiper(
-                  itemWidth: 300.0,
-                  loop: true,
-                  itemHeight: 200.0,
-                  transformItemBuilder: (Widget child, double position) {
-                    double pageWidth = 375.0;
-                    print(position);
-                    if(position <= 0){
-                      return new Opacity(
-                        opacity: 1.0,
-                        child: new Transform.translate(
-                          offset: new Offset(0.0, 0.0),
-                          child: new Transform.scale(
-                            scale: 1.0,
-                            child: child,
-                          ),
-                        ),
-                      );
-                    }else if (position <= 1) {
-                      const double MIN_SCALE = 0.75;
-                      // Scale the page down (between MIN_SCALE and 1)
-                      double scaleFactor =
-                          MIN_SCALE + (1 - MIN_SCALE) * (1 - position);
-
-                      return new Opacity(
-                        opacity: 1.0 - position ,
-                        child: new Transform.translate(
-                          offset: new Offset(pageWidth * -position, 0.0),
-                          child: new Transform.scale(
-                            scale: scaleFactor,
-                            child: child,
-                          ),
-                        ),
-                      );
-                    }
-
-                    return child;
-                  },
-                  itemBuilder: (context, index) {
-                    return new Container(
-                      color: colors[index % colors.length],
-                      child: new Center(
-                        child: new Text("$index"),
-                      ),
-                    );
-                  },
-                  itemCount: 10),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -88,8 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      //home: new MyHomePage(title: 'Flutter Swiper'),
-      home: buildHome(),
+      home: new MyHomePage(title: 'Flutter Swiper'),
+      //home: buildHome(),
       routes: {
         '/example01': (BuildContext context) => new ExampleHorizontal(),
         '/example02': (BuildContext context) => new ExampleVertical(),
@@ -118,13 +46,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> render(BuildContext context, List children) {
-    return ListTile
-        .divideTiles(
-            context: context,
-            tiles: children.map((dynamic data) {
-              return buildListTile(context, data[0], data[1], data[2]);
-            }))
-        .toList();
+    return ListTile.divideTiles(
+        context: context,
+        tiles: children.map((dynamic data) {
+          return buildListTile(context, data[0], data[1], data[2]);
+        })).toList();
   }
 
   Widget buildListTile(
@@ -292,7 +218,7 @@ class ExampleCustomPagination extends StatelessWidget {
                         child: new Container(
                             color: Colors.white,
                             child: new Text(
-                              "${titles[config.activeIndex]} ${config.activeIndex+1}/${config.itemCount}",
+                              "${titles[config.activeIndex]} ${config.activeIndex + 1}/${config.itemCount}",
                               style: new TextStyle(fontSize: 20.0),
                             )),
                         constraints: new BoxConstraints.expand(height: 50.0),
@@ -320,7 +246,7 @@ class ExampleCustomPagination extends StatelessWidget {
                         child: new Row(
                           children: <Widget>[
                             new Text(
-                              "${titles[config.activeIndex]} ${config.activeIndex+1}/${config.itemCount}",
+                              "${titles[config.activeIndex]} ${config.activeIndex + 1}/${config.itemCount}",
                               style: TextStyle(fontSize: 20.0),
                             ),
                             new Expanded(

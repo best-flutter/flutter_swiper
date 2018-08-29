@@ -7,14 +7,24 @@ import 'src/ExampleSwiperInScrollView.dart';
 
 void main() => runApp(new MyApp());
 
-class MyApp extends StatelessWidget {
-  Widget buildHome() {
+class MyHome extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return new _MyHomeState();
+  }
+}
+
+class _MyHomeState extends State<MyHome> {
+  @override
+  Widget build(BuildContext context) {
     List<Color> colors = [
       Colors.green,
       Colors.blueAccent,
       Colors.yellowAccent,
       Colors.red
     ];
+
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return new Scaffold(
       appBar: new AppBar(
@@ -27,13 +37,11 @@ class MyApp extends StatelessWidget {
             new SizedBox(
               height: 300.0,
               child: Swiper(
-                  itemWidth: 300.0,
-                  loop: true,
-                  itemHeight: 200.0,
-                  transformItemBuilder: (Widget child, double position) {
-                    double pageWidth = 375.0;
+                  reverseRendering: true,
+                  transformItemBuilder:
+                      (Widget child, int index, double position) {
                     print(position);
-                    if(position <= 0){
+                    if (position <= 0) {
                       return new Opacity(
                         opacity: 1.0,
                         child: new Transform.translate(
@@ -44,16 +52,16 @@ class MyApp extends StatelessWidget {
                           ),
                         ),
                       );
-                    }else if (position <= 1) {
+                    } else if (position <= 1) {
                       const double MIN_SCALE = 0.75;
                       // Scale the page down (between MIN_SCALE and 1)
                       double scaleFactor =
                           MIN_SCALE + (1 - MIN_SCALE) * (1 - position);
 
                       return new Opacity(
-                        opacity: 1.0 - position ,
+                        opacity: 1.0 - position,
                         child: new Transform.translate(
-                          offset: new Offset(pageWidth * -position, 0.0),
+                          offset: new Offset(screenWidth * -position, 0.0),
                           child: new Transform.scale(
                             scale: scaleFactor,
                             child: child,
@@ -79,18 +87,18 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
 
+class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      //home: new MyHomePage(title: 'Flutter Swiper'),
-      home: buildHome(),
-
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        //home: new MyHomePage(title: 'Flutter Swiper'),
+        home: new MyHome());
   }
 }
