@@ -343,7 +343,7 @@ abstract class _SwiperTimerMixin extends State<Swiper> {
   void dispose() {
     if (_controller != null) {
       _controller.removeListener(_onController);
-      _controller.dispose();
+    //  _controller.dispose();
     }
 
     _stopAutoplay();

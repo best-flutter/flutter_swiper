@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-import 'package:percent_indicator/circular_percent_indicator.dart';
-
 class ExampleSwiperInScrollView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -49,25 +47,6 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
               Container(
                 padding: const EdgeInsets.all(10.0),
               ),
-              new CircularPercentIndicator(
-                fillColor: Colors.white,
-                radius: 100.0,
-                lineWidth: 10.0,
-                animation: true,
-                percent: 0.0,
-                center: new Text(
-                  "0.0%",
-                  style: new TextStyle(
-                      fontWeight: FontWeight.normal, fontSize: 20.0),
-                ),
-                footer: new Text(
-                  "Batterie",
-                  style: new TextStyle(
-                      fontWeight: FontWeight.normal, fontSize: 17.0),
-                ),
-                circularStrokeCap: CircularStrokeCap.round,
-                progressColor: Colors.lightBlue,
-              ),
             ],
           ),
           new Column(
@@ -83,26 +62,6 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                         new ScaleTransition(
                           scale: _animation10,
                           alignment: FractionalOffset.center,
-                          child: new CircularPercentIndicator(
-                            fillColor: Colors.white,
-                            radius: 70.0,
-                            lineWidth: 5.0,
-                            animation: false,
-                            percent: 1.0,
-                            center: new Icon(
-                              Icons.hearing,
-                              size: 30.0,
-                              color: Colors.grey.shade400,
-                            ),
-                            footer: new Text(
-                              "     Ecoute\n silencieuse",
-                              style: new TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 15.0),
-                            ),
-                            circularStrokeCap: CircularStrokeCap.round,
-                            progressColor: Colors.grey.shade400,
-                          ),
                         ),
                       ],
                     ),
@@ -114,26 +73,6 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                         new ScaleTransition(
                           scale: _animation11,
                           alignment: FractionalOffset.center,
-                          child: new CircularPercentIndicator(
-                            fillColor: Colors.white,
-                            radius: 70.0,
-                            lineWidth: 5.0,
-                            animation: false,
-                            percent: 1.0,
-                            center: new Icon(
-                              Icons.battery_alert,
-                              size: 30.0,
-                              color: Colors.grey.shade400,
-                            ),
-                            footer: new Text(
-                              "Batterie \n  faible",
-                              style: new TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 15.0),
-                            ),
-                            circularStrokeCap: CircularStrokeCap.round,
-                            progressColor: Colors.grey.shade400,
-                          ),
                         ),
                       ],
                     ),
@@ -148,26 +87,6 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                         new ScaleTransition(
                           scale: _animation12,
                           alignment: FractionalOffset.center,
-                          child: new CircularPercentIndicator(
-                            fillColor: Colors.white,
-                            radius: 70.0,
-                            lineWidth: 5.0,
-                            animation: false,
-                            percent: 1.0,
-                            center: new Icon(
-                              Icons.notifications_off,
-                              size: 30.0,
-                              color: Colors.grey.shade400,
-                            ),
-                            footer: new Text(
-                              "Décrochage \n       auto",
-                              style: new TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 15.0),
-                            ),
-                            circularStrokeCap: CircularStrokeCap.round,
-                            progressColor: Colors.grey.shade400,
-                          ),
                         ),
                       ],
                     ),
@@ -179,26 +98,6 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                         new ScaleTransition(
                           scale: _animation13,
                           alignment: FractionalOffset.center,
-                          child: new CircularPercentIndicator(
-                            fillColor: Colors.white,
-                            radius: 70.0,
-                            lineWidth: 5.0,
-                            animation: false,
-                            percent: 1.0,
-                            center: new Icon(
-                              Icons.trending_down,
-                              size: 30.0,
-                              color: Colors.green.shade400,
-                            ),
-                            footer: new Text(
-                              "Détection \n de chute",
-                              style: new TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 15.0),
-                            ),
-                            circularStrokeCap: CircularStrokeCap.round,
-                            progressColor: Colors.green.shade400,
-                          ),
                         ),
                       ],
                     ),
