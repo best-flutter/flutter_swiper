@@ -61,3 +61,6 @@
 
 ## [1.0.6] - [2018/08/28]
     * Implement vertical scroll direction for `TINDER` and `STACK` layout, see #9
+
+## [1.0.7] - [2018/09/02]
+    * Don't call SwiperController's dispose when `Swiper` dispose.

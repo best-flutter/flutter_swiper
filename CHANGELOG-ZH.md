@@ -55,3 +55,6 @@
     
 ## [1.0.6] - [2018/08/28]
     * `TINDER` 和 `STACK` 这两种布局方式实现垂直滚动, #9
+
+## [1.0.7] - [2018/09/02]
+    * 在Swiper dispose的时候不调用Controller的dispose.
