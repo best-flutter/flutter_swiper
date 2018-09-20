@@ -29,7 +29,7 @@ The best swiper for flutter , with multiple layouts, infinite loop. Compatible w
 
 # :sparkles::sparkles: New Features:PageTransformer
 
-Finally, we have `PageTransformer` like android, just set `transformItemBuilder` to `Swiper`,
+Finally, we have `PageTransformer` like android, just set a `transformer` to `Swiper`,
 it returns a widget that has been transformed. For now, only support for layout `DEFAULT`.
 Thanks to @FlutterRocks ,you've done great job 👏.
 
