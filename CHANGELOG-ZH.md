@@ -1,3 +1,11 @@
+## [1.1.1] - [2018/09/20]
+    * 修复自动集成测试错误
+
+## [1.1.0] - [2018/09/20]
+    * 修复index的bug ,见 #11
+    * 增加 `autoplayDisableOnInteraction` 选项, 如果设置为true，那么在用户滑动的时候停止自动播放，滑动之后重新自动播放
+
+
 ## [1.0.7] - [2018/09/02]
     * 在Swiper dispose的时候不调用Controller的dispose.
 

@@ -118,11 +118,11 @@ void main() {
 
     controller.stopAutoplay();
 
-    controller.move(0, animation: true);
-    controller.move(0, animation: false);
+    await controller.move(0, animation: false);
+    await controller.move(0, animation: false);
 
-    controller.next(animation: false);
-    controller.previous(animation: true);
+    await controller.next(animation: false);
+    await controller.previous(animation: false);
 
     expect(find.text("0", skipOffstage: false), findsOneWidget);
   });

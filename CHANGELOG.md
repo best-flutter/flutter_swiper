@@ -1,3 +1,10 @@
+## [1.1.1] - [2018/09/20]
+    * Fix `test` failure.
+
+## [1.1.0] - [2018/09/20]
+    * Fix index bug ,See #11
+    * Enable `autoplayDisableOnInteraction` property, if set `true`,disable autoplay when user swipes.
+
 ## [1.0.7] - [2018/09/02]
     * Don't call SwiperController's dispose when `Swiper` dispose.
 
