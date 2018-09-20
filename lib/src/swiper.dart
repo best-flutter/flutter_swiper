@@ -3,12 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'dart:async';
 
+import 'package:transformer_page_view/transformer_page_view.dart';
+
 part 'custom_layout.dart';
-part 'page_view.dart';
 
 typedef void SwiperOnTap(int index);
-
-typedef Widget TransformItemBuilder(Widget child, int index, double position);
 
 typedef Widget SwiperDataBuilder(BuildContext context, dynamic data, int index);
 
@@ -43,7 +42,7 @@ class Swiper extends StatefulWidget {
 
   /// Support transform like Android PageView did
   /// `itemBuilder` and `transformItemBuilder` must have one not null
-  final TransformItemBuilder transformItemBuilder;
+  final PageTransformer transformer;
 
   /// count of the display items
   final int itemCount;
@@ -118,7 +117,7 @@ class Swiper extends StatefulWidget {
     this.itemBuilder,
 
     ///
-    this.transformItemBuilder,
+    this.transformer,
     @required this.itemCount,
     this.autoplay: false,
     this.layout,
@@ -148,16 +147,16 @@ class Swiper extends StatefulWidget {
     this.itemHeight,
     this.itemWidth,
     this.outer: false,
-    this.scale: 1.0,
-    this.fade: 1.0,
-  })  : assert(itemBuilder != null || transformItemBuilder != null,
+    this.scale,
+    this.fade,
+  })  : assert(itemBuilder != null || transformer != null,
             "itemBuilder and transformItemBuilder must not be both null"),
         super(key: key);
 
   factory Swiper.children({
     List<Widget> children,
     bool autoplay: false,
-    TransformItemBuilder transformItemBuilder,
+    PageTransformer transformer,
     int autoplayDelay: kDefaultAutoplayDelayMs,
     bool reverse: false,
     bool autoplayDisableOnInteraction: true,
@@ -186,7 +185,7 @@ class Swiper extends StatefulWidget {
     assert(children != null, "children must not be null");
 
     return new Swiper(
-        transformItemBuilder: transformItemBuilder,
+        transformer: transformer,
         customLayoutOption: customLayoutOption,
         containerHeight: containerHeight,
         containerWidth: containerWidth,
@@ -219,7 +218,7 @@ class Swiper extends StatefulWidget {
   }
 
   factory Swiper.list({
-    TransformItemBuilder transformItemBuilder,
+    PageTransformer transformer,
     List list,
     CustomLayoutOption customLayoutOption,
     SwiperDataBuilder builder,
@@ -249,7 +248,7 @@ class Swiper extends StatefulWidget {
     double scale: 1.0,
   }) {
     return new Swiper(
-        transformItemBuilder: transformItemBuilder,
+        transformer: transformer,
         customLayoutOption: customLayoutOption,
         containerHeight: containerHeight,
         containerWidth: containerWidth,
@@ -305,23 +304,19 @@ abstract class _SwiperTimerMixin extends State<Swiper> {
 
   void _onController() {
     switch (_controller.event) {
-      case SwiperControllerEvent.START_AUTOPLAY:
+      case SwiperController.START_AUTOPLAY:
         {
           if (_timer == null) {
             _startAutoplay();
           }
         }
         break;
-      case SwiperControllerEvent.STOP_AUTOPLAY:
+      case SwiperController.STOP_AUTOPLAY:
         {
           if (_timer != null) {
             _stopAutoplay();
           }
         }
-        break;
-      case SwiperControllerEvent.MOVE_INDEX:
-      case SwiperControllerEvent.PREV_INDEX:
-      case SwiperControllerEvent.NEXT_INDEX:
         break;
     }
   }
@@ -343,20 +338,21 @@ abstract class _SwiperTimerMixin extends State<Swiper> {
   void dispose() {
     if (_controller != null) {
       _controller.removeListener(_onController);
-    //  _controller.dispose();
+      //  _controller.dispose();
     }
 
     _stopAutoplay();
     super.dispose();
   }
 
-  bool _isAutoplay() {
+  bool _autoplayEnabled() {
     return _controller.autoplay ?? widget.autoplay;
   }
 
   void _handleAutoplay() {
+    if (_autoplayEnabled() && _timer != null) return;
     _stopAutoplay();
-    if (_isAutoplay()) {
+    if (_autoplayEnabled()) {
       _startAutoplay();
     }
   }
@@ -444,46 +440,45 @@ class _SwiperState extends _SwiperTimerMixin {
         scrollDirection: widget.scrollDirection,
       );
     } else if (widget.layout == null || widget.layout == SwiperLayout.DEFAULT) {
-      if (widget.loop) {
-        return new _PageViewSwiper(
-          transformItemBuilder: widget.transformItemBuilder,
-          loop: widget.loop,
-          containerWidth: widget.containerWidth,
-          containerHeight: widget.containerHeight,
-          viewportFraction: widget.viewportFraction,
-          fade: widget.fade,
-          scale: widget.scale,
-          itemCount: widget.itemCount,
-          itemBuilder: itemBuilder,
-          index: _activeIndex,
-          curve: widget.curve,
-          duration: widget.duration,
-          scrollDirection: widget.scrollDirection,
-          onIndexChanged: _onIndexChanged,
-          controller: _controller,
-          reverseRendering: widget.reverseRendering,
-          physics: widget.physics,
-        );
-      } else {
-        return new _NoneLoopPageViewSwiper(
-          transformItemBuilder: widget.transformItemBuilder,
-          containerWidth: widget.containerWidth,
-          containerHeight: widget.containerHeight,
-          viewportFraction: widget.viewportFraction,
-          scale: widget.scale,
-          fade: widget.fade,
-          itemCount: widget.itemCount,
-          itemBuilder: itemBuilder,
-          index: _activeIndex,
-          curve: widget.curve,
-          duration: widget.duration,
-          scrollDirection: widget.scrollDirection,
-          onIndexChanged: _onIndexChanged,
-          controller: _controller,
-          reverseRendering: widget.reverseRendering,
-          physics: widget.physics,
+      PageTransformer transformer = widget.transformer;
+      if (widget.scale != null || widget.fade != null) {
+        transformer =
+            new ScaleAndFadeTransformer(scale: widget.scale, fade: widget.fade);
+      }
+
+      Widget child = new TransformerPageView(
+        loop: widget.loop,
+        itemCount: widget.itemCount,
+        itemBuilder: widget.itemBuilder,
+        transformer: transformer,
+        viewportFraction: widget.viewportFraction,
+        index: _activeIndex,
+        duration: new Duration(milliseconds: widget.duration),
+        scrollDirection: widget.scrollDirection,
+        onPageChanged: _onIndexChanged,
+        curve: widget.curve,
+        physics: widget.physics,
+        controller: _controller,
+      );
+      if (widget.autoplayDisableOnInteraction && widget.autoplay) {
+        return new NotificationListener(
+          child: child,
+          onNotification: (ScrollNotification notification) {
+            if (notification is ScrollStartNotification) {
+              if (notification.dragDetails != null) {
+                //by human
+                if (_timer != null) _stopAutoplay();
+              }
+            } else if (notification is ScrollEndNotification) {
+              if (_timer == null) _stopAutoplay();
+            }
+
+            return false;
+          },
         );
       }
+
+      return child;
     } else if (widget.layout == SwiperLayout.TINDER) {
       return new _TinderSwiper(
         loop: widget.loop,
@@ -878,5 +873,40 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
         ),
       ),
     );
+  }
+}
+
+class ScaleAndFadeTransformer extends PageTransformer {
+  final double _scale;
+  final double _fade;
+
+  ScaleAndFadeTransformer({double fade: 0.3, double scale: 0.8})
+      : _fade = fade,
+        _scale = scale;
+
+  @override
+  Widget transform(Widget item, TransformInfo info) {
+    double position = info.position;
+    Widget child = item;
+    if (_scale != null) {
+      double scaleFactor = (1 - position.abs()) * (1 - _scale);
+      double scale = _scale + scaleFactor;
+
+      child = new Transform.scale(
+        scale: scale,
+        child: item,
+      );
+    }
+
+    if (_fade != null) {
+      double fadeFactor = (1 - position.abs()) * (1 - _fade);
+      double opacity = _fade + fadeFactor;
+      child = new Opacity(
+        opacity: opacity,
+        child: child,
+      );
+    }
+
+    return child;
   }
 }

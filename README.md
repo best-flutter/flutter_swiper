@@ -33,10 +33,7 @@ Finally, we have `PageTransformer` like android, just set `transformItemBuilder`
 it returns a widget that has been transformed. For now, only support for layout `DEFAULT`.
 Thanks to @FlutterRocks ,you've done great job 👏.
 
-![](https://github.com/jzoom/images/raw/master/transform1.gif)
-
->See the code [here](https://github.com/best-flutter/flutter_swiper/blob/master/example/lib/swiper_tranform_depeth.dart).
-
+We are now using this project [transformer_page_view](https://github.com/best-flutter/transformer_page_view).
 
 
 # :sparkles::sparkles: New Features:Layout
@@ -247,8 +244,7 @@ The `Controller` is used to control the `index` of the Swiper, start or stop aut
 | Parameter  | Default   | Description |
 | :------------ |:---------------:| :-----|
 | autoplayDelay | 3000  | Autoplay delay milliseconds. |
-| autoplayDiableOnInteraction | true | Disable autoplay when user drag. |
-
+| autoplayDisableOnInteraction | true | If set true, `autoplay` is disabled when use swipes. |
 
 ## Build in layouts
 ![](https://github.com/jzoom/images/raw/master/layout1.gif)

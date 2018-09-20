@@ -29,8 +29,12 @@ class _InnerSwiperState extends State<InnerSwiper> {
   @override
   void initState() {
     controller = new SwiperController();
-    autoplayes = new List()..length=10..fillRange(0, 10,false);
-    controllers = new List()..length=10..fillRange(0, 10,new SwiperController());
+    autoplayes = new List()
+      ..length = 10
+      ..fillRange(0, 10, false);
+    controllers = new List()
+      ..length = 10
+      ..fillRange(0, 10, new SwiperController());
     super.initState();
   }
 
@@ -47,7 +51,7 @@ class _InnerSwiperState extends State<InnerSwiper> {
             children: <Widget>[
               new SizedBox(
                 child: new Swiper(
-                  controller:controllers[index],
+                  controller: controllers[index],
                   pagination: new SwiperPagination(),
                   itemCount: 4,
                   itemBuilder: (BuildContext context, int index) {
@@ -56,30 +60,27 @@ class _InnerSwiperState extends State<InnerSwiper> {
                       child: new Text("jkfjkldsfjd"),
                     );
                   },
-
                   autoplay: autoplayes[index],
-
                 ),
                 height: 300.0,
               ),
-              new RaisedButton(onPressed: (){
-
-                setState(() {
-                  autoplayes[index] = true;
-                });
-
-              },child: new Text("Start autoplay"),),
-
-              new RaisedButton(onPressed: (){
-
-
-                setState(() {
-                  autoplayes[index] = false;
-                });
-              },child: new Text("End autoplay"),),
-              
+              new RaisedButton(
+                onPressed: () {
+                  setState(() {
+                    autoplayes[index] = true;
+                  });
+                },
+                child: new Text("Start autoplay"),
+              ),
+              new RaisedButton(
+                onPressed: () {
+                  setState(() {
+                    autoplayes[index] = false;
+                  });
+                },
+                child: new Text("End autoplay"),
+              ),
               new Text("is autoplay: ${autoplayes[index]}")
-
             ],
           );
         },

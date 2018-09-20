@@ -171,21 +171,21 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
 
   void _onController() {
     switch (widget.controller.event) {
-      case SwiperControllerEvent.PREV_INDEX:
+      case IndexController.PREVIOUS:
         int prevIndex = _prevIndex();
         if (prevIndex == _currentIndex) return;
         _move(1.0, nextIndex: prevIndex);
         break;
-      case SwiperControllerEvent.NEXT_INDEX:
+      case IndexController.NEXT:
         int nextIndex = _nextIndex();
         if (nextIndex == _currentIndex) return;
         _move(0.0, nextIndex: nextIndex);
         break;
-      case SwiperControllerEvent.MOVE_INDEX:
+      case IndexController.MOVE:
         throw new Exception(
             "Custom layout does not support SwiperControllerEvent.MOVE_INDEX yet!");
-      case SwiperControllerEvent.STOP_AUTOPLAY:
-      case SwiperControllerEvent.START_AUTOPLAY:
+      case SwiperController.STOP_AUTOPLAY:
+      case SwiperController.START_AUTOPLAY:
         break;
     }
   }

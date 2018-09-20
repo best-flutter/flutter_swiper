@@ -163,6 +163,17 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                       pagination: SwiperPagination(),
                       itemCount: 10),
                 ),
+                new Text("Image from network"),
+                new SizedBox(
+                  height: 300.0,
+                  child: new Swiper(
+                    itemCount: 10,
+                    itemBuilder: (BuildContext context, int index) {
+                      return new Image.network(
+                          "https://ss3.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=87d6daed02f41bd5c553eef461d881a0/f9198618367adab4b025268587d4b31c8601e47b.jpg");
+                    },
+                  ),
+                ),
                 new SizedBox(
                   height: 100.0,
                   child: new Swiper(
@@ -229,83 +240,6 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                       pagination:
                           new SwiperPagination(alignment: Alignment.topCenter),
                       itemCount: 10),
-                ),
-                new SizedBox(
-                  height: 100.0,
-                  child: new Swiper(
-                      outer: true,
-                      itemBuilder: (c, i) {
-                        return Container(
-                          color: Colors.grey,
-                          child: Text("$i"),
-                        );
-                      },
-                      pagination:
-                          new SwiperPagination(alignment: Alignment.topCenter),
-                      itemCount: 10),
-                ),
-                new Swiper(
-                  containerHeight: 100.0,
-                  outer: true,
-                  itemBuilder: (c, i) {
-                    return Container(
-                      color: Colors.grey,
-                      child: Text("$i"),
-                    );
-                  },
-                  pagination: new SwiperPagination(),
-                  itemCount: 10,
-                ),
-                new ConstrainedBox(
-                    child: new Swiper(
-                      outer: false,
-                      itemBuilder: (c, i) {
-                        return new Wrap(
-                          runSpacing: 6.0,
-                          children: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) {
-                            return new SizedBox(
-                              width: MediaQuery.of(context).size.width / 5,
-                              child: new Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  new SizedBox(
-                                    child: new Container(
-                                      child: new Image.network(
-                                          "https://fuss10.elemecdn.com/c/db/d20d49e5029281b9b73db1c5ec6f9jpeg.jpeg%3FimageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90"),
-                                    ),
-                                    height: MediaQuery.of(context).size.width *
-                                        0.12,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.12,
-                                  ),
-                                  new Padding(
-                                    padding: new EdgeInsets.only(top: 6.0),
-                                    child: new Text("$i"),
-                                  )
-                                ],
-                              ),
-                            );
-                          }).toList(),
-                        );
-                      },
-                      pagination:
-                          new SwiperPagination(margin: new EdgeInsets.all(5.0)),
-                      itemCount: 10,
-                    ),
-                    constraints:
-                        new BoxConstraints.loose(new Size(screenWidth, 170.0))),
-                new SizedBox(
-                  height: 100.0,
-                  child: new Swiper(
-                    itemBuilder: (c, i) {
-                      return Container(
-                        color: Colors.grey,
-                        child: Text("$i"),
-                      );
-                    },
-                    pagination: new SwiperPagination(),
-                    itemCount: 10,
-                  ),
                 ),
               ],
             );

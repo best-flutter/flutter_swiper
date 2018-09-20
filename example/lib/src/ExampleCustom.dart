@@ -11,8 +11,7 @@ class ExampleCustom extends StatefulWidget {
 }
 
 class _ExampleCustomState extends State<ExampleCustom> {
-  //properties whant to custom
-
+  //properties want to custom
   int _itemCount;
 
   bool _loop;
@@ -40,6 +39,8 @@ class _ExampleCustomState extends State<ExampleCustom> {
   Curve _curve;
 
   double _fade;
+
+  bool _autoplayDisableOnInteraction;
 
   CustomLayoutOption customLayoutOption;
 
@@ -87,13 +88,13 @@ class _ExampleCustomState extends State<ExampleCustom> {
     _viewportFraction = 0.8;
     _outer = false;
     _scrollDirection = Axis.horizontal;
+    _autoplayDisableOnInteraction = false;
     super.initState();
   }
 
 // maintain the index
 
   Widget buildSwiper() {
-    Navigator;
     return new Swiper(
       onTap: (int index) {
 //        Navigator
@@ -129,12 +130,13 @@ class _ExampleCustomState extends State<ExampleCustom> {
       itemBuilder: _buildItem,
       itemCount: _itemCount,
       scrollDirection: _scrollDirection,
+      autoplayDisableOnInteraction: _autoplayDisableOnInteraction,
       pagination: new SwiperPagination(),
     );
   }
 
   SwiperController _controller;
-
+  TextEditingController numberController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return new Column(children: <Widget>[
@@ -146,6 +148,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
       new Expanded(
           child: new ListView(
         children: <Widget>[
+          new Text("Index:$_currentIndex"),
           new Row(
             children: <Widget>[
               new RaisedButton(
@@ -160,7 +163,19 @@ class _ExampleCustomState extends State<ExampleCustom> {
                 },
                 child: new Text("Next"),
               ),
-              new Text("Index:$_currentIndex")
+              new Expanded(
+                  child: new TextField(
+                controller: numberController,
+              )),
+              new RaisedButton(
+                onPressed: () {
+                  var text = numberController.text;
+                  setState(() {
+                    _currentIndex = int.parse(text);
+                  });
+                },
+                child: new Text("Update"),
+              ),
             ],
           ),
           new FormWidget(
@@ -184,6 +199,13 @@ class _ExampleCustomState extends State<ExampleCustom> {
                 value: _scrollDirection == Axis.horizontal,
                 onChanged: (bool value) => setState(() => _scrollDirection =
                     value ? Axis.horizontal : Axis.vertical)),
+          ),
+          new FormWidget(
+            label: "autoplayDisableOnInteractio",
+            child: new Switch(
+                value: _autoplayDisableOnInteraction,
+                onChanged: (bool value) =>
+                    setState(() => _autoplayDisableOnInteraction = value)),
           ),
           //Pannel Begin
           new FormWidget(
