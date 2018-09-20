@@ -2,10 +2,10 @@
 
 <p align="center">
     <a href="https://travis-ci.org/jzoom/flutter_swiper">
-        <img src="https://travis-ci.org/jzoom/flutter_swiper.svg?branch=master" alt="Build Status" />
+        <img src="https://travis-ci.org/best-flutter/flutter_swiper.svg?branch=master" alt="Build Status" />
     </a>
     <a href="https://coveralls.io/github/jzoom/flutter_swiper?branch=master">
-        <img src="https://coveralls.io/repos/github/jzoom/flutter_swiper/badge.svg?branch=master" alt="Coverage Status" />
+        <img src="https://coveralls.io/repos/github/best-flutter/flutter_swiper/badge.svg?branch=master" alt="Coverage Status" />
     </a>
     <a href="https://github.com/jzoom/flutter_swiper/pulls">
         <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg" alt="PRs Welcome" />
