@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
+import 'package:flutter_page_indicator/flutter_page_indicator.dart';
+
 class FractionPaginationBuilder extends SwiperPlugin {
   ///color ,if set null , will be Theme.of(context).scaffoldBackgroundColor
   final Color color;
@@ -168,20 +170,36 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
 
   @override
   Widget build(BuildContext context, SwiperPluginConfig config) {
-    List<Widget> list = [];
-
     if (config.itemCount > 20) {
       print(
           "The itemCount is too big, we suggest use FractionPaginationBuilder instead of DotSwiperPaginationBuilder in this sitituation");
     }
+    Color activeColor = this.activeColor;
+    Color color = this.color;
+
+    if (activeColor == null || color == null) {
+      ThemeData themeData = Theme.of(context);
+      activeColor = this.activeColor ?? themeData.primaryColor;
+      color = this.color ?? themeData.scaffoldBackgroundColor;
+    }
+
+    if (config.indicatorLayout != PageIndicatorLayout.NONE &&
+        config.layout == SwiperLayout.DEFAULT) {
+      return new PageIndicator(
+        count: config.itemCount,
+        controller: config.pageController,
+        layout: config.indicatorLayout,
+        size: size,
+        activeColor: activeColor,
+        color: color,
+        space: space,
+      );
+    }
+
+    List<Widget> list = [];
 
     int itemCount = config.itemCount;
     int activeIndex = config.activeIndex;
-
-    ThemeData themeData = Theme.of(context);
-
-    Color activeColor = this.activeColor ?? themeData.primaryColor;
-    Color color = this.color ?? themeData.scaffoldBackgroundColor;
 
     for (int i = 0; i < itemCount; ++i) {
       bool active = i == activeIndex;

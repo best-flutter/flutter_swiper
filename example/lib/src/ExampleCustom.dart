@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'config.dart';
 import 'forms/form_widget.dart';
@@ -97,16 +98,15 @@ class _ExampleCustomState extends State<ExampleCustom> {
   Widget buildSwiper() {
     return new Swiper(
       onTap: (int index) {
-//        Navigator
-//            .of(context)
-//            .push(new MaterialPageRoute(builder: (BuildContext context) {
-//          return Scaffold(
-//            appBar: AppBar(
-//              title: Text("New page"),
-//            ),
-//            body: Container(),
-//          );
-//        }));
+        Navigator.of(context)
+            .push(new MaterialPageRoute(builder: (BuildContext context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("New page"),
+            ),
+            body: Container(),
+          );
+        }));
       },
       customLayoutOption: customLayoutOption,
       fade: _fade,
@@ -130,8 +130,11 @@ class _ExampleCustomState extends State<ExampleCustom> {
       itemBuilder: _buildItem,
       itemCount: _itemCount,
       scrollDirection: _scrollDirection,
+      indicatorLayout: PageIndicatorLayout.COLOR,
       autoplayDisableOnInteraction: _autoplayDisableOnInteraction,
-      pagination: new SwiperPagination(),
+      pagination: new SwiperPagination(
+          builder: const DotSwiperPaginationBuilder(
+              size: 20.0, activeSize: 20.0, space: 10.0)),
     );
   }
 

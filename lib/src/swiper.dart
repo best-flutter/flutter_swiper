@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'dart:async';
 
@@ -58,9 +59,6 @@ class Swiper extends StatefulWidget {
   ///disable auto play when interaction
   final bool autoplayDisableOnInteraction;
 
-  ///reverse direction
-  final bool reverse;
-
   ///auto play transition duration (in millisecond)
   final int duration;
 
@@ -110,20 +108,18 @@ class Swiper extends StatefulWidget {
   // This value is valid when viewportFraction is set and < 1.0
   final double fade;
 
-  /// if true ,
-  final bool reverseRendering;
+  final PageIndicatorLayout indicatorLayout;
 
   Swiper({
     this.itemBuilder,
+    this.indicatorLayout: PageIndicatorLayout.NONE,
 
     ///
     this.transformer,
     @required this.itemCount,
     this.autoplay: false,
-    this.layout,
+    this.layout: SwiperLayout.DEFAULT,
     this.autoplayDelay: kDefaultAutoplayDelayMs,
-    this.reverse: false,
-    this.reverseRendering: false,
     this.autoplayDisableOnInteraction: true,
     this.duration: kDefaultAutoplayTransactionDuration,
     this.onIndexChanged,
@@ -151,6 +147,15 @@ class Swiper extends StatefulWidget {
     this.fade,
   })  : assert(itemBuilder != null || transformer != null,
             "itemBuilder and transformItemBuilder must not be both null"),
+        assert(
+            !loop ||
+                ((loop &&
+                        layout == SwiperLayout.DEFAULT &&
+                        (indicatorLayout == PageIndicatorLayout.SCALE ||
+                            indicatorLayout == PageIndicatorLayout.COLOR ||
+                            indicatorLayout == PageIndicatorLayout.NONE)) ||
+                    (loop && layout != SwiperLayout.DEFAULT)),
+            "Only support `PageIndicatorLayout.SCALE` and `PageIndicatorLayout.COLOR`when layout==SwiperLayout.DEFAULT in loop mode"),
         super(key: key);
 
   factory Swiper.children({
@@ -197,7 +202,6 @@ class Swiper extends StatefulWidget {
         autoplay: autoplay,
         autoplayDelay: autoplayDelay,
         autoplayDisableOnInteraction: autoplayDisableOnInteraction,
-        reverse: reverse,
         duration: duration,
         onIndexChanged: onIndexChanged,
         index: index,
@@ -260,7 +264,6 @@ class Swiper extends StatefulWidget {
         autoplay: autoplay,
         autoplayDelay: autoplayDelay,
         autoplayDisableOnInteraction: autoplayDisableOnInteraction,
-        reverse: reverse,
         duration: duration,
         onIndexChanged: onIndexChanged,
         index: index,
@@ -378,6 +381,8 @@ abstract class _SwiperTimerMixin extends State<Swiper> {
 class _SwiperState extends _SwiperTimerMixin {
   int _activeIndex;
 
+  TransformerPageController _pageController;
+
   Widget _wrapTap(BuildContext context, int index) {
     return new GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -391,8 +396,20 @@ class _SwiperState extends _SwiperTimerMixin {
   @override
   void initState() {
     _activeIndex = widget.index ?? 0;
-
+    if (_isPageViewLayout()) {
+      _pageController = new TransformerPageController(
+          initialPage: widget.index,
+          loop: widget.loop,
+          itemCount: widget.itemCount,
+          reverse:
+              widget.transformer == null ? false : widget.transformer.reverse,
+          viewportFraction: widget.viewportFraction);
+    }
     super.initState();
+  }
+
+  bool _isPageViewLayout() {
+    return widget.layout == null || widget.layout == SwiperLayout.DEFAULT;
   }
 
   @override
@@ -400,12 +417,38 @@ class _SwiperState extends _SwiperTimerMixin {
     super.didChangeDependencies();
   }
 
+  bool _getReverse(Swiper widget) =>
+      widget.transformer == null ? false : widget.transformer.reverse;
+
   @override
   void didUpdateWidget(Swiper oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_isPageViewLayout()) {
+      if (_pageController == null ||
+          (widget.index != oldWidget.index ||
+              widget.loop != oldWidget.loop ||
+              widget.itemCount != oldWidget.itemCount ||
+              widget.viewportFraction != oldWidget.viewportFraction ||
+              _getReverse(widget) != _getReverse(oldWidget))) {
+        _pageController = new TransformerPageController(
+            initialPage: widget.index,
+            loop: widget.loop,
+            itemCount: widget.itemCount,
+            reverse: _getReverse(widget),
+            viewportFraction: widget.viewportFraction);
+      }
+    } else {
+      scheduleMicrotask(() {
+        // So that we have a chance to do `removeListener` in child widgets.
+        if (_pageController != null) {
+          _pageController.dispose();
+          _pageController = null;
+        }
+      });
+    }
     if (widget.index != null && widget.index != _activeIndex) {
       _activeIndex = widget.index;
     }
-    super.didUpdateWidget(oldWidget);
   }
 
   void _onIndexChanged(int index) {
@@ -439,7 +482,7 @@ class _SwiperState extends _SwiperTimerMixin {
         controller: _controller,
         scrollDirection: widget.scrollDirection,
       );
-    } else if (widget.layout == null || widget.layout == SwiperLayout.DEFAULT) {
+    } else if (_isPageViewLayout()) {
       PageTransformer transformer = widget.transformer;
       if (widget.scale != null || widget.fade != null) {
         transformer =
@@ -447,9 +490,10 @@ class _SwiperState extends _SwiperTimerMixin {
       }
 
       Widget child = new TransformerPageView(
+        pageController: _pageController,
         loop: widget.loop,
         itemCount: widget.itemCount,
-        itemBuilder: widget.itemBuilder,
+        itemBuilder: itemBuilder,
         transformer: transformer,
         viewportFraction: widget.viewportFraction,
         index: _activeIndex,
@@ -470,7 +514,7 @@ class _SwiperState extends _SwiperTimerMixin {
                 if (_timer != null) _stopAutoplay();
               }
             } else if (notification is ScrollEndNotification) {
-              if (_timer == null) _stopAutoplay();
+              if (_timer == null) _startAutoplay();
             }
 
             return false;
@@ -518,6 +562,9 @@ class _SwiperState extends _SwiperTimerMixin {
       config = new SwiperPluginConfig(
           outer: widget.outer,
           itemCount: widget.itemCount,
+          layout: widget.layout,
+          indicatorLayout: widget.indicatorLayout,
+          pageController: _pageController,
           activeIndex: _activeIndex,
           scrollDirection: widget.scrollDirection,
           controller: _controller,

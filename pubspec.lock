@@ -69,6 +69,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_page_indicator:
+    dependency: "direct main"
+    description:
+      name: flutter_page_indicator
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -330,7 +337,7 @@ packages:
       name: transformer_page_view
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.9"
+    version: "0.1.1"
   typed_data:
     dependency: transitive
     description:

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'src/ExampleCustom.dart';
 import 'src/config.dart';
 import 'src/ExampleSwiperInScrollView.dart';
+
+import 'package:flutter/cupertino.dart';
 
 void main() => runApp(new MyApp());
 
@@ -114,9 +117,9 @@ class ExampleHorizontal extends StatelessWidget {
               fit: BoxFit.fill,
             );
           },
+          indicatorLayout: PageIndicatorLayout.COLOR,
           autoplay: true,
           itemCount: images.length,
-          reverse: false,
           pagination: new SwiperPagination(),
           control: new SwiperControl(),
         ));
@@ -139,7 +142,6 @@ class ExampleVertical extends StatelessWidget {
           },
           autoplay: true,
           itemCount: images.length,
-          reverse: false,
           scrollDirection: Axis.vertical,
           pagination: new SwiperPagination(alignment: Alignment.centerRight),
           control: new SwiperControl(),
@@ -166,7 +168,6 @@ class ExampleFraction extends StatelessWidget {
               },
               autoplay: true,
               itemCount: images.length,
-              reverse: false,
               pagination:
                   new SwiperPagination(builder: SwiperPagination.fraction),
               control: new SwiperControl(),
@@ -181,7 +182,6 @@ class ExampleFraction extends StatelessWidget {
               },
               autoplay: true,
               itemCount: images.length,
-              reverse: false,
               scrollDirection: Axis.vertical,
               pagination: new SwiperPagination(
                   alignment: Alignment.centerRight,
@@ -211,7 +211,6 @@ class ExampleCustomPagination extends StatelessWidget {
                 },
                 autoplay: true,
                 itemCount: images.length,
-                reverse: false,
                 pagination: new SwiperPagination(
                     margin: new EdgeInsets.all(0.0),
                     builder: new SwiperCustomPagination(builder:
@@ -239,7 +238,6 @@ class ExampleCustomPagination extends StatelessWidget {
                 },
                 autoplay: true,
                 itemCount: images.length,
-                reverse: false,
                 pagination: new SwiperPagination(
                     margin: new EdgeInsets.all(0.0),
                     builder: new SwiperCustomPagination(builder:

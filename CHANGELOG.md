@@ -1,3 +1,9 @@
+
+
+## [1.1.2] - [2018/10/10]
+    * Fix #7
+    * Support layout for pagination.
+
 ## [1.1.1] - [2018/09/20]
     * Fix `test` failure.
 
