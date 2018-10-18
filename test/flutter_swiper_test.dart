@@ -143,4 +143,22 @@ void main() {
 
     expect(find.text("0", skipOffstage: false), findsOneWidget);
   });
+
+
+  testWidgets('Zero itemCount', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    SwiperController controller = SwiperController();
+    await tester.pumpWidget(MaterialApp(
+        home: Swiper(
+          controller: controller,
+          itemBuilder: (context, index) {
+            return Text("0");
+          },
+          itemCount: 0,
+          pagination: SwiperPagination(builder: SwiperPagination.fraction),
+          control: SwiperControl(),
+        )));
+
+    expect(find.text("0", skipOffstage: false), findsNothing);
+  });
 }

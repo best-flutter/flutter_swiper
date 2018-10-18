@@ -148,6 +148,19 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                       },
                       pagination: new SwiperPagination(
                           builder: SwiperPagination.fraction),
+                      itemCount: 0),
+                ),
+                new SizedBox(
+                  height: 100.0,
+                  child: Swiper(
+                      itemBuilder: (c, i) {
+                        return Container(
+                          color: Colors.grey,
+                          child: Text("$i"),
+                        );
+                      },
+                      pagination: new SwiperPagination(
+                          builder: SwiperPagination.fraction),
                       itemCount: 10000),
                 ),
                 new SizedBox(
