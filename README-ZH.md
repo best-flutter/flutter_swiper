@@ -16,7 +16,7 @@
     <a target="_blank" href="https://shang.qq.com/wpa/qunwpa?idkey=a71a2504cda4cc9ace3320f2dc588bdae928abc671e903463caeb71ec9302c2c"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="best-flutter" title="best-flutter"></a>
 </p>
 <p align="center">
-    <a href="https://github.com/jzoom/flutter_swiper.md">
+    <a href="https://github.com/jzoom/flutter_swiper">
         <b>英文说明</b>
     </a>
 </p>
