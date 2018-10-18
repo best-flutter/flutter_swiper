@@ -1,14 +1,43 @@
-语言 : [English](https://github.com/jzoom/flutter_swiper) | [中文](https://github.com/jzoom/flutter_swiper/blob/master/README-ZH.md)
+![Logo](banner.jpg)
 
-[![build_status](https://travis-ci.org/jzoom/flutter_swiper.svg?branch=master)](https://travis-ci.org/jzoom/flutter_swiper)
-[![Coverage Status](https://coveralls.io/repos/github/jzoom/flutter_swiper/badge.svg?branch=master)](https://coveralls.io/github/jzoom/flutter_swiper?branch=master)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](https://github.com/jzoom/flutter_swiper/pulls)
-[![pub package](https://img.shields.io/pub/v/flutter_swiper.svg)](https://pub.flutter-io.cn/packages/flutter_swiper)
+<p align="center">
+    <a href="https://travis-ci.org/best-flutter/flutter_swiper">
+        <img src="https://travis-ci.org/best-flutter/flutter_swiper.svg?branch=master" alt="Build Status" />
+    </a>
+    <a href="https://coveralls.io/github/best-flutter/flutter_swiper?branch=master">
+        <img src="https://coveralls.io/repos/github/best-flutter/flutter_swiper/badge.svg?branch=master" alt="Coverage Status" />
+    </a>
+    <a href="https://github.com/jzoom/flutter_swiper/pulls">
+        <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg" alt="PRs Welcome" />
+    </a>
+    <a href="https://pub.flutter-io.cn/packages/flutter_swiper">
+        <img src="https://img.shields.io/pub/v/flutter_swiper.svg" alt="pub package" />
+    </a>
+    <a target="_blank" href="https://shang.qq.com/wpa/qunwpa?idkey=a71a2504cda4cc9ace3320f2dc588bdae928abc671e903463caeb71ec9302c2c"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="best-flutter" title="best-flutter"></a>
+</p>
+<p align="center">
+    <a href="https://github.com/jzoom/flutter_swiper.md">
+        <b>英文说明</b>
+    </a>
+</p>
 
 
 # flutter_swiper
 
 flutter最强大的siwiper, 多种布局方式，无限轮播，Android和IOS双端适配.
+
+# :sparkles::sparkles: New Features: 分页组件
+
+正在使用这个项目作为分页： [flutter_page_indicator](https://github.com/best-flutter/flutter_page_indicator)  .
+
+# :sparkles::sparkles: New Features: 视差
+
+我们在 Swiper 中也像android一样支持了 `PageTransformer`, 只要给Swiper设置一下 `transformer` 属性就行,
+这里返回一个被转换的组件给Swiper. 目前仅仅支持 `DEFAULT`布局.
+感谢 @FlutterRocks ,棒棒哒 👏.
+
+正在使用这个项目作为视差 [transformer_page_view](https://github.com/best-flutter/transformer_page_view)  .
+
 
 
 # :sparkles::sparkles: 新功能
