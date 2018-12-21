@@ -9,6 +9,8 @@ import 'package:transformer_page_view/transformer_page_view.dart';
 part 'custom_layout.dart';
 
 typedef void SwiperOnTap(int index);
+typedef void SwiperOnDoubleTap(int index);
+typedef void SwiperOnLongPress(int index);
 
 typedef Widget SwiperDataBuilder(BuildContext context, dynamic data, int index);
 
@@ -79,6 +81,12 @@ class Swiper extends StatefulWidget {
   ///Called when tap
   final SwiperOnTap onTap;
 
+  ///Called when double tap
+  final SwiperOnDoubleTap onDoubleTap;
+
+  ///Called when long press
+  final SwiperOnLongPress onLongPress;
+
   ///The swiper pagination plugin
   final SwiperPlugin pagination;
 
@@ -125,6 +133,8 @@ class Swiper extends StatefulWidget {
     this.onIndexChanged,
     this.index,
     this.onTap,
+    this.onDoubleTap,
+    this.onLongPress,
     this.control,
     this.loop: true,
     this.curve: Curves.ease,
@@ -169,6 +179,8 @@ class Swiper extends StatefulWidget {
     ValueChanged<int> onIndexChanged,
     int index,
     SwiperOnTap onTap,
+    SwiperOnDoubleTap onDoubleTap,
+    SwiperOnLongPress onLongPress,
     bool loop: true,
     Curve curve: Curves.ease,
     Axis scrollDirection: Axis.horizontal,
@@ -206,6 +218,8 @@ class Swiper extends StatefulWidget {
         onIndexChanged: onIndexChanged,
         index: index,
         onTap: onTap,
+        onDoubleTap: onDoubleTap,
+        onLongPress: onLongPress,
         curve: curve,
         scrollDirection: scrollDirection,
         pagination: pagination,
@@ -234,6 +248,8 @@ class Swiper extends StatefulWidget {
     ValueChanged<int> onIndexChanged,
     int index,
     SwiperOnTap onTap,
+    SwiperOnDoubleTap onDoubleTap,
+    SwiperOnLongPress onLongPress,
     bool loop: true,
     Curve curve: Curves.ease,
     Axis scrollDirection: Axis.horizontal,
@@ -268,6 +284,8 @@ class Swiper extends StatefulWidget {
         onIndexChanged: onIndexChanged,
         index: index,
         onTap: onTap,
+        onDoubleTap: onDoubleTap,
+        onLongPress: onLongPress,
         curve: curve,
         key: key,
         scrollDirection: scrollDirection,
@@ -387,7 +405,13 @@ class _SwiperState extends _SwiperTimerMixin {
     return new GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        this.widget.onTap(index);
+        this.widget.onTap?.call(index);
+      },
+      onDoubleTap: () {
+        this.widget.onDoubleTap?.call(index);
+      },
+      onLongPress: () {
+        this.widget.onLongPress?.call(index);
       },
       child: widget.itemBuilder(context, index),
     );
@@ -462,7 +486,7 @@ class _SwiperState extends _SwiperTimerMixin {
 
   Widget _buildSwiper() {
     IndexedWidgetBuilder itemBuilder;
-    if (widget.onTap != null) {
+    if (widget.onTap != null || widget.onDoubleTap != null || widget.onLongPress != null) {
       itemBuilder = _wrapTap;
     } else {
       itemBuilder = widget.itemBuilder;
