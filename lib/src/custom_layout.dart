@@ -34,7 +34,9 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
   }
 
   void _getSize(_) {
-    afterRender();
+    if(context != null) {
+      afterRender();
+    }
   }
 
   @mustCallSuper
