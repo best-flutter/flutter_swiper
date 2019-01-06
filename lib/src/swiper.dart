@@ -481,6 +481,16 @@ class _SwiperState extends _SwiperTimerMixin {
         onIndexChanged: _onIndexChanged,
         controller: _controller,
         scrollDirection: widget.scrollDirection,
+        onStartSwipe: () {
+          if (widget.autoplayDisableOnInteraction && widget.autoplay) {
+            if (_timer != null) _stopAutoplay();
+          }
+        },
+        onEndSwipe: () {
+          if (widget.autoplayDisableOnInteraction && widget.autoplay) {
+            if (_timer == null) _startAutoplay();
+          }
+        },
       );
     } else if (_isPageViewLayout()) {
       PageTransformer transformer = widget.transformer;
@@ -536,9 +546,20 @@ class _SwiperState extends _SwiperTimerMixin {
         onIndexChanged: _onIndexChanged,
         controller: _controller,
         scrollDirection: widget.scrollDirection,
+        onStartSwipe: () {
+          if (widget.autoplayDisableOnInteraction && widget.autoplay) {
+            if (_timer != null) _stopAutoplay();
+          }
+        },
+        onEndSwipe: () {
+          if (widget.autoplayDisableOnInteraction && widget.autoplay) {
+            if (_timer == null) _startAutoplay();
+          }
+        },
       );
     } else if (widget.layout == SwiperLayout.CUSTOM) {
-      return new _CustomLayoutSwiper(
+
+      Widget child = new  _CustomLayoutSwiper(
         loop: widget.loop,
         option: widget.customLayoutOption,
         itemWidth: widget.itemWidth,
@@ -551,7 +572,21 @@ class _SwiperState extends _SwiperTimerMixin {
         onIndexChanged: _onIndexChanged,
         controller: _controller,
         scrollDirection: widget.scrollDirection,
+        onStartSwipe: () {
+          if (widget.autoplayDisableOnInteraction && widget.autoplay) {
+            if (_timer != null) _stopAutoplay();
+          }
+        },
+        onEndSwipe: () {
+          if (widget.autoplayDisableOnInteraction && widget.autoplay) {
+            if (_timer == null) _startAutoplay();
+          }
+        },
+
       );
+
+      return child;
+
     } else {
       return new Container();
     }
@@ -659,6 +694,8 @@ abstract class _SubSwiper extends StatefulWidget {
   final double itemHeight;
   final bool loop;
   final Axis scrollDirection;
+  final VoidCallback onStartSwipe;
+  final VoidCallback onEndSwipe;
 
   _SubSwiper(
       {Key key,
@@ -672,7 +709,9 @@ abstract class _SubSwiper extends StatefulWidget {
       this.index,
       this.itemCount,
       this.scrollDirection: Axis.horizontal,
-      this.onIndexChanged})
+      this.onIndexChanged,
+      this.onStartSwipe,
+      this.onEndSwipe})
       : super(key: key);
 
   @override
@@ -702,6 +741,9 @@ class _TinderSwiper extends _SubSwiper {
     bool loop,
     int itemCount,
     Axis scrollDirection,
+    VoidCallback onStartSwipe ,
+    VoidCallback onEndSwipe,
+
   })  : assert(itemWidth != null && itemHeight != null),
         super(
             loop: loop,
@@ -715,7 +757,10 @@ class _TinderSwiper extends _SubSwiper {
             index: index,
             onIndexChanged: onIndexChanged,
             itemCount: itemCount,
-            scrollDirection: scrollDirection);
+            scrollDirection: scrollDirection,
+            onStartSwipe: onStartSwipe,
+            onEndSwipe: onEndSwipe,
+          );
 
   @override
   State<StatefulWidget> createState() {
@@ -737,6 +782,9 @@ class _StackSwiper extends _SubSwiper {
     bool loop,
     int itemCount,
     Axis scrollDirection,
+    VoidCallback onStartSwipe ,
+    VoidCallback onEndSwipe,
+
   }) : super(
             loop: loop,
             key: key,
@@ -749,7 +797,10 @@ class _StackSwiper extends _SubSwiper {
             index: index,
             onIndexChanged: onIndexChanged,
             itemCount: itemCount,
-            scrollDirection: scrollDirection);
+            scrollDirection: scrollDirection,
+            onStartSwipe: onStartSwipe,
+            onEndSwipe: onEndSwipe,
+    );
 
   @override
   State<StatefulWidget> createState() {
