@@ -116,7 +116,7 @@ flutter create myapp
 
 Edit lib/main.dart like this:
 
-```
+```dart
 
 import 'package:flutter/material.dart';
 
@@ -201,7 +201,7 @@ The pagination extends from `SwiperPlugin`,the `SwiperPlugin` provides extra ui 
 
 If you'd like to customize your own pagination, you can do like this:
 
-```
+```dart
 new Swiper(
     ...,
     pagination:new SwiperCustomPagination(
@@ -254,7 +254,7 @@ The `Controller` is used to control the `index` of the Swiper, start or stop aut
 ## Build in layouts
 ![](https://github.com/jzoom/images/raw/master/layout1.gif)
 
-```
+```dart
 new Swiper(
   itemBuilder: (BuildContext context, int index) {
     return new Image.network(
@@ -273,7 +273,7 @@ new Swiper(
 
 ![](https://github.com/jzoom/images/raw/master/layout2.gif)
 
-```
+```dart
 new Swiper(
   itemBuilder: (BuildContext context, int index) {
     return new Image.network(
@@ -289,7 +289,7 @@ new Swiper(
 
 ![](https://github.com/jzoom/images/raw/master/layout3.gif)
 
-```
+```dart
 new Swiper(
     itemBuilder: (BuildContext context, int index) {
       return new Image.network(
@@ -308,7 +308,7 @@ new Swiper(
 ![](https://github.com/jzoom/images/raw/master/layout4.gif)
 
 Very easy to create you own custom animation:
-```
+```dart
 
  new Swiper(
   layout: SwiperLayout.CUSTOM,
@@ -341,7 +341,7 @@ Very easy to create you own custom animation:
 The `CustomLayoutOption` is designed to describe animations.
 It is very easy to specify every state of items in Swiper.
 
-```
+```dart
 new CustomLayoutOption(
       startIndex: -1,  /// Which index is the first item of array below      
       stateCount: 3    /// array length 
@@ -361,7 +361,7 @@ new CustomLayoutOption(
 
 ![Example](https://github.com/jzoom/images/raw/master/swiper-example.gif)
 
-```
+```dart
 new ConstrainedBox(
   child: new Swiper(
     outer:false,
