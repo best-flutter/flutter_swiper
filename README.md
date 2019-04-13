@@ -212,7 +212,39 @@ new Swiper(
 );
 
 ```
+##### Implemented pagination
 
+###### DotSwiperPaginationBuilder
+
+| Parameter     | Default        |  Description   | Required |
+| :------------ |:---------------| :-----| :----: |
+| activeColor | Theme.of(context).primaryColor  | Active bullet color |false |
+| color | Theme.of(context).scaffoldBackgroundColor | Bullet color | false |
+| activeSize | 10.0 | Active bullet size | false |
+| size | 10.0 | Bullet size | false | 
+| space | 3.0 | Distance between bullets | false |
+| key | - | key | false |
+
+###### FractionPaginationBuilder
+
+| Parameter            | Default             |           Description     | Required
+| :------------ |:---------------| :-----| :----: |
+| activeColor | Theme.of(context).primaryColor  | Active font color |false |
+| color | Theme.of(context).scaffoldBackgroundColor | font color | false|
+| activeFontSize | 35.0 | Active font size | false |
+| fontSize | 20.0 | Font size | false |
+| key | - | key | false |
+
+###### RectSwiperPaginationBuilder
+
+| Parameter            | Default             |           Description     | Required
+| :------------ |:---------------| :-----| :----: |
+| activeColor | Theme.of(context).primaryColor  | Active bullet color |false |
+| color | Theme.of(context).scaffoldBackgroundColor | Bullet color | false|
+| activeSize | 10.0 | Active bullet size | false |
+| size | 10.0 | Bullet size | false | 
+| space | 3.0 | Distance between bullets| false |
+| key | - | key | false |
 
 
 #### Control buttons
