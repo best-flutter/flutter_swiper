@@ -226,7 +226,39 @@ new Swiper(
 );
 
 ```
+##### 内置分页指示器
 
+###### DotSwiperPaginationBuilder
+
+| 参数            | 默认值             |           描述     | 是否必须
+| :------------ |:---------------| :-----| :----: |
+| activeColor | Theme.of(context).primaryColor  | 激活状态颜色 |否 |
+| color | Theme.of(context).scaffoldBackgroundColor | 指示器颜色 | 否|
+| activeSize | 10.0 | 激活状态指示器大小 | 否 |
+| size | 10.0 | 指示器大小 | 否 | 
+| space | 3.0 | 指示器间距| 否 |
+| key | - | key | 否 |
+
+###### FractionPaginationBuilder
+
+| 参数            | 默认值             |           描述     | 是否必须
+| :------------ |:---------------| :-----| :----: |
+| activeColor | Theme.of(context).primaryColor  | 激活状态颜色 |否 |
+| color | Theme.of(context).scaffoldBackgroundColor | 颜色 | 否|
+| activeFontSize | 35.0 | 激活状态指示器文字大小 | 否 |
+| fontSize | 20.0 | 指示器文字大小 | 否 |
+| key | - | key | 否 |
+
+###### RectSwiperPaginationBuilder
+
+| 参数            | 默认值             |           描述     | 是否必须
+| :------------ |:---------------| :-----| :----: |
+| activeColor | Theme.of(context).primaryColor  | 激活状态颜色 |否 |
+| color | Theme.of(context).scaffoldBackgroundColor | 指示器颜色 | 否|
+| activeSize | 10.0 | 激活状态指示器大小 | 否 |
+| size | 10.0 | 指示器大小 | 否 | 
+| space | 3.0 | 指示器间距| 否 |
+| key | - | key | 否 |
 
 
 #### 控制按钮
