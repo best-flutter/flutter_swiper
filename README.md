@@ -206,7 +206,7 @@ new Swiper(
     ...,
     pagination:new SwiperCustomPagination(
         builder:(BuildContext context, SwiperPluginConfig config){
-            return new YourOwnPaginatipon();
+            return new YourOwnPagination();
         }
     )
 );
