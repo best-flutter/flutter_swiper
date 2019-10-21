@@ -217,15 +217,13 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
     }
 
     if (config.scrollDirection == Axis.vertical) {
-      return new Column(
+      return new Wrap(
         key: key,
-        mainAxisSize: MainAxisSize.min,
         children: list,
       );
     } else {
-      return new Row(
+      return new Wrap(
         key: key,
-        mainAxisSize: MainAxisSize.min,
         children: list,
       );
     }
