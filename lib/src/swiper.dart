@@ -18,8 +18,8 @@ const int kDefaultAutoplayDelayMs = 3000;
 ///  Default auto play transition duration (in millisecond)
 const int kDefaultAutoplayTransactionDuration = 300;
 
-const int kMaxValue = 2000000000;
-const int kMiddleValue = 1000000000;
+const int kMaxValue = 200000000;
+const int kMiddleValue = 100000000;
 
 enum SwiperLayout { DEFAULT, STACK, TINDER, CUSTOM }
 
