@@ -225,6 +225,7 @@ The control also extends from `SwiperPlugin`,set `new SwiperControl()` to show d
 | iconPrevious | Icons.arrow_back_ios  | The icon data to display `previous` control button |
 | iconNext | Icons.arrow_forward_ios | The icon data to display `next`. |
 | color | Theme.of(context).primaryColor | Control button color |
+| disableColor | Theme.of(context).disabledColor | Disabled control button color |
 | size | 30.0 | Control button size |
 | padding | const EdgeInsets.all(5.0) | Control button padding |
 
