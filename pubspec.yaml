@@ -10,6 +10,7 @@ dependencies:
 
   transformer_page_view: ^0.1.6
   flutter_page_indicator: ^0.0.3
+  equatable: ^1.0.2
 
 environment:
   sdk: ">=2.0.0-dev.48.0 <3.0.0"

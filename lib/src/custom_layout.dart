@@ -286,7 +286,7 @@ abstract class TransformBuilder<T> {
   Widget build(int i, double animationValue, Widget widget);
 }
 
-class ScaleTransformBuilder extends TransformBuilder<double> {
+class ScaleTransformBuilder extends TransformBuilder<double> with EquatableMixin {
   final Alignment alignment;
   ScaleTransformBuilder({List<double> values, this.alignment: Alignment.center})
       : super(values: values);
@@ -295,9 +295,12 @@ class ScaleTransformBuilder extends TransformBuilder<double> {
     double s = _getValue(values, animationValue, i);
     return new Transform.scale(scale: s, child: widget);
   }
+
+  @override
+  List<Object> get props => [values, alignment];
 }
 
-class OpacityTransformBuilder extends TransformBuilder<double> {
+class OpacityTransformBuilder extends TransformBuilder<double> with EquatableMixin {
   OpacityTransformBuilder({List<double> values}) : super(values: values);
 
   Widget build(int i, double animationValue, Widget widget) {
@@ -307,9 +310,12 @@ class OpacityTransformBuilder extends TransformBuilder<double> {
       child: widget,
     );
   }
+
+  @override
+  List<Object> get props => values;
 }
 
-class RotateTransformBuilder extends TransformBuilder<double> {
+class RotateTransformBuilder extends TransformBuilder<double> with EquatableMixin {
   RotateTransformBuilder({List<double> values}) : super(values: values);
 
   Widget build(int i, double animationValue, Widget widget) {
@@ -319,9 +325,12 @@ class RotateTransformBuilder extends TransformBuilder<double> {
       child: widget,
     );
   }
+
+  @override
+  List<Object> get props => values;
 }
 
-class TranslateTransformBuilder extends TransformBuilder<Offset> {
+class TranslateTransformBuilder extends TransformBuilder<Offset> with EquatableMixin {
   TranslateTransformBuilder({List<Offset> values}) : super(values: values);
 
   @override
@@ -332,6 +341,9 @@ class TranslateTransformBuilder extends TransformBuilder<Offset> {
       child: widget,
     );
   }
+
+  @override
+  List<Object> get props => values;
 }
 
 class CustomLayoutOption {
@@ -339,8 +351,12 @@ class CustomLayoutOption {
   final int startIndex;
   final int stateCount;
 
-  CustomLayoutOption({this.stateCount, this.startIndex})
-      : assert(startIndex != null, stateCount != null);
+  CustomLayoutOption({
+    @required
+    this.stateCount,
+    @required
+    this.startIndex,
+  }) : assert(startIndex != null, stateCount != null);
 
   CustomLayoutOption addOpacity(List<double> values) {
     builders.add(new OpacityTransformBuilder(values: values));
