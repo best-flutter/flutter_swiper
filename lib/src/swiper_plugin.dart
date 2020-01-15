@@ -21,28 +21,30 @@ class SwiperPluginConfig {
   final SwiperController controller;
   final SwiperLayout layout;
 
-  const SwiperPluginConfig(
-      {this.activeIndex,
-      this.itemCount,
-      this.indicatorLayout,
-      this.outer,
-      this.scrollDirection,
-      this.controller,
-      this.pageController,
-      this.layout,
-      this.loop})
-      : assert(scrollDirection != null),
-        assert(controller != null);
+  const SwiperPluginConfig({
+    this.activeIndex,
+    this.itemCount,
+    this.indicatorLayout,
+    this.outer,
+    @required
+    this.scrollDirection,
+    @required
+    this.controller,
+    this.pageController,
+    this.layout,
+    this.loop,
+  })
+    : assert(scrollDirection != null),
+      assert(controller != null);
 }
 
 class SwiperPluginView extends StatelessWidget {
   final SwiperPlugin plugin;
   final SwiperPluginConfig config;
 
-  const SwiperPluginView(this.plugin, this.config);
+  const SwiperPluginView(this.plugin, this.config)
+    : assert(plugin != null);
 
   @override
-  Widget build(BuildContext context) {
-    return plugin.build(context, config);
-  }
+  Widget build(BuildContext context) => plugin.build(context, config);
 }
