@@ -21,6 +21,7 @@ class InnerSwiper extends StatefulWidget {
 
 class _InnerSwiperState extends State<InnerSwiper> {
   SwiperController controller;
+  int autoPlayDelay = 3000;
 
   List<bool> autoplayes;
 
@@ -59,6 +60,11 @@ class _InnerSwiperState extends State<InnerSwiper> {
                       color: Colors.greenAccent,
                       child: new Text("jkfjkldsfjd"),
                     );
+                  },
+                  onIndexChanged: (i) {
+                    setState(() {
+                      autoPlayDelay = autoPlayDelay * i;
+                    });
                   },
                   autoplay: autoplayes[index],
                 ),

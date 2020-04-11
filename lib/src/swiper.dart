@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_page_indicator/flutter_page_indicator.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_page_indicator/flutter_page_indicator.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:transformer_page_view/transformer_page_view.dart';
 
 part 'custom_layout.dart';
@@ -48,13 +48,13 @@ class Swiper extends StatefulWidget {
   /// count of the display items
   final int itemCount;
 
-  final ValueChanged<int> onIndexChanged;
+  final Function(int) onIndexChanged;
 
   ///auto play config
   final bool autoplay;
 
   ///Duration of the animation between transactions (in millisecond).
-  final int autoplayDelay;
+  int autoplayDelay;
 
   ///disable auto play when interaction
   final bool autoplayDisableOnInteraction;
@@ -285,7 +285,7 @@ class Swiper extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return new _SwiperState();
+    return new _SwiperState(delay: this.autoplayDelay);
   }
 }
 
@@ -380,7 +380,8 @@ abstract class _SwiperTimerMixin extends State<Swiper> {
 
 class _SwiperState extends _SwiperTimerMixin {
   int _activeIndex;
-
+  int delay;
+  _SwiperState({this.delay});
   TransformerPageController _pageController;
 
   Widget _wrapTap(BuildContext context, int index) {
@@ -456,6 +457,8 @@ class _SwiperState extends _SwiperTimerMixin {
       _activeIndex = index;
     });
     if (widget.onIndexChanged != null) {
+      _stopAutoplay();
+      _startAutoplay();
       widget.onIndexChanged(index);
     }
   }
