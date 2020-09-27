@@ -258,7 +258,7 @@ The `Controller` is used to control the `index` of the Swiper, start or stop aut
 new Swiper(
   itemBuilder: (BuildContext context, int index) {
     return new Image.network(
-      "http://via.placeholder.com/288x188",
+      "https://via.placeholder.com/288x188",
       fit: BoxFit.fill,
     );
   },
