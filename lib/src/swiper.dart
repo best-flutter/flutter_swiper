@@ -514,7 +514,7 @@ class _SwiperState extends _SwiperTimerMixin {
                 if (_timer != null) _stopAutoplay();
               }
             } else if (notification is ScrollEndNotification) {
-              if (_timer == null) _startAutoplay();
+              if (_timer == null && _controller?.autoplay == true) _startAutoplay();
             }
 
             return false;
