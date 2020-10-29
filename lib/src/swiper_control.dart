@@ -36,10 +36,13 @@ class SwiperControl extends SwiperPlugin {
     return new GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
+        ///condition onTap animation to loop status or presence of previous or next index (avoiding jump-loop).
+        bool isPrev = config.activeIndex > 0;
+        bool isNext = config.activeIndex < config.itemCount - 1;
         if (previous) {
-          config.controller.previous(animation: true);
+          if (isPrev || config.loop) config.controller.previous(animation: true);
         } else {
-          config.controller.next(animation: true);
+          if (isNext || config.loop) config.controller.next(animation: true);
         }
       },
       child: Padding(
