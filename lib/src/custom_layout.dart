@@ -235,7 +235,8 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
         if (value < 0.5) {
           value = 0.5;
         }
-      } else if (_currentIndex <= 0) {
+      }
+      if (_currentIndex <= 0) {
         if (value > 0.5) {
           value = 0.5;
         }
