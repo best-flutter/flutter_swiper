@@ -452,9 +452,7 @@ class _SwiperState extends _SwiperTimerMixin {
   }
 
   void _onIndexChanged(int index) {
-    setState(() {
-      _activeIndex = index;
-    });
+    _activeIndex = index;
     if (widget.onIndexChanged != null) {
       widget.onIndexChanged(index);
     }
