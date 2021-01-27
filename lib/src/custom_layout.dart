@@ -13,7 +13,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
   void initState() {
     if (widget.itemWidth == null) {
       throw new Exception(
-          "==============\n\nwidget.itemWith must not be null when use stack layout.\n========\n");
+          "==============\n\nwidget.itemWidth must not be null when use stack layout.\n========\n");
     }
 
     _createAnimationController();
