@@ -408,12 +408,14 @@ class _CustomLayoutState extends _CustomLayoutStateBase<_CustomLayoutSwiper> {
     super.didChangeDependencies();
     _startIndex = widget.option.startIndex;
     _animationCount = widget.option.stateCount;
+    _currentIndex = widget.index;
   }
 
   @override
   void didUpdateWidget(_CustomLayoutSwiper oldWidget) {
     _startIndex = widget.option.startIndex;
     _animationCount = widget.option.stateCount;
+    _currentIndex = widget.index;
     super.didUpdateWidget(oldWidget);
   }
 
