@@ -1,18 +1,22 @@
 name: example
 description: A new Flutter project.
 
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
 dependencies:
   flutter:
     sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.0
-
+  cupertino_icons: ^1.0.2
   flutter_swiper:
     path: ../
-
-  percent_indicator:
 
 dev_dependencies:
   flutter_test:
@@ -20,7 +24,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
 
   assets:
     - images/bg0.jpeg

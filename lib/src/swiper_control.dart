@@ -12,34 +12,35 @@ class SwiperControl extends SwiperPlugin {
   final double size;
 
   ///Icon normal color, The theme's [ThemeData.primaryColor] by default.
-  final Color color;
+  final Color? color;
 
   ///if set loop=false on Swiper, this color will be used when swiper goto the last slide.
   ///The theme's [ThemeData.disabledColor] by default.
-  final Color disableColor;
+  final Color? disableColor;
 
   final EdgeInsetsGeometry padding;
 
-  final Key key;
+  final Key? key;
 
-  const SwiperControl(
-      {this.iconPrevious: Icons.arrow_back_ios,
-      this.iconNext: Icons.arrow_forward_ios,
-      this.color,
-      this.disableColor,
-      this.key,
-      this.size: 30.0,
-      this.padding: const EdgeInsets.all(5.0)});
+  const SwiperControl({
+    this.iconPrevious = Icons.arrow_back_ios,
+    this.iconNext = Icons.arrow_forward_ios,
+    this.color,
+    this.disableColor,
+    this.key,
+    this.size = 30.0,
+    this.padding = const EdgeInsets.all(5.0),
+  });
 
-  Widget buildButton(SwiperPluginConfig config, Color color, IconData iconDaga,
+  Widget buildButton(SwiperPluginConfig? config, Color color, IconData iconDaga,
       int quarterTurns, bool previous) {
-    return new GestureDetector(
+    return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
         if (previous) {
-          config.controller.previous(animation: true);
+          config!.controller.previous(animation: true);
         } else {
-          config.controller.next(animation: true);
+          config!.controller.next(animation: true);
         }
       },
       child: Padding(
@@ -48,7 +49,7 @@ class SwiperControl extends SwiperPlugin {
               quarterTurns: quarterTurns,
               child: Icon(
                 iconDaga,
-                semanticLabel: previous ? "Previous" : "Next",
+                semanticLabel: previous ? 'Previous' : 'Next',
                 size: size,
                 color: color,
               ))),
@@ -56,19 +57,19 @@ class SwiperControl extends SwiperPlugin {
   }
 
   @override
-  Widget build(BuildContext context, SwiperPluginConfig config) {
-    ThemeData themeData = Theme.of(context);
+  Widget build(BuildContext context, SwiperPluginConfig? config) {
+    final themeData = Theme.of(context);
 
-    Color color = this.color ?? themeData.primaryColor;
-    Color disableColor = this.disableColor ?? themeData.disabledColor;
-    Color prevColor;
-    Color nextColor;
+    final color = this.color ?? themeData.primaryColor;
+    final disableColor = this.disableColor ?? themeData.disabledColor;
+    var prevColor;
+    var nextColor;
 
-    if (config.loop) {
+    if (config!.loop!) {
       prevColor = nextColor = color;
     } else {
-      bool next = config.activeIndex < config.itemCount - 1;
-      bool prev = config.activeIndex > 0;
+      final next = config.activeIndex! < config.itemCount! - 1;
+      final prev = config.activeIndex! > 0;
       prevColor = prev ? color : disableColor;
       nextColor = next ? color : disableColor;
     }
@@ -94,10 +95,10 @@ class SwiperControl extends SwiperPlugin {
       );
     }
 
-    return new Container(
+    return Container(
       height: double.infinity,
-      child: child,
       width: double.infinity,
+      child: child,
     );
   }
 }

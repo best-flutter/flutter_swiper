@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new InnerSwiper(),
+    return MaterialApp(
+      home: InnerSwiper(),
     );
   }
 }
@@ -15,72 +15,68 @@ class MyApp extends StatelessWidget {
 class InnerSwiper extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new _InnerSwiperState();
+    return _InnerSwiperState();
   }
 }
 
 class _InnerSwiperState extends State<InnerSwiper> {
-  SwiperController controller;
+  late SwiperController controller;
 
-  List<bool> autoplayes;
+  late List<bool> autoPlayer;
 
-  List<SwiperController> controllers;
+  late List<SwiperController> controllers;
 
   @override
   void initState() {
-    controller = new SwiperController();
-    autoplayes = new List()
-      ..length = 10
-      ..fillRange(0, 10, false);
-    controllers = new List()
-      ..length = 10
-      ..fillRange(0, 10, new SwiperController());
+    controller = SwiperController();
+    autoPlayer = List.generate(10, (index) => false);
+    controllers = List.generate(10, (index) => SwiperController());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new Swiper(
+    return Scaffold(
+      body: Swiper(
         loop: false,
         itemCount: 10,
         controller: controller,
-        pagination: new SwiperPagination(),
+        pagination: SwiperPagination(),
         itemBuilder: (BuildContext context, int index) {
-          return new Column(
+          return Column(
             children: <Widget>[
-              new SizedBox(
-                child: new Swiper(
+              SizedBox(
+                child: Swiper(
                   controller: controllers[index],
-                  pagination: new SwiperPagination(),
+                  pagination: SwiperPagination(),
                   itemCount: 4,
                   itemBuilder: (BuildContext context, int index) {
-                    return new Container(
+                    return Container(
                       color: Colors.greenAccent,
-                      child: new Text("jkfjkldsfjd"),
+                      child: Text('jkfjkldsfjd'),
                     );
                   },
-                  autoplay: autoplayes[index],
+                  autoplay: autoPlayer[index],
                 ),
                 height: 300.0,
               ),
-              new RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    autoplayes[index] = true;
+                    autoPlayer[index] = true;
                   });
                 },
-                child: new Text("Start autoplay"),
+                child: Text('Start autoplay'),
               ),
-              new RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    autoplayes[index] = false;
+                    autoPlayer[index] = false;
                   });
                 },
-                child: new Text("End autoplay"),
+                child: Text('End autoplay'),
               ),
-              new Text("is autoplay: ${autoplayes[index]}")
+              Text('is autoplay: ${autoPlayer[index]}')
             ],
           );
         },
