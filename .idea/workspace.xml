@@ -7,15 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c786231b-ff91-4235-b541-261fe51b92a1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/images/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/images/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/images/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/images/bg.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/images/bg0.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/images/bg1.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/images/bg2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/swiper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/swiper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/swiper_pagination.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/swiper_pagination.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/swiper_plugin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/swiper_plugin.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,7 +292,7 @@
       <workItem from="1615820035433" duration="45000" />
       <workItem from="1615820083410" duration="233000" />
       <workItem from="1615820926273" duration="1151000" />
-      <workItem from="1615822720318" duration="298000" />
+      <workItem from="1615822720318" duration="684000" />
     </task>
     <servers />
   </component>
@@ -376,6 +373,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
