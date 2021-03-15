@@ -7,7 +7,7 @@ import 'package:flutter_swiper/src/flutter_page_indicator/flutter_page_indicator
 abstract class SwiperPlugin {
   const SwiperPlugin();
 
-  Widget build(BuildContext context, SwiperPluginConfig? config);
+  Widget build(BuildContext context, SwiperPluginConfig config);
 }
 
 class SwiperPluginConfig {

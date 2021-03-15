@@ -9,21 +9,11 @@
     <list default="true" id="c786231b-ff91-4235-b541-261fe51b92a1" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/custom_layout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/custom_layout.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/flutter_page_indicator/flutter_page_indicator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/flutter_page_indicator/flutter_page_indicator.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/flutter_swiper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flutter_swiper.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/swiper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/swiper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/swiper_control.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/swiper_control.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/swiper_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/swiper_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/swiper_pagination.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/swiper_pagination.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/swiper_plugin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/swiper_plugin.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/transformer_page_view/index_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/transformer_page_view/index_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/transformer_page_view/parallax.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/transformer_page_view/parallax.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/transformer_page_view/transformer_page_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/transformer_page_view/transformer_page_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/control_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/control_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/flutter_swiper_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/flutter_swiper_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/pagination_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/pagination_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,6 +190,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -223,10 +214,11 @@
       <recent name="$PROJECT_DIR$/lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/example/lib" />
+      <recent name="$PROJECT_DIR$/example" />
       <recent name="$PROJECT_DIR$/lib/src/tranformer_page_view" />
       <recent name="$PROJECT_DIR$/lib/src/flutter_page_indicator" />
       <recent name="$PROJECT_DIR$/lib/src" />
-      <recent name="$PROJECT_DIR$/example/lib" />
     </key>
   </component>
   <component name="RunManager" selected="Flutter.main.dart">
@@ -318,7 +310,7 @@
       <workItem from="1615820035433" duration="45000" />
       <workItem from="1615820083410" duration="233000" />
       <workItem from="1615820926273" duration="1151000" />
-      <workItem from="1615822720318" duration="8819000" />
+      <workItem from="1615822720318" duration="13814000" />
     </task>
     <servers />
   </component>

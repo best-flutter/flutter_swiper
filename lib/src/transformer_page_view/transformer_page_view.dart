@@ -142,17 +142,7 @@ class TransformerPageController extends PageController {
     return renderIndex;
   }
 
-  double? get realPage {
-    double? page;
-
-    if (position.maxScrollExtent == 0.0 || position.minScrollExtent == 0.0) {
-      page = 0.0;
-    } else {
-      page = super.page;
-    }
-
-    return page;
-  }
+  double get realPage => super.page ?? 0.0;
 
   static double? _getRenderPageFromRealPage(
       double? page, bool loop, int? itemCount, bool reverse) {
@@ -376,7 +366,7 @@ class _TransformerPageViewState extends State<TransformerPageView> {
 
           double position;
 
-          double? page = _pageController!.realPage ?? 0.0;
+          double? page = _pageController!.realPage;
 
           if (_transformer!.reverse) {
             position = page - index;

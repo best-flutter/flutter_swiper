@@ -558,7 +558,7 @@ class _SwiperState extends _SwiperTimerMixin {
     }
   }
 
-  SwiperPluginConfig? _ensureConfig(SwiperPluginConfig? config) {
+  SwiperPluginConfig _ensureConfig(SwiperPluginConfig? config) {
     config ??= SwiperPluginConfig(
         outer: widget.outer,
         itemCount: widget.itemCount,
@@ -608,7 +608,7 @@ class _SwiperState extends _SwiperTimerMixin {
         return _buildOuterPagination(
             widget.pagination as SwiperPagination,
             listForStack == null ? swiper : Stack(children: listForStack),
-            config!);
+            config);
       } else {
         listForStack = _ensureListForStack(
             swiper, listForStack, widget.pagination!.build(context, config));
@@ -928,7 +928,7 @@ class ScaleAndFadeTransformer extends PageTransformer {
   final double? _scale;
   final double? _fade;
 
-  ScaleAndFadeTransformer({double? fade = 0.3, double? scale= 0.8})
+  ScaleAndFadeTransformer({double? fade = 0.3, double? scale = 0.8})
       : _fade = fade,
         _scale = scale;
 
