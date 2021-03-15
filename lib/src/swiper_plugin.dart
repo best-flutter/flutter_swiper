@@ -7,32 +7,31 @@ import 'package:flutter_swiper/src/flutter_page_indicator/flutter_page_indicator
 abstract class SwiperPlugin {
   const SwiperPlugin();
 
-  Widget build(BuildContext context, SwiperPluginConfig config);
+  Widget build(BuildContext context, SwiperPluginConfig? config);
 }
 
 class SwiperPluginConfig {
-  final int activeIndex;
-  final int itemCount;
-  final PageIndicatorLayout indicatorLayout;
   final Axis scrollDirection;
-  final bool loop;
-  final bool outer;
-  final PageController pageController;
   final SwiperController controller;
-  final SwiperLayout layout;
+  final int? activeIndex;
+  final int? itemCount;
+  final PageIndicatorLayout? indicatorLayout;
+  final bool? loop;
+  final bool? outer;
+  final PageController? pageController;
+  final SwiperLayout? layout;
 
-  const SwiperPluginConfig(
-      {this.activeIndex,
-      this.itemCount,
-      this.indicatorLayout,
-      this.outer,
-      this.scrollDirection,
-      this.controller,
-      this.pageController,
-      this.layout,
-      this.loop})
-      : assert(scrollDirection != null),
-        assert(controller != null);
+  const SwiperPluginConfig({
+    required this.scrollDirection,
+    required this.controller,
+    this.activeIndex,
+    this.itemCount,
+    this.indicatorLayout,
+    this.outer,
+    this.pageController,
+    this.layout,
+    this.loop,
+  });
 }
 
 class SwiperPluginView extends StatelessWidget {

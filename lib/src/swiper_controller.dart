@@ -16,27 +16,31 @@ class SwiperController extends IndexController {
   static const int BUILD = 5;
 
   // available when `event` == SwiperController.BUILD
-  SwiperPluginConfig config;
+  SwiperPluginConfig? config;
 
   // available when `event` == SwiperController.SWIPE
   // this value is PageViewController.pos
-  double pos;
+  double? pos;
 
-  int index;
-  bool animation;
-  bool autoplay;
+  @override
+  int? index;
+
+  @override
+  bool? animation;
+
+  bool? autoplay;
 
   SwiperController();
 
   void startAutoplay() {
     event = SwiperController.START_AUTOPLAY;
-    this.autoplay = true;
+    autoplay = true;
     notifyListeners();
   }
 
   void stopAutoplay() {
     event = SwiperController.STOP_AUTOPLAY;
-    this.autoplay = false;
+    autoplay = false;
     notifyListeners();
   }
 }
