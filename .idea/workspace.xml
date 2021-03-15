@@ -6,15 +6,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c786231b-ff91-4235-b541-261fe51b92a1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/flutter_swiper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flutter_swiper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/swiper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/swiper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/swiper_pagination.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/swiper_pagination.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/swiper_plugin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/swiper_plugin.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/transformer_page_view/transformer_page_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/transformer_page_view/transformer_page_view.dart" afterDir="false" />
-    </list>
+    <list default="true" id="c786231b-ff91-4235-b541-261fe51b92a1" name="Default" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -310,7 +302,7 @@
       <workItem from="1615820035433" duration="45000" />
       <workItem from="1615820083410" duration="233000" />
       <workItem from="1615820926273" duration="1151000" />
-      <workItem from="1615822720318" duration="13814000" />
+      <workItem from="1615822720318" duration="14210000" />
     </task>
     <servers />
   </component>
