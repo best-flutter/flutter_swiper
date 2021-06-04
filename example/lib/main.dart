@@ -2,7 +2,7 @@ import 'package:example/src/ExampleCustom.dart';
 import 'package:example/src/ExampleSwiperInScrollView.dart';
 import 'package:example/src/config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 void main() => runApp(MyApp());
 

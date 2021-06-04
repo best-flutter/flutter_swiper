@@ -1,7 +1,7 @@
 library transformer_page_view;
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_swiper/src/transformer_page_view/index_controller.dart';
+import 'package:card_swiper/src/transformer_page_view/index_controller.dart';
 
 ///
 /// NOTICE::
