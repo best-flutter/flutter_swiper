@@ -259,7 +259,7 @@ class TransformerPageView extends StatefulWidget {
     this.itemBuilder,
     this.pageController,
     required this.itemCount,
-  })   : assert(itemCount == 0 || itemBuilder != null || transformer != null),
+  })  : assert(itemCount == 0 || itemBuilder != null || transformer != null),
         duration =
             duration ?? Duration(milliseconds: kDefaultTransactionDuration),
         super(key: key);

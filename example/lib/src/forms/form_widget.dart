@@ -14,18 +14,19 @@ class FormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(5.0),
-        child: Row(
-          children: <Widget>[
-            Text(label, style: TextStyle(fontSize: 14.0)),
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: child,
-              ),
-            )
-          ],
-        ),);
+      padding: EdgeInsets.all(5.0),
+      child: Row(
+        children: <Widget>[
+          Text(label, style: TextStyle(fontSize: 14.0)),
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: child,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 

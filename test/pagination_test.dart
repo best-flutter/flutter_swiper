@@ -44,10 +44,11 @@ void main() {
     final controller = SwiperController();
 
     final config = SwiperPluginConfig(
-        activeIndex: 0,
-        controller: controller,
-        itemCount: 10,
-        scrollDirection: Axis.vertical,);
+      activeIndex: 0,
+      controller: controller,
+      itemCount: 10,
+      scrollDirection: Axis.vertical,
+    );
 
     Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
@@ -106,10 +107,11 @@ void main() {
     final controller = SwiperController();
 
     final config = SwiperPluginConfig(
-        activeIndex: 0,
-        controller: controller,
-        itemCount: 10,
-        scrollDirection: Axis.vertical,);
+      activeIndex: 0,
+      controller: controller,
+      itemCount: 10,
+      scrollDirection: Axis.vertical,
+    );
 
     Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
