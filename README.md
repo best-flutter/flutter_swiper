@@ -1,27 +1,15 @@
 ![Logo](banner.jpg)
 
 <p align="center">
-    <a href="https://travis-ci.org/best-flutter/flutter_swiper">
-        <img src="https://travis-ci.org/best-flutter/flutter_swiper.svg?branch=master" alt="Build Status" />
-    </a>
-    <a href="https://coveralls.io/github/best-flutter/flutter_swiper?branch=master">
-        <img src="https://coveralls.io/repos/github/best-flutter/flutter_swiper/badge.svg?branch=master" alt="Coverage Status" />
-    </a>
-    <a href="https://github.com/jzoom/flutter_swiper/pulls">
+    <a href="https://github.com/TheAnkurPanchani/flutter_swiper/pulls">
         <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg" alt="PRs Welcome" />
     </a>
-    <a href="https://pub.dartlang.org/packages/flutter_swiper">
-        <img src="https://img.shields.io/pub/v/flutter_swiper.svg" alt="pub package" />
-    </a>
-    <a target="_blank" href="https://shang.qq.com/wpa/qunwpa?idkey=a71a2504cda4cc9ace3320f2dc588bdae928abc671e903463caeb71ec9302c2c"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="best-flutter" title="best-flutter"></a>
-</p>
-<p align="center">
-    <a href="https://github.com/jzoom/flutter_swiper/blob/master/README-ZH.md">
-        <b>中文说明</b>
+    <a href="https://pub.dev/packages/card_swiper">
+        <img src="https://img.shields.io/pub/v/card_swiper.svg" alt="pub package" />
     </a>
 </p>
 
-# flutter_swiper
+# card_swiper
 
 Swiper/Carousel for flutter, with multiple layouts, infinite loop. Compatible with Android & iOS.
 
@@ -65,7 +53,7 @@ We are using this project [transformer_page_view](https://github.com/best-flutte
 
 ## Changelogs
 
-> see:[CHANGELOG.md](https://github.com/jzoom/flutter_swiper/blob/master/CHANGELOG.md)
+> see:[CHANGELOG.md](https://github.com/TheAnkurPanchani/flutter_swiper/blob/master/CHANGELOG.md)
 
 ## Getting Started
 
@@ -85,15 +73,22 @@ We are using this project [transformer_page_view](https://github.com/best-flutte
 Add
 
 ```bash
-
-flutter_swiper : ^lastest_version
-
+card_swiper : ^1.0.1
 ```
 
-to your pubspec.yaml ,and run
+to your `pubspec.yaml`, and run
 
 ```bash
 flutter packages get
+```
+
+in your project's root directory.
+
+OR
+
+run
+```bash
+flutter pub add card_swiper
 ```
 
 in your project's root directory.
@@ -414,4 +409,4 @@ ConstrainedBox(
 
 You can find all custom options here:
 
-> https://github.com/jzoom/flutter_swiper/blob/master/example/lib/src/ExampleCustom.dart
+> https://github.com/TheAnkurPanchani/flutter_swiper/blob/master/example/lib/src/ExampleCustom.dart
