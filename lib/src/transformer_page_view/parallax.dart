@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:card_swiper/src/transformer_page_view/transformer_page_view.dart';
 
-typedef  PaintCallback = Function(Canvas canvas, Size size);
+typedef PaintCallback = Function(Canvas canvas, Size size);
 
 class ColorPainter extends CustomPainter {
   final Paint _paint;
