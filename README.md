@@ -21,12 +21,9 @@
     </a>
 </p>
 
-
-
 # flutter_swiper
 
-The best swiper for flutter , with multiple layouts, infinite loop. Compatible with Android & iOS.
-
+Swiper/Carousel for flutter, with multiple layouts, infinite loop. Compatible with Android & iOS.
 
 # :sparkles::sparkles: New Features:Layout for pagination.
 
@@ -40,9 +37,7 @@ Thanks to @FlutterRocks ,you've done great job 👏.
 
 We are using this project [transformer_page_view](https://github.com/best-flutter/transformer_page_view) now .
 
-
 # :sparkles::sparkles: New Features:Layout
-
 
 ![](https://github.com/jzoom/images/raw/master/layout1.gif)
 
@@ -51,7 +46,6 @@ We are using this project [transformer_page_view](https://github.com/best-flutte
 ![](https://github.com/jzoom/images/raw/master/layout3.gif)
 
 [See More](#build-in-layouts)
-
 
 # Showcases
 
@@ -69,41 +63,39 @@ We are using this project [transformer_page_view](https://github.com/best-flutte
 
 [See More](#codes)
 
-## Roadmap
-
->see:[ROADMAP.md](https://github.com/jzoom/flutter_swiper/blob/master/ROADMAP.md)
-
 ## Changelogs
 
->see:[CHANGELOG.md](https://github.com/jzoom/flutter_swiper/blob/master/CHANGELOG.md)
+> see:[CHANGELOG.md](https://github.com/jzoom/flutter_swiper/blob/master/CHANGELOG.md)
 
 ## Getting Started
 
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
 - [Constructor](#constructor)
-  + [Basic](#basic)
-  + [Pagination](#pagination)
-  + [Control buttons](#control-buttons)
-  + [Controller](#controller)
-  + [Autoplay](#autoplay)
+  - [Basic](#basic)
+  - [Pagination](#pagination)
+  - [Control buttons](#control-buttons)
+  - [Controller](#controller)
+  - [Autoplay](#autoplay)
 - [Build in layouts](#build-in-layouts)
 - [Codes](#codes)
 
 ### Installation
 
-Add 
+Add
 
 ```bash
 
 flutter_swiper : ^lastest_version
 
 ```
-to your pubspec.yaml ,and run 
+
+to your pubspec.yaml ,and run
 
 ```bash
-flutter packages get 
+flutter packages get
 ```
+
 in your project's root directory.
 
 ### Basic Usage
@@ -122,17 +114,17 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
-      theme: new ThemeData(
+      theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -143,24 +135,24 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
-    body:  new Swiper(
+    body: Swiper(
         itemBuilder: (BuildContext context,int index){
-          return new Image.network("http://via.placeholder.com/350x150",fit: BoxFit.fill,);
+          return Image.network("https://via.placeholder.com/350x150",fit: BoxFit.fill,);
         },
         itemCount: 3,
-        pagination: new SwiperPagination(),
-        control: new SwiperControl(),
+        pagination: SwiperPagination(),
+        control: SwiperControl(),
       ),
     );
   }
@@ -168,129 +160,121 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ```
 
-
-
 ### Constructor
-
 
 #### Basic
 
-| Parameter  | Default   | Description |
-| :------------ |:---------------:| :-----|
-| scrollDirection | Axis.horizontal  | If `Axis.horizontal`, the scroll view's children are arranged horizontally in a row instead of vertically in a column. |
-| loop | true |Set to `false` to disable continuous loop mode. |
-| index | 0 |  Index number of initial slide. |
-| autoplay | false |Set to `true` enable auto play mode. |
-| onIndexChanged | void onIndexChanged(int index)  | Called with the new index when the user swiped or autoplay |
-| onTap | void onTap(int index)  | Called when user tap ui. |
-| duration | 300.0  | The milliscends of every transaction animation costs  |
-| pagination | null | set `new SwiperPagination()` to show default pagination
-| control | null | set `new SwiperControl()` to show default control buttons
-
+| Parameter       |            Default             | Description                                                                                                            |
+| :-------------- | :----------------------------: | :--------------------------------------------------------------------------------------------------------------------- |
+| scrollDirection |        Axis.horizontal         | If `Axis.horizontal`, the scroll view's children are arranged horizontally in a row instead of vertically in a column. |
+| loop            |              true              | Set to `false` to disable continuous loop mode.                                                                        |
+| index           |               0                | Index number of initial slide.                                                                                         |
+| autoplay        |             false              | Set to `true` enable auto play mode.                                                                                   |
+| onIndexChanged  | void onIndexChanged(int index) | Called with the new index when the user swiped or autoplay                                                             |
+| onTap           |     void onTap(int index)      | Called when user tap ui.                                                                                               |
+| duration        |             300.0              | The milliscends of every transaction animation costs                                                                   |
+| pagination      |              null              | set `SwiperPagination()` to show default pagination                                                                |
+| control         |              null              | set `SwiperControl()` to show default control buttons                                                              |
 
 #### Pagination
 
-The pagination extends from `SwiperPlugin`,the `SwiperPlugin` provides extra ui for `Swiper`.Set `new SwiperPagination()` to show default pagination.
+The pagination extends from `SwiperPlugin`,the `SwiperPlugin` provides extra ui for `Swiper`.Set `SwiperPagination()` to show default pagination.
 
-
-| Parameter  | Default   | Description |
-| :------------ |:---------------:| :-----|
-| alignment | Alignment.bottomCenter  | Change this value if you what to put pagination in other place |
-| margin | const EdgeInsets.all(10.0) | The distance between inner side of the parent container. |
-| builder | SwiperPagination.dots | There are two default styles `SwiperPagination.dots` and `SwiperPagination.fraction`,both can be customized. |
+| Parameter |          Default           | Description                                                                                                  |
+| :-------- | :------------------------: | :----------------------------------------------------------------------------------------------------------- |
+| alignment |   Alignment.bottomCenter   | Change this value if you what to put pagination in other place                                               |
+| margin    | const EdgeInsets.all(10.0) | The distance between inner side of the parent container.                                                     |
+| builder   |   SwiperPagination.dots    | There are two default styles `SwiperPagination.dots` and `SwiperPagination.fraction`,both can be customized. |
 
 If you'd like to customize your own pagination, you can do like this:
 
 ```dart
-new Swiper(
+Swiper(
     ...,
-    pagination:new SwiperCustomPagination(
+    pagination: SwiperCustomPagination(
         builder:(BuildContext context, SwiperPluginConfig config){
-            return new YourOwnPaginatipon();
+            return YourOwnPagination();
         }
     )
 );
 
 ```
+
 ##### Implemented pagination
 
 ###### DotSwiperPaginationBuilder
 
-| Parameter     | Default        |  Description   | Required |
-| :------------ |:---------------| :-----| :----: |
-| activeColor | Theme.of(context).primaryColor  | Active bullet color |false |
-| color | Theme.of(context).scaffoldBackgroundColor | Bullet color | false |
-| activeSize | 10.0 | Active bullet size | false |
-| size | 10.0 | Bullet size | false |
-| space | 3.0 | Distance between bullets | false |
-| key | - | key | false |
+| Parameter   | Default                                   | Description              | Required |
+| :---------- | :---------------------------------------- | :----------------------- | :------: |
+| activeColor | Theme.of(context).primaryColor            | Active bullet color      |  false   |
+| color       | Theme.of(context).scaffoldBackgroundColor | Bullet color             |  false   |
+| activeSize  | 10.0                                      | Active bullet size       |  false   |
+| size        | 10.0                                      | Bullet size              |  false   |
+| space       | 3.0                                       | Distance between bullets |  false   |
+| key         | -                                         | key                      |  false   |
 
 ###### FractionPaginationBuilder
 
-| Parameter            | Default             |           Description     | Required
-| :------------ |:---------------| :-----| :----: |
-| activeColor | Theme.of(context).primaryColor  | Active font color |false |
-| color | Theme.of(context).scaffoldBackgroundColor | font color | false|
-| activeFontSize | 35.0 | Active font size | false |
-| fontSize | 20.0 | Font size | false |
-| key | - | key | false |
+| Parameter      | Default                                   | Description       | Required |
+| :------------- | :---------------------------------------- | :---------------- | :------: |
+| activeColor    | Theme.of(context).primaryColor            | Active font color |  false   |
+| color          | Theme.of(context).scaffoldBackgroundColor | font color        |  false   |
+| activeFontSize | 35.0                                      | Active font size  |  false   |
+| fontSize       | 20.0                                      | Font size         |  false   |
+| key            | -                                         | key               |  false   |
 
 ###### RectSwiperPaginationBuilder
 
-| Parameter            | Default             |           Description     | Required
-| :------------ |:---------------| :-----| :----: |
-| activeColor | Theme.of(context).primaryColor  | Active bullet color |false |
-| color | Theme.of(context).scaffoldBackgroundColor | Bullet color | false|
-| activeSize | 10.0 | Active bullet size | false |
-| size | 10.0 | Bullet size | false |
-| space | 3.0 | Distance between bullets| false |
-| key | - | key | false |
-
+| Parameter   | Default                                   | Description              | Required |
+| :---------- | :---------------------------------------- | :----------------------- | :------: |
+| activeColor | Theme.of(context).primaryColor            | Active bullet color      |  false   |
+| color       | Theme.of(context).scaffoldBackgroundColor | Bullet color             |  false   |
+| activeSize  | 10.0                                      | Active bullet size       |  false   |
+| size        | 10.0                                      | Bullet size              |  false   |
+| space       | 3.0                                       | Distance between bullets |  false   |
+| key         | -                                         | key                      |  false   |
 
 #### Control buttons
 
-The control also extends from `SwiperPlugin`,set `new SwiperControl()` to show default control buttons.
+The control also extends from `SwiperPlugin`,set `SwiperControl()` to show default control buttons.
 
-
-| Parameter  | Default   | Description |
-| :------------ |:---------------:| :-----|
-| iconPrevious | Icons.arrow_back_ios  | The icon data to display `previous` control button |
-| iconNext | Icons.arrow_forward_ios | The icon data to display `next`. |
-| color | Theme.of(context).primaryColor | Control button color |
-| size | 30.0 | Control button size |
-| padding | const EdgeInsets.all(5.0) | Control button padding |
-
+| Parameter    |            Default              | Description                                        |
+| :----------- | :----------------------------:  | :------------------------------------------------- |
+| iconPrevious |      Icons.arrow_back_ios       | The icon data to display `previous` control button |
+| iconNext     |    Icons.arrow_forward_ios      | The icon data to display `next`.                   |
+| color        | Theme.of(context).primaryColor  | Control button color                               |
+| disableColor | Theme.of(context).disabledColor | Disabled control button color                      |
+| size         |              30.0               | Control button size                                |
+| padding      |   const EdgeInsets.all(5.0)     | Control button padding                             |
 
 #### Controller
 
-The `Controller` is used to control the `index` of the Swiper, start or stop autoplay.You can create a controller by `new SwiperController()` and save the instance by futher usage.
+The `Controller` is used to control the `index` of the Swiper, start or stop autoplay.You can create a controller by `SwiperController()` and save the instance by futher usage.
 
-
-| Method  | Description |
-| :------------ |:-----|
+| Method                                       | Description                                         |
+| :------------------------------------------- | :-------------------------------------------------- |
 | void move(int index, {bool animation: true}) | Move to the spicified `index`,with animation or not |
-| void next({bool animation: true}) | Move to next |
-| void previous({bool animation: true}) | Move to previous |
-| void startAutoplay() | Start autoplay |
-| void stopAutoplay() | Stop autoplay |
-
-
+| void next({bool animation: true})            | Move to next                                        |
+| void previous({bool animation: true})        | Move to previous                                    |
+| void startAutoplay()                         | Start autoplay                                      |
+| void stopAutoplay()                          | Stop autoplay                                       |
 
 #### Autoplay
 
-| Parameter  | Default   | Description |
-| :------------ |:---------------:| :-----|
-| autoplayDelay | 3000  | Autoplay delay milliseconds. |
-| autoplayDisableOnInteraction | true | If set true, `autoplay` is disabled when use swipes. |
+| Parameter                    | Default | Description                                          |
+| :--------------------------- | :-----: | :--------------------------------------------------- |
+| autoplayDelay                |  3000   | Autoplay delay milliseconds.                         |
+| autoplayDisableOnInteraction |  true   | If set true, `autoplay` is disabled when use swipes. |
 
 ## Build in layouts
+
 ![](https://github.com/jzoom/images/raw/master/layout1.gif)
 
 ```dart
-new Swiper(
+Swiper(
   itemBuilder: (BuildContext context, int index) {
-    return new Image.network(
-      "http://via.placeholder.com/288x188",
+    return Image.network(
+      "https://via.placeholder.com/288x188",
       fit: BoxFit.fill,
     );
   },
@@ -301,15 +285,13 @@ new Swiper(
 
 ```
 
-
-
 ![](https://github.com/jzoom/images/raw/master/layout2.gif)
 
 ```dart
-new Swiper(
+Swiper(
   itemBuilder: (BuildContext context, int index) {
-    return new Image.network(
-      "http://via.placeholder.com/288x188",
+    return Image.network(
+      "https://via.placeholder.com/288x188",
       fit: BoxFit.fill,
     );
   },
@@ -322,10 +304,10 @@ new Swiper(
 ![](https://github.com/jzoom/images/raw/master/layout3.gif)
 
 ```dart
-new Swiper(
+Swiper(
     itemBuilder: (BuildContext context, int index) {
-      return new Image.network(
-        "http://via.placeholder.com/288x188",
+      return Image.network(
+        "https://via.placeholder.com/288x188",
         fit: BoxFit.fill,
       );
     },
@@ -336,15 +318,15 @@ new Swiper(
  )
 ```
 
-
 ![](https://github.com/jzoom/images/raw/master/layout4.gif)
 
 Very easy to create you own custom animation:
+
 ```dart
 
- new Swiper(
+ Swiper(
   layout: SwiperLayout.CUSTOM,
-  customLayoutOption: new CustomLayoutOption(
+  customLayoutOption: CustomLayoutOption(
       startIndex: -1,
       stateCount: 3
   ).addRotate([
@@ -352,17 +334,17 @@ Very easy to create you own custom animation:
     0.0,
     45.0/180
   ]).addTranslate([
-    new Offset(-370.0, -40.0),
-    new Offset(0.0, 0.0),
-    new Offset(370.0, -40.0)
+    Offset(-370.0, -40.0),
+    Offset(0.0, 0.0),
+    Offset(370.0, -40.0)
   ]),
   itemWidth: 300.0,
   itemHeight: 200.0,
   itemBuilder: (context, index) {
-    return new Container(
+    return Container(
       color: Colors.grey,
-      child: new Center(
-        child: new Text("$index"),
+      child: Center(
+        child: Text("$index"),
       ),
     );
   },
@@ -374,17 +356,17 @@ The `CustomLayoutOption` is designed to describe animations.
 It is very easy to specify every state of items in Swiper.
 
 ```dart
-new CustomLayoutOption(
-      startIndex: -1,  /// Which index is the first item of array below      
-      stateCount: 3    /// array length 
-  ).addRotate([        // rotation of every item 
+CustomLayoutOption(
+      startIndex: -1,  /// Which index is the first item of array below
+      stateCount: 3    /// array length
+  ).addRotate([        // rotation of every item
     -45.0/180,
     0.0,
     45.0/180
   ]).addTranslate([           /// offset of every item
-    new Offset(-370.0, -40.0),
-    new Offset(0.0, 0.0),
-    new Offset(370.0, -40.0)
+    Offset(-370.0, -40.0),
+    Offset(0.0, 0.0),
+    Offset(370.0, -40.0)
   ])
 
 ```
@@ -394,51 +376,42 @@ new CustomLayoutOption(
 ![Example](https://github.com/jzoom/images/raw/master/swiper-example.gif)
 
 ```dart
-new ConstrainedBox(
-  child: new Swiper(
+ConstrainedBox(
+  child: Swiper(
     outer:false,
     itemBuilder: (c, i) {
-      return new Wrap(
-        runSpacing:  6.0,
+      return Wrap(
+        runSpacing: 6.0,
         children: [0,1,2,3,4,5,6,7,8,9].map((i){
-          return new SizedBox(
+          return SizedBox(
             width: MediaQuery.of(context).size.width/5,
-            child: new Column(
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                new SizedBox(
-                  child:  new Container(
-                    child: new Image.network("https://fuss10.elemecdn.com/c/db/d20d49e5029281b9b73db1c5ec6f9jpeg.jpeg%3FimageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90"),
+                SizedBox(
+                  child: Container(
+                    child: Image.network("https://fuss10.elemecdn.com/c/db/d20d49e5029281b9b73db1c5ec6f9jpeg.jpeg%3FimageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90"),
                   ),
                   height: MediaQuery.of(context).size.width * 0.12,
                   width: MediaQuery.of(context).size.width * 0.12,
                 ),
-                new Padding(padding: new EdgeInsets.only(top:6.0),child: new Text("$i"),)
+                Padding(padding: EdgeInsets.only(top:6.0),child: Text("$i"),)
               ],
             ),
           );
         }).toList(),
       );
     },
-    pagination: new SwiperPagination(
-      margin: new EdgeInsets.all(5.0)
+    pagination: SwiperPagination(
+      margin: EdgeInsets.all(5.0)
     ),
     itemCount: 10,
   ),
-    constraints:new BoxConstraints.loose(new Size(screenWidth, 170.0))
+    constraints:BoxConstraints.loose(Size(screenWidth, 170.0))
 ),
 
 ```
 
-
-
-
-
 You can find all custom options here:
 
->https://github.com/jzoom/flutter_swiper/blob/master/example/lib/src/ExampleCustom.dart
-
-
-
-
-
+> https://github.com/jzoom/flutter_swiper/blob/master/example/lib/src/ExampleCustom.dart
