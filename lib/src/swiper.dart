@@ -399,7 +399,7 @@ class _SwiperState extends _SwiperTimerMixin {
     _activeIndex = widget.index ?? 0;
     if (_isPageViewLayout()) {
       _pageController = TransformerPageController(
-          initialPage: widget.index ?? 0,
+          initialPage: widget.index ?? widget.controller?.index ?? 0,
           loop: widget.loop,
           itemCount: widget.itemCount,
           reverse:
@@ -432,7 +432,7 @@ class _SwiperState extends _SwiperTimerMixin {
               widget.viewportFraction != oldWidget.viewportFraction ||
               _getReverse(widget) != _getReverse(oldWidget))) {
         _pageController = TransformerPageController(
-            initialPage: widget.index ?? 0,
+            initialPage: widget.index ?? widget.controller?.index ?? 0,
             loop: widget.loop,
             itemCount: widget.itemCount,
             reverse: _getReverse(widget),
