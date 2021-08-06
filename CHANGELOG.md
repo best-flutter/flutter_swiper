@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+
+## [1.0.4] - 2021-08-06
+### Fixed
+- Initial index should set from controller is provided in parameter
+- Update readme
+
 ## [1.0.3] - 2021-08-06
 ### Fixed
 - Initial index should set from controller is provided in parameter

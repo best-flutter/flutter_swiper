@@ -73,7 +73,7 @@ We are using this project [transformer_page_view](https://github.com/best-flutte
 Add
 
 ```bash
-card_swiper : ^1.0.3
+card_swiper : ^1.0.4
 ```
 
 to your `pubspec.yaml`, and run
@@ -179,7 +179,7 @@ The pagination extends from `SwiperPlugin`,the `SwiperPlugin` provides extra ui 
 | :-------- | :------------------------: | :----------------------------------------------------------------------------------------------------------- |
 | alignment |   Alignment.bottomCenter   | Change this value if you what to put pagination in other place                                               |
 | margin    | const EdgeInsets.all(10.0) | The distance between inner side of the parent container.                                                     |
-| builder   |   SwiperPagination.dots    | There are two default styles `SwiperPagination.dots` and `SwiperPagination.fraction`,both can be customized. |
+| builder   |   SwiperPagination.dots    | There are three default styles `SwiperPagination.dots`, `SwiperPagination.fraction` and `SwiperPagination.rect`, these can be customized. |
 
 If you'd like to customize your own pagination, you can do like this:
 
