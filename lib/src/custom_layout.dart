@@ -164,6 +164,16 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     return index;
   }
 
+  int _moveIndex() {
+    final index = widget.controller!.index ?? _currentIndex;
+    if(!widget.loop! && index >= widget.itemCount! - 1) {
+      return widget.itemCount! - 1;
+    } else if(!widget.loop! && index < 0) {
+      return 0;
+    }
+    return index;
+  }
+
   int _prevIndex() {
     final index = _currentIndex - 1;
     if (!widget.loop! && index < 0) {
@@ -185,8 +195,10 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
         _move(0.0, nextIndex: nextIndex);
         break;
       case IndexController.MOVE:
-        throw Exception(
-            'Custom layout does not support SwiperControllerEvent.MOVE_INDEX yet!');
+        var moveIndex = _moveIndex();
+        if (moveIndex == _currentIndex) return;
+        _move(moveIndex > _currentIndex ? 1.0 : 0.0, nextIndex: moveIndex);
+        break;
       case SwiperController.STOP_AUTOPLAY:
       case SwiperController.START_AUTOPLAY:
         break;
