@@ -1,7 +1,8 @@
+// ignore_for_file: constant_identifier_names
+
 library flutter_page_indicator;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class WarmPainter extends BasePainter {
   WarmPainter(PageIndicator widget, double page, int index, Paint paint)
@@ -9,9 +10,9 @@ class WarmPainter extends BasePainter {
 
   @override
   void draw(Canvas canvas, double space, double size, double radius) {
-    var progress = page - index;
-    var distance = size + space;
-    var start = index * (size + space);
+    final progress = page - index;
+    final distance = size + space;
+    final start = index * (size + space);
 
     if (progress > 0.5) {
       final right = start + size + distance;
@@ -88,13 +89,12 @@ class ScalePainter extends BasePainter {
   ScalePainter(PageIndicator widget, double page, int index, Paint paint)
       : super(widget, page, index, paint);
 
-  // 连续的两个点，含有最后一个和第一个
   @override
-  bool _shouldSkip(int i) {
-    if (index == widget.count - 1) {
-      return i == 0 || i == index;
+  bool _shouldSkip(int index) {
+    if (this.index == widget.count - 1) {
+      return index == 0 || index == this.index;
     }
-    return (i == index || i == index + 1);
+    return (index == this.index || index == this.index + 1);
   }
 
   @override
@@ -103,7 +103,8 @@ class ScalePainter extends BasePainter {
     final space = widget.space;
     final size = widget.size;
     final radius = size / 2;
-    for (var i = 0, c = widget.count; i < c; ++i) {
+    final c = widget.count;
+    for (var i = 0; i < c; ++i) {
       if (_shouldSkip(i)) {
         continue;
       }
@@ -137,13 +138,12 @@ class ColorPainter extends BasePainter {
   ColorPainter(PageIndicator widget, double page, int index, Paint paint)
       : super(widget, page, index, paint);
 
-  // 连续的两个点，含有最后一个和第一个
   @override
-  bool _shouldSkip(int i) {
-    if (index == widget.count - 1) {
-      return i == 0 || i == index;
+  bool _shouldSkip(int index) {
+    if (this.index == widget.count - 1) {
+      return index == 0 || index == this.index;
     }
-    return (i == index || i == index + 1);
+    return (index == this.index || index == this.index + 1);
   }
 
   @override
@@ -189,7 +189,8 @@ abstract class BasePainter extends CustomPainter {
     final space = widget.space;
     final size = widget.size;
     final radius = size / 2;
-    for (var i = 0, c = widget.count; i < c; ++i) {
+    final c = widget.count;
+    for (var i = 0; i < c; ++i) {
       if (_shouldSkip(i)) {
         continue;
       }
@@ -213,28 +214,23 @@ abstract class BasePainter extends CustomPainter {
 
 class _PageIndicatorState extends State<PageIndicator> {
   int index = 0;
+  double page = 0;
   final _paint = Paint();
 
   BasePainter _createPainter() {
     switch (widget.layout) {
       case PageIndicatorLayout.NONE:
-        return NonePainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+        return NonePainter(widget, page, index, _paint);
       case PageIndicatorLayout.SLIDE:
-        return SlidePainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+        return SlidePainter(widget, page, index, _paint);
       case PageIndicatorLayout.WARM:
-        return WarmPainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+        return WarmPainter(widget, page, index, _paint);
       case PageIndicatorLayout.COLOR:
-        return ColorPainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+        return ColorPainter(widget, page, index, _paint);
       case PageIndicatorLayout.SCALE:
-        return ScalePainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+        return ScalePainter(widget, page, index, _paint);
       case PageIndicatorLayout.DROP:
-        return DropPainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+        return DropPainter(widget, page, index, _paint);
       default:
         throw Exception('Not a valid layout');
     }
@@ -262,26 +258,28 @@ class _PageIndicatorState extends State<PageIndicator> {
     );
   }
 
-  void _onController() {
-    final page = widget.controller.page ?? 0.0;
+  void _onController([bool doSetState = true]) {
+    page = (widget.controller.hasClients ? widget.controller.page : 0) ?? 0.0;
     index = page.floor();
-
-    setState(() {});
+    if (doSetState) {
+      setState(() {});
+    }
   }
 
   @override
   void initState() {
-    widget.controller.addListener(_onController);
     super.initState();
+    widget.controller.addListener(_onController);
+    _onController(false);
   }
 
   @override
   void didUpdateWidget(PageIndicator oldWidget) {
+    super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
       oldWidget.controller.removeListener(_onController);
       widget.controller.addListener(_onController);
     }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -329,7 +327,7 @@ class PageIndicator extends StatefulWidget {
 
   final double activeSize;
 
-  PageIndicator({
+  const PageIndicator({
     Key? key,
     this.size = 20.0,
     this.space = 5.0,

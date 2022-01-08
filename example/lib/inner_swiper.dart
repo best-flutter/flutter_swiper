@@ -1,18 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: InnerSwiper(),
     );
   }
 }
 
 class InnerSwiper extends StatefulWidget {
+  const InnerSwiper({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _InnerSwiperState();
@@ -41,19 +45,19 @@ class _InnerSwiperState extends State<InnerSwiper> {
         loop: false,
         itemCount: 10,
         controller: controller,
-        pagination: SwiperPagination(),
-        itemBuilder: (BuildContext context, int index) {
+        pagination: const SwiperPagination(),
+        itemBuilder: (context, index) {
           return Column(
             children: <Widget>[
               SizedBox(
                 child: Swiper(
                   controller: controllers[index],
-                  pagination: SwiperPagination(),
+                  pagination: const SwiperPagination(),
                   itemCount: 4,
-                  itemBuilder: (BuildContext context, int index) {
+                  itemBuilder: (context, index) {
                     return Container(
                       color: Colors.greenAccent,
-                      child: Text('jkfjkldsfjd'),
+                      child: const Text('jkfjkldsfjd'),
                     );
                   },
                   autoplay: autoPlayer[index],
@@ -66,7 +70,7 @@ class _InnerSwiperState extends State<InnerSwiper> {
                     autoPlayer[index] = true;
                   });
                 },
-                child: Text('Start autoplay'),
+                child: const Text('Start autoplay'),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -74,7 +78,7 @@ class _InnerSwiperState extends State<InnerSwiper> {
                     autoPlayer[index] = false;
                   });
                 },
-                child: Text('End autoplay'),
+                child: const Text('End autoplay'),
               ),
               Text('is autoplay: ${autoPlayer[index]}')
             ],

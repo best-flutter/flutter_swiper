@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:card_swiper/src/transformer_page_view/transformer_page_view.dart';
+import 'transformer_page_view.dart';
 
 typedef PaintCallback = Function(Canvas canvas, Size size);
 
@@ -12,7 +12,7 @@ class ColorPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    var index = info.fromIndex!;
+    final index = info.fromIndex;
     _paint.color = colors[index];
     canvas.drawRect(Rect.fromLTWH(0.0, 0.0, size.width, size.height), _paint);
     if (info.done!) {
@@ -86,11 +86,12 @@ class ParallaxColor extends StatefulWidget {
 
   final TransformInfo info;
 
-  ParallaxColor({
+  const ParallaxColor({
+    Key? key,
+    required this.child,
     required this.colors,
     required this.info,
-    required this.child,
-  });
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -105,11 +106,12 @@ class ParallaxContainer extends StatelessWidget {
   final double opacityFactor;
 
   const ParallaxContainer({
+    Key? key,
     required this.child,
     required this.position,
     this.translationFactor = 100.0,
     this.opacityFactor = 1.0,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -127,14 +129,20 @@ class ParallaxImage extends StatelessWidget {
   final Image image;
   final double imageFactor;
 
-  ParallaxImage.asset(String name,
-      {required double position, this.imageFactor = 0.3})
-      : image = Image.asset(name,
-            fit: BoxFit.cover,
-            alignment: FractionalOffset(
-              0.5 + position * imageFactor,
-              0.5,
-            ));
+  ParallaxImage.asset(
+    String name, {
+    Key? key,
+    required double position,
+    this.imageFactor = 0.3,
+  })  : image = Image.asset(
+          name,
+          fit: BoxFit.cover,
+          alignment: FractionalOffset(
+            0.5 + position * imageFactor,
+            0.5,
+          ),
+        ),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

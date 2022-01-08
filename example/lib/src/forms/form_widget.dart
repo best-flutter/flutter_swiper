@@ -1,23 +1,24 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class FormWidget extends StatelessWidget {
   final String label;
 
   final Widget child;
 
-  FormWidget({
+  const FormWidget({
+    Key? key,
     required this.label,
     required this.child,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(5.0),
+      padding: const EdgeInsets.all(5.0),
       child: Row(
         children: <Widget>[
-          Text(label, style: TextStyle(fontSize: 14.0)),
+          Text(label, style: const TextStyle(fontSize: 14.0)),
           Expanded(
             child: Align(
               alignment: Alignment.centerRight,
@@ -33,28 +34,29 @@ class FormWidget extends StatelessWidget {
 class FormSelect<T> extends StatefulWidget {
   final String placeholder;
   final ValueChanged<T> valueChanged;
-  final List<Object> values;
-  final Object value;
+  final List<T> values;
+  final T value;
 
-  FormSelect({
+  const FormSelect({
+    Key? key,
     required this.placeholder,
     required this.valueChanged,
     required this.value,
     required this.values,
-  });
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _FormSelectState();
+    return _FormSelectState<T>();
   }
 }
 
-class _FormSelectState extends State<FormSelect> {
+class _FormSelectState<T> extends State<FormSelect<T>> {
   int _selectedIndex = 0;
 
   @override
   void initState() {
-    for (int i = 0, c = widget.values.length; i < c; ++i) {
+    for (var i = 0; i < widget.values.length; ++i) {
       if (widget.values[i] == widget.value) {
         _selectedIndex = i;
         break;
@@ -66,58 +68,55 @@ class _FormSelectState extends State<FormSelect> {
 
   @override
   Widget build(BuildContext context) {
-    String placeholder = widget.placeholder;
-    List<Object> values = widget.values;
+    final placeholder = widget.placeholder;
+    final values = widget.values;
 
-    return Container(
-      child: InkWell(
-        child: Text(_selectedIndex < 0
-            ? placeholder
-            : values[_selectedIndex].toString()),
-        onTap: () {
-          _selectedIndex = 0;
-          showBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return SizedBox(
-                  height: values.length * 30.0 + 200.0,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      SizedBox(
-                        height: values.length * 30.0 + 70.0,
-                        child: CupertinoPicker(
-                          itemExtent: 30.0,
-                          children: values.map((Object value) {
-                            return Text(value.toString());
-                          }).toList(),
-                          onSelectedItemChanged: (int index) {
-                            _selectedIndex = index;
-                          },
-                        ),
+    return InkWell(
+      child: Text(
+          _selectedIndex < 0 ? placeholder : values[_selectedIndex].toString()),
+      onTap: () {
+        _selectedIndex = 0;
+        showBottomSheet<dynamic>(
+            context: context,
+            builder: (context) {
+              return SizedBox(
+                height: values.length * 30.0 + 200.0,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(
+                      height: values.length * 30.0 + 70.0,
+                      child: CupertinoPicker(
+                        itemExtent: 30.0,
+                        children: values.map((value) {
+                          return Text(value.toString());
+                        }).toList(),
+                        onSelectedItemChanged: (index) {
+                          _selectedIndex = index;
+                        },
                       ),
-                      Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (_selectedIndex >= 0) {
-                              widget.valueChanged(
-                                widget.values[_selectedIndex],
-                              );
-                            }
+                    ),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_selectedIndex >= 0) {
+                            widget.valueChanged(
+                              widget.values[_selectedIndex],
+                            );
+                          }
 
-                            setState(() {});
+                          setState(() {});
 
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('ok'),
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              });
-        },
-      ),
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('ok'),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            });
+      },
     );
   }
 }
@@ -129,13 +128,14 @@ class NumberPad extends StatelessWidget {
   final num min;
   final ValueChanged<num> onChangeValue;
 
-  NumberPad({
+  const NumberPad({
+    Key? key,
     required this.number,
     required this.step,
     required this.onChangeValue,
     required this.max,
     required this.min,
-  });
+  }) : super(key: key);
 
   void onAdd() {
     onChangeValue(number + step > max ? max : number + step);
@@ -150,12 +150,12 @@ class NumberPad extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        IconButton(icon: Icon(Icons.exposure_neg_1), onPressed: onSub),
+        IconButton(icon: const Icon(Icons.exposure_neg_1), onPressed: onSub),
         Text(
           number is int ? number.toString() : number.toStringAsFixed(1),
-          style: TextStyle(fontSize: 14.0),
+          style: const TextStyle(fontSize: 14.0),
         ),
-        IconButton(icon: Icon(Icons.exposure_plus_1), onPressed: onAdd)
+        IconButton(icon: const Icon(Icons.exposure_plus_1), onPressed: onAdd)
       ],
     );
   }

@@ -1,9 +1,9 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:card_swiper/card_swiper.dart';
 
 void main() {
-  testWidgets('STACK', (WidgetTester tester) async {
+  testWidgets('STACK', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Swiper(
@@ -24,7 +24,7 @@ void main() {
     );
   });
 
-  testWidgets('TINDER', (WidgetTester tester) async {
+  testWidgets('TINDER', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Swiper(
@@ -45,7 +45,7 @@ void main() {
     );
   });
 
-  testWidgets('DEFAULT', (WidgetTester tester) async {
+  testWidgets('DEFAULT', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Swiper(
@@ -66,11 +66,17 @@ void main() {
     );
   });
 
-  testWidgets('CUSTOM', (WidgetTester tester) async {
+  testWidgets('CUSTOM', (tester) async {
     CustomLayoutOption customLayoutOption;
     customLayoutOption = CustomLayoutOption(startIndex: -1, stateCount: 3)
-        .addRotate([-45.0 / 180, 0.0, 45.0 / 180]).addTranslate(
-            [Offset(-370.0, -40.0), Offset(0.0, 0.0), Offset(370.0, -40.0)]);
+      ..addRotate([-45.0 / 180, 0.0, 45.0 / 180])
+      ..addTranslate(
+        const [
+          Offset(-370.0, -40.0),
+          Offset.zero,
+          Offset(370.0, -40.0),
+        ],
+      );
     await tester.pumpWidget(
       MaterialApp(
         home: Swiper(

@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter/material.dart';
 
 class ExampleSwiperInScrollView extends StatefulWidget {
+  const ExampleSwiperInScrollView({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _ExampleState();
@@ -32,7 +34,7 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
     _animation11 = Tween(begin: 0.0, end: 1.0).animate(controller);
     _animation12 = Tween(begin: 0.0, end: 1.0).animate(controller);
     _animation13 = Tween(begin: 0.0, end: 1.0).animate(controller);
-    controller.animateTo(1.0, duration: Duration(seconds: 3));
+    controller.animateTo(1.0, duration: const Duration(seconds: 3));
     super.initState();
   }
 
@@ -135,7 +137,7 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                       );
                     },
                     itemCount: 10,
-                    pagination: SwiperPagination(),
+                    pagination: const SwiperPagination(),
                   ),
                 ),
                 SizedBox(
@@ -149,8 +151,8 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                           child: Text('$i'),
                         );
                       },
-                      pagination:
-                          SwiperPagination(builder: SwiperPagination.fraction),
+                      pagination: const SwiperPagination(
+                          builder: SwiperPagination.fraction),
                       itemCount: 0),
                 ),
                 SizedBox(
@@ -164,8 +166,8 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                           child: Text('$i'),
                         );
                       },
-                      pagination:
-                          SwiperPagination(builder: SwiperPagination.fraction),
+                      pagination: const SwiperPagination(
+                          builder: SwiperPagination.fraction),
                       itemCount: 10000),
                 ),
                 SizedBox(
@@ -180,15 +182,15 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                           child: Text('$i'),
                         );
                       },
-                      pagination: SwiperPagination(),
+                      pagination: const SwiperPagination(),
                       itemCount: 10),
                 ),
-                Text('Image from network'),
+                const Text('Image from network'),
                 SizedBox(
                   height: 300.0,
                   child: Swiper(
                     itemCount: 10,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (context, index) {
                       return Image.network(
                           'https://ss3.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=87d6daed02f41bd5c553eef461d881a0/f9198618367adab4b025268587d4b31c8601e47b.jpg');
                     },
@@ -206,14 +208,12 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                           child: Stack(
                             alignment: AlignmentDirectional.center,
                             children: <Widget>[
-                              Container(
-                                child: Image.network(
-                                    'https://ss3.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=87d6daed02f41bd5c553eef461d881a0/f9198618367adab4b025268587d4b31c8601e47b.jpg'),
-                              ),
+                              Image.network(
+                                  'https://ss3.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=87d6daed02f41bd5c553eef461d881a0/f9198618367adab4b025268587d4b31c8601e47b.jpg'),
                               FractionalTranslation(
-                                translation: Offset(0.0, 0.0),
+                                translation: Offset.zero,
                                 child: Container(
-                                  alignment: FractionalOffset(0.0, 0.0),
+                                  alignment: FractionalOffset.topLeft,
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color: Colors.lightBlue.withOpacity(0.5),
@@ -225,17 +225,17 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                               ),
                               Container(
                                 //padding: const EdgeInsets.only(bottom:10.0),
-                                margin: EdgeInsets.all(140.0),
+                                margin: const EdgeInsets.all(140.0),
 
-                                child: Icon(Icons.location_on,
+                                child: const Icon(Icons.location_on,
                                     color: Colors.white, size: 25.0),
                               ),
                             ],
                           ),
                         );
                       },
-                      pagination:
-                          SwiperPagination(alignment: Alignment.topCenter),
+                      pagination: const SwiperPagination(
+                          alignment: Alignment.topCenter),
                       itemCount: 10),
                 ),
                 SizedBox(
@@ -245,8 +245,8 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                       itemBuilder: (c, i) {
                         return _buildDynamicCard();
                       },
-                      pagination:
-                          SwiperPagination(alignment: Alignment.topCenter),
+                      pagination: const SwiperPagination(
+                          alignment: Alignment.topCenter),
                       itemCount: 10),
                 ),
                 SizedBox(
@@ -262,8 +262,8 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                           child: Text('$i'),
                         );
                       },
-                      pagination:
-                          SwiperPagination(alignment: Alignment.topCenter),
+                      pagination: const SwiperPagination(
+                          alignment: Alignment.topCenter),
                       itemCount: 10),
                 ),
               ],

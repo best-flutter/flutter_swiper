@@ -1,46 +1,45 @@
-import 'package:card_swiper/src/swiper_plugin.dart';
-import 'package:card_swiper/src/transformer_page_view/index_controller.dart';
+import 'swiper_plugin.dart';
+import 'transformer_page_view/index_controller.dart';
+
+class SwipeIndexControllerEvent extends IndexControllerEventBase {
+  SwipeIndexControllerEvent({
+    required this.pos,
+    required bool animation,
+  }) : super(animation: animation);
+  final double pos;
+}
+
+class BuildIndexControllerEvent extends IndexControllerEventBase {
+  BuildIndexControllerEvent({
+    required bool animation,
+    required this.config,
+  }) : super(animation: animation);
+  final SwiperPluginConfig config;
+}
+
+class AutoPlaySwiperControllerEvent extends IndexControllerEventBase {
+  AutoPlaySwiperControllerEvent({
+    required bool animation,
+    required this.autoplay,
+  }) : super(animation: animation);
+
+  AutoPlaySwiperControllerEvent.start({
+    required bool animation,
+  }) : this(animation: animation, autoplay: true);
+  AutoPlaySwiperControllerEvent.stop({
+    required bool animation,
+  }) : this(animation: animation, autoplay: false);
+  final bool autoplay;
+}
 
 class SwiperController extends IndexController {
-  // Autoplay is started
-  static const int START_AUTOPLAY = 2;
-
-  // Autoplay is stopped.
-  static const int STOP_AUTOPLAY = 3;
-
-  // Indicate that the user is swiping
-  static const int SWIPE = 4;
-
-  // Indicate that the `Swiper` has changed it's index and is building it's ui ,so that the
-  // `SwiperPluginConfig` is available.
-  static const int BUILD = 5;
-
-  // available when `event` == SwiperController.BUILD
-  SwiperPluginConfig? config;
-
-  // available when `event` == SwiperController.SWIPE
-  // this value is PageViewController.pos
-  double? pos;
-
-  @override
-  int? index;
-
-  @override
-  bool? animation;
-
-  bool? autoplay;
-
-  SwiperController();
-
-  void startAutoplay() {
-    event = SwiperController.START_AUTOPLAY;
-    autoplay = true;
+  void startAutoplay({bool animation = true}) {
+    event = AutoPlaySwiperControllerEvent.start(animation: animation);
     notifyListeners();
   }
 
-  void stopAutoplay() {
-    event = SwiperController.STOP_AUTOPLAY;
-    autoplay = false;
+  void stopAutoplay({bool animation = true}) {
+    event = AutoPlaySwiperControllerEvent.stop(animation: animation);
     notifyListeners();
   }
 }

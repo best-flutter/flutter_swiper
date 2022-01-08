@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter/material.dart';
 
 class SwiperControl extends SwiperPlugin {
   ///IconData for previous
@@ -32,8 +32,13 @@ class SwiperControl extends SwiperPlugin {
     this.padding = const EdgeInsets.all(5.0),
   });
 
-  Widget buildButton(SwiperPluginConfig? config, Color color, IconData iconDaga,
-      int quarterTurns, bool previous) {
+  Widget buildButton({
+    required SwiperPluginConfig? config,
+    required Color color,
+    required IconData iconDaga,
+    required int quarterTurns,
+    required bool previous,
+  }) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -57,19 +62,19 @@ class SwiperControl extends SwiperPlugin {
   }
 
   @override
-  Widget build(BuildContext context, SwiperPluginConfig? config) {
+  Widget build(BuildContext context, SwiperPluginConfig config) {
     final themeData = Theme.of(context);
 
     final color = this.color ?? themeData.primaryColor;
     final disableColor = this.disableColor ?? themeData.disabledColor;
-    var prevColor;
-    var nextColor;
+    Color prevColor;
+    Color nextColor;
 
-    if (config!.loop!) {
+    if (config.loop) {
       prevColor = nextColor = color;
     } else {
-      final next = config.activeIndex! < config.itemCount! - 1;
-      final prev = config.activeIndex! > 0;
+      final next = config.activeIndex < config.itemCount - 1;
+      final prev = config.activeIndex > 0;
       prevColor = prev ? color : disableColor;
       nextColor = next ? color : disableColor;
     }
@@ -80,8 +85,20 @@ class SwiperControl extends SwiperPlugin {
         key: key,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          buildButton(config, prevColor, iconPrevious, 0, true),
-          buildButton(config, nextColor, iconNext, 0, false)
+          buildButton(
+            config: config,
+            color: prevColor,
+            iconDaga: iconPrevious,
+            quarterTurns: 0,
+            previous: true,
+          ),
+          buildButton(
+            config: config,
+            color: nextColor,
+            iconDaga: iconNext,
+            quarterTurns: 0,
+            previous: false,
+          )
         ],
       );
     } else {
@@ -89,13 +106,25 @@ class SwiperControl extends SwiperPlugin {
         key: key,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          buildButton(config, prevColor, iconPrevious, -3, true),
-          buildButton(config, nextColor, iconNext, -3, false)
+          buildButton(
+            config: config,
+            color: prevColor,
+            iconDaga: iconPrevious,
+            quarterTurns: -3,
+            previous: true,
+          ),
+          buildButton(
+            config: config,
+            color: nextColor,
+            iconDaga: iconNext,
+            quarterTurns: -3,
+            previous: false,
+          )
         ],
       );
     }
 
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: double.infinity,
       child: child,

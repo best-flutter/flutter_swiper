@@ -1,42 +1,43 @@
-import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Flutter Swiper'),
+      home: const MyHomePage(title: 'Flutter Swiper'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new Swiper(
+    return Scaffold(
+      body: Swiper(
         itemCount: 10,
         itemBuilder: (c, i) {
-          return new Text("$i");
+          return Text('$i');
         },
-        plugins: [],
+        plugins: const [],
       ),
     );
   }
