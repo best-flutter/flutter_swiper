@@ -77,6 +77,9 @@ class Swiper extends StatefulWidget {
   ///horizontal/vertical
   final Axis scrollDirection;
 
+  ///left/right for Stack Layout
+  final AxisDirection axisDirection;
+
   ///transition curve
   final Curve curve;
 
@@ -141,6 +144,7 @@ class Swiper extends StatefulWidget {
     this.loop = true,
     this.curve = Curves.ease,
     this.scrollDirection = Axis.horizontal,
+    this.axisDirection = AxisDirection.left,
     this.pagination,
     this.plugins,
     this.physics,
@@ -185,6 +189,7 @@ class Swiper extends StatefulWidget {
     bool loop = true,
     Curve curve = Curves.ease,
     Axis scrollDirection = Axis.horizontal,
+    AxisDirection axisDirection = AxisDirection.left,
     SwiperPlugin? pagination,
     SwiperPlugin? control,
     List<SwiperPlugin>? plugins,
@@ -225,6 +230,7 @@ class Swiper extends StatefulWidget {
         onTap: onTap,
         curve: curve,
         scrollDirection: scrollDirection,
+        axisDirection: axisDirection,
         pagination: pagination,
         control: control,
         controller: controller,
@@ -254,6 +260,7 @@ class Swiper extends StatefulWidget {
     bool loop = true,
     Curve curve = Curves.ease,
     Axis scrollDirection = Axis.horizontal,
+    AxisDirection axisDirection = AxisDirection.left,
     SwiperPlugin? pagination,
     SwiperPlugin? control,
     List<SwiperPlugin>? plugins,
@@ -294,6 +301,7 @@ class Swiper extends StatefulWidget {
         curve: curve,
         key: key,
         scrollDirection: scrollDirection,
+        axisDirection: axisDirection,
         pagination: pagination,
         control: control,
         controller: controller,
@@ -485,6 +493,7 @@ class _SwiperState extends _SwiperTimerMixin {
         onIndexChanged: _onIndexChanged,
         controller: _controller,
         scrollDirection: widget.scrollDirection,
+        axisDirection: widget.axisDirection,
       );
     } else if (_isPageViewLayout()) {
       //default
@@ -572,6 +581,7 @@ class _SwiperState extends _SwiperTimerMixin {
           pageController: _pageController,
           activeIndex: _activeIndex,
           scrollDirection: widget.scrollDirection,
+          axisDirection: widget.axisDirection,
           controller: _controller,
           loop: widget.loop,
         );
@@ -681,6 +691,7 @@ abstract class _SubSwiper extends StatefulWidget {
   final double? itemHeight;
   final bool loop;
   final Axis? scrollDirection;
+  final AxisDirection? axisDirection;
 
   const _SubSwiper({
     Key? key,
@@ -694,6 +705,7 @@ abstract class _SubSwiper extends StatefulWidget {
     this.index,
     required this.itemCount,
     this.scrollDirection = Axis.horizontal,
+    this.axisDirection = AxisDirection.left,
     this.onIndexChanged,
   }) : super(key: key);
 
@@ -759,6 +771,7 @@ class _StackSwiper extends _SubSwiper {
     required bool loop,
     required int itemCount,
     Axis? scrollDirection,
+    AxisDirection? axisDirection,
   }) : super(
           loop: loop,
           key: key,
@@ -772,6 +785,7 @@ class _StackSwiper extends _SubSwiper {
           onIndexChanged: onIndexChanged,
           itemCount: itemCount,
           scrollDirection: scrollDirection,
+          axisDirection: axisDirection,
         );
 
   @override
@@ -904,7 +918,7 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
     //length of the values array below
     _animationCount = 5;
 
-    //Array below this line, '0' index is 1.0 ,witch is the first item show in swiper.
+    //Array below this line, '0' index is 1.0, which is the first item show in swiper.
     _startIndex = -3;
     scales = [0.7, 0.8, 0.9, 1.0, 1.0];
     opacity = [0.0, 0.5, 1.0, 1.0, 1.0];
@@ -919,11 +933,15 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
     final o = _getValue(opacity, animationValue, i);
 
     final offset = widget.scrollDirection == Axis.horizontal
-        ? Offset(f, 0.0)
+        ? widget.axisDirection == AxisDirection.left
+            ? Offset(f, 0.0)
+            : Offset(-f, 0.0)
         : Offset(0.0, f);
 
     final alignment = widget.scrollDirection == Axis.horizontal
-        ? Alignment.centerLeft
+        ? widget.axisDirection == AxisDirection.left
+            ? Alignment.centerLeft
+            : Alignment.centerRight
         : Alignment.topCenter;
 
     return Opacity(

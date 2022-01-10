@@ -73,7 +73,7 @@ We are using this project [transformer_page_view](https://github.com/best-flutte
 Add
 
 ```bash
-card_swiper : ^1.0.4
+card_swiper : ^2.0.1
 ```
 
 to your `pubspec.yaml`, and run
@@ -87,6 +87,7 @@ in your project's root directory.
 OR
 
 run
+
 ```bash
 flutter pub add card_swiper
 ```
@@ -159,26 +160,27 @@ class _MyHomePageState extends State<MyHomePage> {
 
 #### Basic
 
-| Parameter       |            Default             | Description                                                                                                            |
-| :-------------- | :----------------------------: | :--------------------------------------------------------------------------------------------------------------------- |
-| scrollDirection |        Axis.horizontal         | If `Axis.horizontal`, the scroll view's children are arranged horizontally in a row instead of vertically in a column. |
-| loop            |              true              | Set to `false` to disable continuous loop mode.                                                                        |
-| index           |               0                | Index number of initial slide.                                                                                         |
-| autoplay        |             false              | Set to `true` enable auto play mode.                                                                                   |
-| onIndexChanged  | void onIndexChanged(int index) | Called with the new index when the user swiped or autoplay                                                             |
-| onTap           |     void onTap(int index)      | Called when user tap ui.                                                                                               |
-| duration        |             300.0              | The milliscends of every transaction animation costs                                                                   |
-| pagination      |              null              | set `SwiperPagination()` to show default pagination                                                                |
-| control         |              null              | set `SwiperControl()` to show default control buttons                                                              |
+| Parameter       |            Default             | Description                                                                                                                                                   |
+| :-------------- | :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| scrollDirection |        Axis.horizontal         | If `Axis.horizontal`, the scroll view's children are arranged horizontally in a row instead of vertically in a column.                                        |
+| axisDirection   |       AxisDirection.left       | If `AxisDirection.right`, the scroll view's children are arranged right side in a row instead of left.<br>**Note:** Currently supported for stack layout only |
+| loop            |              true              | Set to `false` to disable continuous loop mode.                                                                                                               |
+| index           |               0                | Index number of initial slide.                                                                                                                                |
+| autoplay        |             false              | Set to `true` enable auto play mode.                                                                                                                          |
+| onIndexChanged  | void onIndexChanged(int index) | Called with the new index when the user swiped or autoplay                                                                                                    |
+| onTap           |     void onTap(int index)      | Called when user tap ui.                                                                                                                                      |
+| duration        |             300.0              | The milliscends of every transaction animation costs                                                                                                          |
+| pagination      |              null              | set `SwiperPagination()` to show default pagination                                                                                                           |
+| control         |              null              | set `SwiperControl()` to show default control buttons                                                                                                         |
 
 #### Pagination
 
 The pagination extends from `SwiperPlugin`,the `SwiperPlugin` provides extra ui for `Swiper`.Set `SwiperPagination()` to show default pagination.
 
-| Parameter |          Default           | Description                                                                                                  |
-| :-------- | :------------------------: | :----------------------------------------------------------------------------------------------------------- |
-| alignment |   Alignment.bottomCenter   | Change this value if you what to put pagination in other place                                               |
-| margin    | const EdgeInsets.all(10.0) | The distance between inner side of the parent container.                                                     |
+| Parameter |          Default           | Description                                                                                                                               |
+| :-------- | :------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| alignment |   Alignment.bottomCenter   | Change this value if you what to put pagination in other place                                                                            |
+| margin    | const EdgeInsets.all(10.0) | The distance between inner side of the parent container.                                                                                  |
 | builder   |   SwiperPagination.dots    | There are three default styles `SwiperPagination.dots`, `SwiperPagination.fraction` and `SwiperPagination.rect`, these can be customized. |
 
 If you'd like to customize your own pagination, you can do like this:
@@ -233,14 +235,14 @@ Swiper(
 
 The control also extends from `SwiperPlugin`,set `SwiperControl()` to show default control buttons.
 
-| Parameter    |            Default              | Description                                        |
-| :----------- | :----------------------------:  | :------------------------------------------------- |
+| Parameter    |             Default             | Description                                        |
+| :----------- | :-----------------------------: | :------------------------------------------------- |
 | iconPrevious |      Icons.arrow_back_ios       | The icon data to display `previous` control button |
-| iconNext     |    Icons.arrow_forward_ios      | The icon data to display `next`.                   |
+| iconNext     |     Icons.arrow_forward_ios     | The icon data to display `next`.                   |
 | color        | Theme.of(context).primaryColor  | Control button color                               |
 | disableColor | Theme.of(context).disabledColor | Disabled control button color                      |
 | size         |              30.0               | Control button size                                |
-| padding      |   const EdgeInsets.all(5.0)     | Control button padding                             |
+| padding      |    const EdgeInsets.all(5.0)    | Control button padding                             |
 
 #### Controller
 

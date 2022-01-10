@@ -11,6 +11,7 @@ abstract class SwiperPlugin {
 
 class SwiperPluginConfig {
   final Axis scrollDirection;
+  final AxisDirection? axisDirection;
   final SwiperController controller;
   final int activeIndex;
   final int itemCount;
@@ -25,6 +26,7 @@ class SwiperPluginConfig {
     required this.controller,
     required this.activeIndex,
     required this.itemCount,
+    this.axisDirection,
     this.indicatorLayout,
     this.outer,
     this.pageController,

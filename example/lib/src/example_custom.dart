@@ -39,6 +39,8 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   late Axis _scrollDirection;
 
+  late AxisDirection _axisDirection;
+
   late Curve _curve;
 
   late double _fade;
@@ -101,6 +103,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
     _viewportFraction = 0.8;
     _outer = false;
     _scrollDirection = Axis.horizontal;
+    _axisDirection = AxisDirection.left;
     _autoplayDisableOnInteraction = false;
     super.initState();
   }
@@ -143,6 +146,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
       itemBuilder: _buildItem,
       itemCount: _itemCount,
       scrollDirection: _scrollDirection,
+      axisDirection: _axisDirection,
       indicatorLayout: PageIndicatorLayout.COLOR,
       autoplayDisableOnInteraction: _autoplayDisableOnInteraction,
       pagination: const SwiperPagination(
@@ -220,6 +224,14 @@ class _ExampleCustomState extends State<ExampleCustom> {
                     onChanged: (value) => setState(() => _scrollDirection =
                         value ? Axis.horizontal : Axis.vertical)),
               ),
+              if (_layout == SwiperLayout.STACK)
+                FormWidget(
+                  label: 'axisDirection (left <-> right)',
+                  child: Switch(
+                      value: _axisDirection == AxisDirection.right,
+                      onChanged: (value) => setState(() => _axisDirection =
+                          value ? AxisDirection.right : AxisDirection.left)),
+                ),
               FormWidget(
                 label: 'autoplayDisableOnInteraction',
                 child: Switch(
