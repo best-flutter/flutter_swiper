@@ -114,7 +114,6 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     return new Container(
       color: Theme.of(context).primaryColorLight,
       child: CustomScrollView(

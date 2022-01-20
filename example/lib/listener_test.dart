@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'src/ExampleCustom.dart';
-import 'src/config.dart';
-import 'src/ExampleSwiperInScrollView.dart';
-
-import 'package:flutter/cupertino.dart';
 
 void main() => runApp(new MyApp());
 
