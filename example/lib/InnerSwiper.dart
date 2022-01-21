@@ -20,23 +20,14 @@ class InnerSwiper extends StatefulWidget {
 }
 
 class _InnerSwiperState extends State<InnerSwiper> {
-  SwiperController controller;
+  SwiperController controller = new SwiperController();
 
-  List<bool> autoplayes;
-
-  List<SwiperController> controllers;
-
-  @override
-  void initState() {
-    controller = new SwiperController();
-    autoplayes = []
-      ..length = 10
-      ..fillRange(0, 10, false);
-    controllers = []
-      ..length = 10
-      ..fillRange(0, 10, new SwiperController());
-    super.initState();
-  }
+  List<bool> autoplayes = []
+    ..length = 10
+    ..fillRange(0, 10, false);
+  List<SwiperController> controllers = []
+    ..length = 10
+    ..fillRange(0, 10, new SwiperController());
 
   @override
   Widget build(BuildContext context) {

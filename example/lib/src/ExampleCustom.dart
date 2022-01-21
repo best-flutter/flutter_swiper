@@ -12,37 +12,42 @@ class ExampleCustom extends StatefulWidget {
 
 class _ExampleCustomState extends State<ExampleCustom> {
   //properties want to custom
-  int _itemCount;
+  int _itemCount = 3;
 
-  bool _loop;
+  bool _loop = true;
 
-  bool _autoplay;
+  bool _autoplay = false;
 
-  int _autoplayDely;
+  int _autoplayDely = 3000;
 
-  double _padding;
+  double _padding = 0.0;
 
-  bool _outer;
+  bool _outer = false;
 
-  double _radius;
+  double _radius = 10.0;
 
-  double _viewportFraction;
+  double _viewportFraction = 0.8;
 
-  SwiperLayout _layout;
+  SwiperLayout _layout = SwiperLayout.TINDER;
 
-  int _currentIndex;
+  int _currentIndex = 0;
 
-  double _scale;
+  double _scale = 0.8;
 
-  Axis _scrollDirection;
+  Axis _scrollDirection = Axis.horizontal;
 
-  Curve _curve;
+  Curve _curve = Curves.ease;
 
-  double _fade;
+  double _fade = 1;
 
-  bool _autoplayDisableOnInteraction;
+  bool _autoplayDisableOnInteraction = false;
 
-  CustomLayoutOption customLayoutOption;
+  CustomLayoutOption customLayoutOption = new CustomLayoutOption(startIndex: -1, stateCount: 3)
+        .addRotate([-25.0 / 180, 0.0, 25.0 / 180]).addTranslate([
+      new Offset(-350.0, 0.0),
+      new Offset(0.0, 0.0),
+      new Offset(350.0, 0.0)
+    ]);
 
   Widget _buildItem(BuildContext context, int index) {
     return ClipRRect(
@@ -63,33 +68,6 @@ class _ExampleCustomState extends State<ExampleCustom> {
       new Offset(370.0, -40.0)
     ]);
     super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void initState() {
-    customLayoutOption = new CustomLayoutOption(startIndex: -1, stateCount: 3)
-        .addRotate([-25.0 / 180, 0.0, 25.0 / 180]).addTranslate([
-      new Offset(-350.0, 0.0),
-      new Offset(0.0, 0.0),
-      new Offset(350.0, 0.0)
-    ]);
-    _fade = 1.0;
-    _currentIndex = 0;
-    _curve = Curves.ease;
-    _scale = 0.8;
-    _controller = new SwiperController();
-    _layout = SwiperLayout.TINDER;
-    _radius = 10.0;
-    _padding = 0.0;
-    _loop = true;
-    _itemCount = 3;
-    _autoplay = false;
-    _autoplayDely = 3000;
-    _viewportFraction = 0.8;
-    _outer = false;
-    _scrollDirection = Axis.horizontal;
-    _autoplayDisableOnInteraction = false;
-    super.initState();
   }
 
 // maintain the index
@@ -137,7 +115,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
     );
   }
 
-  SwiperController _controller;
+  SwiperController _controller = new SwiperController();
   TextEditingController numberController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -182,7 +160,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
           ),
           new FormWidget(
               label: "layout",
-              child: new FormSelect(
+              child: new FormSelect<SwiperLayout>(
                   placeholder: "Select layout",
                   value: _layout,
                   values: [
@@ -313,7 +291,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
           new FormWidget(
               label: "curve",
-              child: new FormSelect(
+              child: new FormSelect<Curve>(
                   placeholder: "Select curve",
                   value: _layout,
                   values: [

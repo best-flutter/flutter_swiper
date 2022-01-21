@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -315,11 +315,11 @@ class ExamplePhone extends StatelessWidget {
 }
 
 class ScaffoldWidget extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
   final String title;
   final List<Widget> actions;
 
-  ScaffoldWidget({this.child, this.title, this.actions});
+  ScaffoldWidget({this.child, required this.title, this.actions = const []});
 
   @override
   Widget build(BuildContext context) {

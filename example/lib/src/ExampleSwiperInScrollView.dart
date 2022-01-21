@@ -10,11 +10,11 @@ class ExampleSwiperInScrollView extends StatefulWidget {
 
 class _ExampleState extends State<ExampleSwiperInScrollView>
     with TickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> _animation10;
-  Animation<double> _animation11;
-  Animation<double> _animation12;
-  Animation<double> _animation13;
+  late AnimationController controller;
+  late Animation<double> _animation10;
+  late Animation<double> _animation11;
+  late Animation<double> _animation12;
+  late Animation<double> _animation13;
 
   _ExampleState();
 

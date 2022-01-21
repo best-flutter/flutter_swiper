@@ -122,12 +122,12 @@ class _ScalePainter extends _BasePainter {
         : radius + ((index + 1) * (size + space));
 
     double progress = page - index;
-    _paint.color = Color.lerp(widget.activeColor, widget.color, progress);
+    _paint.color = Color.lerp(widget.activeColor, widget.color, progress)!;
     //last
     canvas.drawCircle(new Offset(radius + (index * (size + space)), radius),
         lerp(radius, radius * widget.scale, progress), _paint);
     //first
-    _paint.color = Color.lerp(widget.color, widget.activeColor, progress);
+    _paint.color = Color.lerp(widget.color, widget.activeColor, progress)!;
     canvas.drawCircle(new Offset(secondOffset, radius),
         lerp(radius * widget.scale, radius, progress), _paint);
   }
@@ -153,12 +153,12 @@ class _ColorPainter extends _BasePainter {
         ? radius
         : radius + ((index + 1) * (size + space));
 
-    _paint.color = Color.lerp(widget.activeColor, widget.color, progress);
+    _paint.color = Color.lerp(widget.activeColor, widget.color, progress)!;
     //left
     canvas.drawCircle(
         new Offset(radius + (index * (size + space)), radius), radius, _paint);
     //right
-    _paint.color = Color.lerp(widget.color, widget.activeColor, progress);
+    _paint.color = Color.lerp(widget.color, widget.activeColor, progress)!;
     canvas.drawCircle(new Offset(secondOffset, radius), radius, _paint);
   }
 }
@@ -218,22 +218,22 @@ class _PageIndicatorState extends State<PageIndicator> {
     switch (widget.layout) {
       case PageIndicatorLayout.NONE:
         return new _NonePainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+            widget, widget.controller?.page ?? 0.0, index, _paint);
       case PageIndicatorLayout.SLIDE:
         return new _SlidePainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+            widget, widget.controller?.page ?? 0.0, index, _paint);
       case PageIndicatorLayout.WARM:
         return new _WarmPainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+            widget, widget.controller?.page ?? 0.0, index, _paint);
       case PageIndicatorLayout.COLOR:
         return new _ColorPainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+            widget, widget.controller?.page ?? 0.0, index, _paint);
       case PageIndicatorLayout.SCALE:
         return new _ScalePainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+            widget, widget.controller?.page ?? 0.0, index, _paint);
       case PageIndicatorLayout.DROP:
         return new _DropPainter(
-            widget, widget.controller.page ?? 0.0, index, _paint);
+            widget, widget.controller?.page ?? 0.0, index, _paint);
       default:
         throw new Exception("Not a valid layout");
     }
@@ -262,7 +262,7 @@ class _PageIndicatorState extends State<PageIndicator> {
   }
 
   void _onController() {
-    double page = widget.controller.page ?? 0.0;
+    double page = widget.controller?.page ?? 0.0;
     index = page.floor();
 
     setState(() {});
@@ -270,22 +270,22 @@ class _PageIndicatorState extends State<PageIndicator> {
 
   @override
   void initState() {
-    widget.controller.addListener(_onController);
+    widget.controller?.addListener(_onController);
     super.initState();
   }
 
   @override
   void didUpdateWidget(PageIndicator oldWidget) {
     if (widget.controller != oldWidget.controller) {
-      oldWidget.controller.removeListener(_onController);
-      widget.controller.addListener(_onController);
+      oldWidget.controller?.removeListener(_onController);
+      widget.controller?.addListener(_onController);
     }
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   void dispose() {
-    widget.controller.removeListener(_onController);
+    widget.controller?.removeListener(_onController);
     super.dispose();
   }
 }
@@ -324,15 +324,15 @@ class PageIndicator extends StatefulWidget {
   // Only valid when layout==PageIndicatorLayout.drop
   final double dropHeight;
 
-  final PageController controller;
+  final PageController? controller;
 
   final double activeSize;
 
   PageIndicator(
-      {Key key,
+      {Key? key,
       this.size: 20.0,
       this.space: 5.0,
-      this.count,
+      required this.count,
       this.activeSize: 20.0,
       this.controller,
       this.color: Colors.white30,
@@ -340,9 +340,7 @@ class PageIndicator extends StatefulWidget {
       this.activeColor: Colors.white,
       this.scale: 0.6,
       this.dropHeight: 20.0})
-      : assert(count != null),
-        assert(controller != null),
-        super(key: key);
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
