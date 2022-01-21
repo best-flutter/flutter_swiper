@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_page_indicator/flutter_page_indicator.dart';
-
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'src/ExampleCustom.dart';
-import 'src/config.dart';
-import 'src/ExampleSwiperInScrollView.dart';
 
-import 'package:flutter/cupertino.dart';
+import 'src/ExampleCustom.dart';
+import 'src/ExampleSwiperInScrollView.dart';
+import 'src/config.dart';
 
 void main() => runApp(new MyApp());
 
@@ -39,7 +36,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -318,11 +315,11 @@ class ExamplePhone extends StatelessWidget {
 }
 
 class ScaffoldWidget extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
   final String title;
   final List<Widget> actions;
 
-  ScaffoldWidget({this.child, this.title, this.actions});
+  ScaffoldWidget({this.child, required this.title, this.actions = const []});
 
   @override
   Widget build(BuildContext context) {
