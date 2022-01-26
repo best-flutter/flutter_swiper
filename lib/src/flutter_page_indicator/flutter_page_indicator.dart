@@ -3,6 +3,7 @@
 library flutter_page_indicator;
 
 import 'package:flutter/material.dart';
+import '../transformer_page_view/transformer_page_view.dart';
 
 class WarmPainter extends BasePainter {
   WarmPainter(PageIndicator widget, double page, int index, Paint paint)
@@ -258,8 +259,16 @@ class _PageIndicatorState extends State<PageIndicator> {
     );
   }
 
+  void _setInitialPage() {
+    // use the initial page index but cut off
+    // the offset specified when looping (kMiddleValue)
+    index = widget.controller.initialPage % kMiddleValue;
+    page = index.toDouble();
+  }
+
   void _onController([bool doSetState = true]) {
-    page = (widget.controller.hasClients ? widget.controller.page : 0) ?? 0.0;
+    if (!widget.controller.hasClients) return;
+    page = widget.controller.page ?? 0.0;
     index = page.floor();
     if (doSetState) {
       setState(() {});
@@ -270,7 +279,8 @@ class _PageIndicatorState extends State<PageIndicator> {
   void initState() {
     super.initState();
     widget.controller.addListener(_onController);
-    _onController(false);
+
+    _setInitialPage();
   }
 
   @override
