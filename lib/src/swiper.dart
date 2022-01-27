@@ -125,6 +125,8 @@ class Swiper extends StatefulWidget {
 
   final PageIndicatorLayout indicatorLayout;
 
+  final bool allowImplicitScrolling;
+
   const Swiper({
     this.itemBuilder,
     this.indicatorLayout = PageIndicatorLayout.NONE,
@@ -161,6 +163,7 @@ class Swiper extends StatefulWidget {
     this.outer = false,
     this.scale,
     this.fade,
+    this.allowImplicitScrolling = false,
   })  : assert(
           itemBuilder != null || transformer != null,
           'itemBuilder and transformItemBuilder must not be both null',
@@ -517,6 +520,7 @@ class _SwiperState extends _SwiperTimerMixin {
         curve: widget.curve,
         physics: widget.physics,
         controller: _controller,
+        allowImplicitScrolling: widget.allowImplicitScrolling,
       );
       if (widget.autoplayDisableOnInteraction && widget.autoplay) {
         return NotificationListener(
