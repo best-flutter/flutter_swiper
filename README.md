@@ -320,21 +320,24 @@ Swiper(
 Very easy to create you own custom animation:
 
 ```dart
+final customLayoutOption = CustomLayoutOption(
+  startIndex: -1,
+  stateCount: 3
+);
+customLayoutOption.addRotate([
+  -45.0/180,
+  0.0,
+  45.0/180
+]);
+customLayoutOption.addTranslate([
+  Offset(-370.0, -40.0),
+  Offset(0.0, 0.0),
+  Offset(370.0, -40.0)
+]);
 
- Swiper(
+Swiper(
   layout: SwiperLayout.CUSTOM,
-  customLayoutOption: CustomLayoutOption(
-      startIndex: -1,
-      stateCount: 3
-  ).addRotate([
-    -45.0/180,
-    0.0,
-    45.0/180
-  ]).addTranslate([
-    Offset(-370.0, -40.0),
-    Offset(0.0, 0.0),
-    Offset(370.0, -40.0)
-  ]),
+  customLayoutOption: customLayoutOption,
   itemWidth: 300.0,
   itemHeight: 200.0,
   itemBuilder: (context, index) {
@@ -345,7 +348,8 @@ Very easy to create you own custom animation:
       ),
     );
   },
-  itemCount: 10)
+  itemCount: 10,
+)
 
 ```
 
@@ -353,18 +357,24 @@ The `CustomLayoutOption` is designed to describe animations.
 It is very easy to specify every state of items in Swiper.
 
 ```dart
-CustomLayoutOption(
-      startIndex: -1,  /// Which index is the first item of array below
-      stateCount: 3    /// array length
-  ).addRotate([        // rotation of every item
-    -45.0/180,
-    0.0,
-    45.0/180
-  ]).addTranslate([           /// offset of every item
-    Offset(-370.0, -40.0),
-    Offset(0.0, 0.0),
-    Offset(370.0, -40.0)
-  ])
+final customLayoutOption = CustomLayoutOption(
+  // Which index is the first item of array below
+  startIndex: -1,
+  // array length
+  stateCount: 3
+);
+// rotation of every item
+customLayoutOption.addRotate([
+  -45.0/180,
+  0.0,
+  45.0/180
+]);
+// offset of every item
+customLayoutOption.addTranslate([
+  Offset(-370.0, -40.0),
+  Offset(0.0, 0.0),
+  Offset(370.0, -40.0)
+]);
 
 ```
 

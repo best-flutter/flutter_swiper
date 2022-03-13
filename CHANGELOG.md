@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Issue#15](https://github.com/TheAnkurPanchani/card_swiper/issues/15): Put item count check before building animation
 - [Issue#24](https://github.com/TheAnkurPanchani/card_swiper/issues/24): Put mounted check on post-frame callbacks
 - [Issue#30](https://github.com/TheAnkurPanchani/card_swiper/issues/30): Fix order for right direction of stack layout
+- [Issue#31](https://github.com/TheAnkurPanchani/card_swiper/issues/31): Update README for custom layout options
 
 ## [2.0.1] - 2022-01-11
 
