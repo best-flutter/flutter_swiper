@@ -19,6 +19,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [2.0.2] - 2022-03-13
+
+### Added
+
+### Fixed
+
+- [Issue#30](https://github.com/TheAnkurPanchani/card_swiper/issues/30): Fix order for right direction of stack layout
+
 ## [2.0.1] - 2022-01-11
 
 ### Added

@@ -160,18 +160,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
 #### Basic
 
-| Parameter       |            Default             | Description                                                                                                                                                   |
-| :-------------- | :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| scrollDirection |        Axis.horizontal         | If `Axis.horizontal`, the scroll view's children are arranged horizontally in a row instead of vertically in a column.                                        |
-| axisDirection   |       AxisDirection.left       | If `AxisDirection.right`, the scroll view's children are arranged right side in a row instead of left.<br>**Note:** Currently supported for stack layout only |
-| loop            |              true              | Set to `false` to disable continuous loop mode.                                                                                                               |
-| index           |               0                | Index number of initial slide.                                                                                                                                |
-| autoplay        |             false              | Set to `true` enable auto play mode.                                                                                                                          |
-| onIndexChanged  | void onIndexChanged(int index) | Called with the new index when the user swiped or autoplay                                                                                                    |
-| onTap           |     void onTap(int index)      | Called when user tap ui.                                                                                                                                      |
-| duration        |             300.0              | The milliscends of every transaction animation costs                                                                                                          |
-| pagination      |              null              | set `SwiperPagination()` to show default pagination                                                                                                           |
-| control         |              null              | set `SwiperControl()` to show default control buttons                                                                                                         |
+| Parameter       |            Default             | Description                                                                                                                                                              |
+| :-------------- | :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| scrollDirection |        Axis.horizontal         | If `Axis.horizontal`, the scroll view's children are arranged horizontally in a row instead of vertically in a column.                                                   |
+| axisDirection   |       AxisDirection.left       | If `AxisDirection.right`, the scroll view's children are arranged right side in a row instead of left.<br>**Note:** Currently supported for horizontal stack layout only |
+| loop            |              true              | Set to `false` to disable continuous loop mode.                                                                                                                          |
+| index           |               0                | Index number of initial slide.                                                                                                                                           |
+| autoplay        |             false              | Set to `true` enable auto play mode.                                                                                                                                     |
+| onIndexChanged  | void onIndexChanged(int index) | Called with the new index when the user swiped or autoplay                                                                                                               |
+| onTap           |     void onTap(int index)      | Called when user tap ui.                                                                                                                                                 |
+| duration        |             300.0              | The milliscends of every transaction animation costs                                                                                                                     |
+| pagination      |              null              | set `SwiperPagination()` to show default pagination                                                                                                                      |
+| control         |              null              | set `SwiperControl()` to show default control buttons                                                                                                                    |
 
 #### Pagination
 

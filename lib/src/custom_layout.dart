@@ -63,6 +63,10 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
       }
     }
 
+    if (widget.axisDirection != oldWidget.axisDirection) {
+      afterRender();
+    }
+
     super.didUpdateWidget(oldWidget);
   }
 
@@ -102,7 +106,11 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
         realIndex += widget.itemCount;
       }
 
-      list.add(_buildItem(i, realIndex, animationValue));
+      if (widget.axisDirection == AxisDirection.right) {
+        list.insert(0, _buildItem(i, realIndex, animationValue));
+      } else {
+        list.add(_buildItem(i, realIndex, animationValue));
+      }
     }
 
     return GestureDetector(
@@ -198,21 +206,19 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     if (_lockScroll) return;
 
     final velocity = widget.scrollDirection == Axis.horizontal
-        ? widget.axisDirection == AxisDirection.left
-            ? details.velocity.pixelsPerSecond.dx
-            : -details.velocity.pixelsPerSecond.dx
+        ? details.velocity.pixelsPerSecond.dx
         : details.velocity.pixelsPerSecond.dy;
 
     if (_animationController.value >= 0.75 || velocity > 500.0) {
       if (_currentIndex <= 0 && !widget.loop) {
         return;
       }
-      _move(1.0, nextIndex: _currentIndex + 1);
+      _move(1.0, nextIndex: _currentIndex - 1);
     } else if (_animationController.value < 0.25 || velocity < -500.0) {
       if (_currentIndex >= widget.itemCount - 1 && !widget.loop) {
         return;
       }
-      _move(0.0, nextIndex: _currentIndex - 1);
+      _move(0.0, nextIndex: _currentIndex + 1);
     } else {
       _move(0.5);
     }
@@ -222,9 +228,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     if (_lockScroll) return;
     _currentValue = _animationController.value;
     _currentPos = widget.scrollDirection == Axis.horizontal
-        ? widget.axisDirection == AxisDirection.left
-            ? details.globalPosition.dx
-            : -details.globalPosition.dx
+        ? details.globalPosition.dx
         : details.globalPosition.dy;
   }
 
@@ -232,9 +236,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     if (_lockScroll) return;
     var value = _currentValue +
         ((widget.scrollDirection == Axis.horizontal
-                    ? widget.axisDirection == AxisDirection.left
-                        ? details.globalPosition.dx
-                        : -details.globalPosition.dx
+                    ? details.globalPosition.dx
                     : details.globalPosition.dy) -
                 _currentPos) /
             _swiperWidth /

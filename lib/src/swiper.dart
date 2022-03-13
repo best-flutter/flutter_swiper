@@ -898,7 +898,9 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
   void _updateValues() {
     if (widget.scrollDirection == Axis.horizontal) {
       final space = (_swiperWidth - widget.itemWidth!) / 2;
-      offsets = [-space, -space / 3 * 2, -space / 3, 0.0, _swiperWidth];
+      offsets = widget.axisDirection == AxisDirection.left
+          ? [-space, -space / 3 * 2, -space / 3, 0.0, _swiperWidth]
+          : [_swiperWidth, 0.0, -space / 3, -space / 3 * 2, -space];
     } else {
       final space = (_swiperHeight - widget.itemHeight!) / 2;
       offsets = [-space, -space / 3 * 2, -space / 3, 0.0, _swiperHeight];
@@ -914,14 +916,17 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
   @override
   void afterRender() {
     super.afterRender();
+    final isRightSide = widget.axisDirection == AxisDirection.right;
 
     //length of the values array below
     _animationCount = 5;
 
     //Array below this line, '0' index is 1.0, which is the first item show in swiper.
-    _startIndex = -3;
-    scales = [0.7, 0.8, 0.9, 1.0, 1.0];
-    opacity = [0.0, 0.5, 1.0, 1.0, 1.0];
+    _startIndex = isRightSide ? -1 : -3;
+    scales =
+        isRightSide ? [1.0, 1.0, 0.9, 0.8, 0.7] : [0.7, 0.8, 0.9, 1.0, 1.0];
+    opacity =
+        isRightSide ? [1.0, 1.0, 1.0, 0.5, 0.0] : [0.0, 0.5, 1.0, 1.0, 1.0];
 
     _updateValues();
   }
