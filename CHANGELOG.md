@@ -19,6 +19,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [2.0.3] - 2022-03-13
+
+### Added
+
+- [PR#29](https://github.com/TheAnkurPanchani/card_swiper/pull/29): Add allowImplicitScrolling property
+
+### Fixed
+
+- [PR#28](https://github.com/TheAnkurPanchani/card_swiper/pull/28): make page indicators respect the initial page index
+
 ## [2.0.2] - 2022-03-13
 
 ### Fixed
