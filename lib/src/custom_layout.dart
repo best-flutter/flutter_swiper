@@ -100,7 +100,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
 
     final animationValue = _animation.value;
 
-    for (var i = 0; i < _animationCount!; ++i) {
+    for (var i = 0; i < _animationCount! && widget.itemCount > 0; ++i) {
       var realIndex = _currentIndex + i + _startIndex;
       realIndex = realIndex % widget.itemCount;
       if (realIndex < 0) {
