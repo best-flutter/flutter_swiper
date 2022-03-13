@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Issue#24](https://github.com/TheAnkurPanchani/card_swiper/issues/24): Put mounted check on post-frame callbacks
 - [Issue#30](https://github.com/TheAnkurPanchani/card_swiper/issues/30): Fix order for right direction of stack layout
 - [Issue#31](https://github.com/TheAnkurPanchani/card_swiper/issues/31): Update README for custom layout options
+- [Issue#32](https://github.com/TheAnkurPanchani/card_swiper/issues/32): Update README to mention how to not get default controls and pagination
 
 ## [2.0.1] - 2022-01-11
 

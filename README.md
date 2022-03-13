@@ -419,6 +419,18 @@ ConstrainedBox(
 
 ```
 
+# FAQs
+
+## How to remove default controlls?
+
+- Do not pass any value in `control` parameter of constructor
+
+## How to remove default pagination?
+
+- Do not pass any value in `pagination` parameter of constructor
+
+---
+
 You can find all custom options here:
 
 > https://github.com/TheAnkurPanchani/flutter_swiper/blob/master/example/lib/src/ExampleCustom.dart
