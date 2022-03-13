@@ -1,6 +1,7 @@
 library transformer_page_view;
 
 import 'package:flutter/widgets.dart';
+
 import 'index_controller.dart';
 
 ///
@@ -455,12 +456,9 @@ class _TransformerPageViewState extends State<TransformerPageView> {
   }
 
   void _onGetSize(Duration _) {
+    if (!mounted) return;
     Size? size;
 
-    // if (context == null) {
-    //   onGetSize(size);
-    //   return;
-    // }
     final renderObject = context.findRenderObject();
     if (renderObject != null) {
       final bounds = renderObject.paintBounds;
