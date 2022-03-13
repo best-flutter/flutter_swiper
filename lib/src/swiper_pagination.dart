@@ -276,7 +276,7 @@ class SwiperPagination extends SwiperPlugin {
   final Key? key;
 
   const SwiperPagination({
-    this.alignment = Alignment.bottomCenter,
+    this.alignment,
     this.key,
     this.margin = const EdgeInsets.all(10.0),
     this.builder = SwiperPagination.dots,
@@ -284,7 +284,7 @@ class SwiperPagination extends SwiperPlugin {
 
   @override
   Widget build(BuildContext context, SwiperPluginConfig config) {
-    final alignment = config.scrollDirection == Axis.horizontal
+    final defaultAlignment = config.scrollDirection == Axis.horizontal
         ? Alignment.bottomCenter
         : Alignment.centerRight;
     Widget child = Container(
@@ -294,7 +294,7 @@ class SwiperPagination extends SwiperPlugin {
     if (!config.outer!) {
       child = Align(
         key: key,
-        alignment: alignment,
+        alignment: alignment ?? defaultAlignment,
         child: child,
       );
     }

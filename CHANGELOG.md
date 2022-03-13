@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- [Issue#12](https://github.com/TheAnkurPanchani/card_swiper/issues/12): Use default pagination only if value is not provided
 - [Issue#15](https://github.com/TheAnkurPanchani/card_swiper/issues/15): Put item count check before building animation
 - [Issue#24](https://github.com/TheAnkurPanchani/card_swiper/issues/24): Put mounted check on post-frame callbacks
 - [Issue#30](https://github.com/TheAnkurPanchani/card_swiper/issues/30): Fix order for right direction of stack layout
