@@ -19,6 +19,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [2.0.4] - 2022-06-05
+
+### Fixed
+
+- [PR#46](https://github.com/TheAnkurPanchani/card_swiper/pull/46): `dart fix --apply` to support Flutter SDK 3.0
+- [Issue#47](https://github.com/TheAnkurPanchani/card_swiper/issues/47): cant work flutter 3.0
+- [Issue#48](https://github.com/TheAnkurPanchani/card_swiper/issues/48): Not supported for Flutter 3.0
+- [Issue#49](https://github.com/TheAnkurPanchani/card_swiper/issues/49): 建议升级一下3.0
+- [Issue#50](https://github.com/TheAnkurPanchani/card_swiper/issues/50): not supporting v3 flutter
+
 ## [2.0.3] - 2022-03-13
 
 ### Added

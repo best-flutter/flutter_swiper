@@ -1,6 +1,6 @@
 name: card_swiper
 description: swiper/carousel for flutter, with multiple layouts, infinite loop. Compatible with Android & iOS.
-version: 2.0.3
+version: 2.0.4
 homepage: https://github.com/TheAnkurPanchani/flutter_swiper
 
 dependencies:
