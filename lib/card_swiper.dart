@@ -7,3 +7,4 @@ export 'src/swiper_controller.dart';
 export 'src/swiper_pagination.dart';
 export 'src/swiper_plugin.dart';
 export 'src/transformer_page_view/index_controller.dart';
+export 'src/transformer_page_view/transformer_page_view.dart';
